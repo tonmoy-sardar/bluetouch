@@ -66,3 +66,28 @@ margin: 22px auto 10px;
     color:#DDA72A
 }
 
+// For product List Page
+
+.bar-subheader h4 {
+    color:#7c8597;
+}
+.bar-subheader h4.active {
+    color:#fb9d9e;;
+}
+
+.product-list ion-card {
+    position: relative;
+}
+
+.product-list .cart-icon-image {
+    position:absolute;
+    top: -16px;
+    width: 50%;
+    left: -14%;
+}
+.product-list .more-option {
+    position: absolute;
+    right:9px;
+    font-size:2em;
+}
+
