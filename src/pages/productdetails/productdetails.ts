@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angula
   templateUrl: 'productdetails.html',
 })
 export class ProductdetailsPage {
-
+  productdetailsType: string = "details";
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,

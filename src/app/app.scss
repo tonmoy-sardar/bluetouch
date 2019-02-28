@@ -135,3 +135,22 @@ margin: 22px auto 10px;
 }
 
 
+
+//Product Details page
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
+    left: 0;
+    width: 100%;
+    top:0px;
+}
+.pro-details ion-col {
+color:#798291;
+}
+.pro-details ion-col p {
+    color:#798291;
+}
+.pro-details ion-col:nth-child(even) {
+    text-align: right;
+}
+.pro-details ion-col:nth-child(odd) {
+    text-align: left;
+}
