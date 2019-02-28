@@ -1,0 +1,36 @@
+
+<ion-header>
+    <ion-navbar>
+      <ion-buttons left>
+          <button ion-button menuToggle color="light">
+            <ion-icon name="menu"></ion-icon>
+            <ion-title></ion-title>
+        </button>
+      </ion-buttons>
+      <ion-title></ion-title>
+      <ion-buttons right>
+        <button ion-button icon-only>
+                <ion-icon ios="ios-person-outline" md="md-person"></ion-icon>
+                <ion-icon ios="ios-cart-outline" md="md-cart"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+<ion-menu [content]="mycontent">
+    <ion-content>
+        <ion-item>
+
+        </ion-item>
+        <ion-item (click)="gotoPage('HomePage')">
+            <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
+            Home
+        </ion-item>
+        <ion-item (click)="gotoPage('ProductlistPage')">
+            <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
+            Product List
+        </ion-item>
+    </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage" swipeBackEnabled="false"></ion-nav>

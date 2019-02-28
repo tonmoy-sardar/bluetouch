@@ -1,0 +1,196 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>home</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="has-header">
+  <div class="category-list">
+    <ion-title>Categories List</ion-title>
+    <hr>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <img src="assets/imgs/apparel.png">
+          <span>Clothing</span>
+        </ion-col>
+        <ion-col col-3>
+          <img src="assets/imgs/beauty-bg.png">
+          <span>Beauty</span>
+        </ion-col>
+        <ion-col col-3>
+          <img src="assets/imgs/shoes-bg.png">
+          <span>Shoes</span>
+        </ion-col>
+        <ion-col col-3>
+          <ion-icon name="ios-arrow-dropright-circle"></ion-icon>
+          <span>See All</span>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="arrival-list">
+    <ion-title>New Arrival</ion-title>
+    <hr>
+    <ion-slides loop slidesPerView="1.2">
+      <ion-slide>
+        <img src="assets/imgs/Banner1.png" />
+      </ion-slide>
+      <ion-slide>
+        <img src="assets/imgs/Banner1.png" />
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div class="custom-slider latest-list">
+    <ion-title>Latest Fashion</ion-title>
+    <hr>
+    <ion-slides loop slidesPerView="3.2">
+      <ion-slide>
+        <ion-card>
+          <img src="assets/imgs/slder1.png" />
+          <ion-card-content>
+            <ion-title>Nike</ion-title>
+            <p>This is description</p>
+            <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card>
+          <img src="assets/imgs/slder1.png" />
+          <ion-card-content>
+            <ion-title>Nike</ion-title>
+            <p>The most </p>
+            <span class="rating" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card>
+          <img src="assets/imgs/slder1.png" />
+          <ion-card-content>
+            <ion-title>Nike</ion-title>
+            <p>The most </p>
+            <span class="rating" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card>
+          <img src="assets/imgs/slder1.png" />
+          <ion-card-content>
+            <ion-title>Nike</ion-title>
+            <p>The most </p>
+            <span class="rating" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card>
+          <img src="assets/imgs/slder1.png" />
+          <ion-card-content>
+            <ion-title>Nike</ion-title>
+            <p>The most </p>
+            <span class="rating" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div class="custom-slider recent-list">
+    <ion-title>Recently Viewed</ion-title>
+    <hr>
+    <ion-slides loop slidesPerView="3">
+        <ion-slide>
+          <ion-card class="card-background-page">
+            <img src="assets/imgs/slider2.png" />
+            <ion-card-content>
+              <ion-title>Nike</ion-title>
+              <p>This is description</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card>
+            <img src="assets/imgs/slider2.png" />
+            <ion-card-content>
+              <ion-title>Nike</ion-title>
+              <p>The most </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card>
+            <img src="assets/imgs/slider2.png" />
+            <ion-card-content>
+              <ion-title>Ishin</ion-title>
+              <p>The most </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card>
+            <img src="assets/imgs/slider2.png" />
+            <ion-card-content>
+              <ion-title>Nike</ion-title>
+              <p>The most </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card>
+            <img src="assets/imgs/slider2.png" />
+            <ion-card-content>
+              <ion-title>Nike</ion-title>
+              <p>The most </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+  </div>
+  <div class="trend-list">
+    <ion-title>Trending Products</ion-title>
+    <hr>
+    <ion-slides loop slidesPerView="1.2">
+        <ion-slide>
+          <img src="assets/imgs/Banner1.png" />
+        </ion-slide>
+        <ion-slide>
+          <img src="assets/imgs/Banner1.png" />
+        </ion-slide>
+      </ion-slides>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar text-center="">
+      <ion-buttons>
+        <button ion-button >
+          <ion-icon name="home"></ion-icon>
+        </button>
+        <button ion-button>
+            <ion-icon ios="ios-search" md="md-search"></ion-icon>
+        </button>
+        <button ion-button>
+            <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+        </button>
+        <button ion-button>
+            <ion-icon ios="ios-person" md="md-person"></ion-icon>
+          </button>
+          <button ion-button>
+              <ion-icon ios="ios-reorder" md="md-reorder"></ion-icon> 
+            </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
