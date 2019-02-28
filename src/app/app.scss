@@ -35,16 +35,28 @@ ion-footer {
         padding: 20px;
     }
 }
+.see-all ion-icon {
+    font-size: 4.5em;
+}
+.see-all span {
+margin: 22px auto 10px;
+}
 .category-list span {
     text-align: center;
     display: block;
     margin: -14px auto 10px;
 }
-.custom-slider ion-card {
+.latest-list ion-card {
     height:210px;
 }
 .latest-list img {
     margin: 0 auto;
+}
+.recent-list img {
+    width:100%;
+}
+.recent-list ion-card {
+    height:300px;
 }
 
 .rating{

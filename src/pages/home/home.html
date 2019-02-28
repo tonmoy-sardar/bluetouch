@@ -31,7 +31,7 @@
           <img src="assets/imgs/shoes-bg.png">
           <span>Shoes</span>
         </ion-col>
-        <ion-col col-3>
+        <ion-col col-3 class="see-all">
           <ion-icon name="ios-arrow-dropright-circle"></ion-icon>
           <span>See All</span>
 
@@ -54,7 +54,7 @@
   <div class="custom-slider latest-list">
     <ion-title>Latest Fashion</ion-title>
     <hr>
-    <ion-slides loop slidesPerView="3.2">
+    <ion-slides loop slidesPerView="3.4">
       <ion-slide>
         <ion-card>
           <img src="assets/imgs/slder1.png" />
@@ -71,7 +71,7 @@
           <ion-card-content>
             <ion-title>Nike</ion-title>
             <p>The most </p>
-            <span class="rating" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+            <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
           </ion-card-content>
         </ion-card>
       </ion-slide>
@@ -81,7 +81,7 @@
           <ion-card-content>
             <ion-title>Nike</ion-title>
             <p>The most </p>
-            <span class="rating" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+            <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
           </ion-card-content>
         </ion-card>
       </ion-slide>
@@ -91,7 +91,7 @@
           <ion-card-content>
             <ion-title>Nike</ion-title>
             <p>The most </p>
-            <span class="rating" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+            <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
           </ion-card-content>
         </ion-card>
       </ion-slide>
@@ -101,7 +101,7 @@
           <ion-card-content>
             <ion-title>Nike</ion-title>
             <p>The most </p>
-            <span class="rating" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+            <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
           </ion-card-content>
         </ion-card>
       </ion-slide>
@@ -115,17 +115,9 @@
           <ion-card class="card-background-page">
             <img src="assets/imgs/slider2.png" />
             <ion-card-content>
-              <ion-title>Nike</ion-title>
+              <ion-title>Ishin</ion-title>
               <p>This is description</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-slide>
-        <ion-slide>
-          <ion-card>
-            <img src="assets/imgs/slider2.png" />
-            <ion-card-content>
-              <ion-title>Nike</ion-title>
-              <p>The most </p>
+              <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
             </ion-card-content>
           </ion-card>
         </ion-slide>
@@ -136,14 +128,16 @@
               <ion-title>Ishin</ion-title>
               <p>The most </p>
             </ion-card-content>
+            <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
           </ion-card>
         </ion-slide>
         <ion-slide>
           <ion-card>
             <img src="assets/imgs/slider2.png" />
             <ion-card-content>
-              <ion-title>Nike</ion-title>
+              <ion-title>Ishin</ion-title>
               <p>The most </p>
+              <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
             </ion-card-content>
           </ion-card>
         </ion-slide>
@@ -151,8 +145,19 @@
           <ion-card>
             <img src="assets/imgs/slider2.png" />
             <ion-card-content>
-              <ion-title>Nike</ion-title>
+              <ion-title>Ishin</ion-title>
               <p>The most </p>
+              <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card>
+            <img src="assets/imgs/slider2.png" />
+            <ion-card-content>
+              <ion-title>Ishin</ion-title>
+              <p>The most </p>
+              <span class="rating " *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
             </ion-card-content>
           </ion-card>
         </ion-slide>
