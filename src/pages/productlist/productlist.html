@@ -12,7 +12,196 @@
 
 </ion-header>
 
-
 <ion-content padding>
-Product page
+  <div class="bar bar-subheader">
+    <ion-slides slidesPerView="3.2">
+      <ion-slide>
+        <h4 class="active">Best Match</h4>
+      </ion-slide>
+      <ion-slide>
+        <h4>Top Rated</h4>
+      </ion-slide>
+      <ion-slide>
+        <h4>Price Low-High</h4>
+      </ion-slide>
+      <ion-slide>
+        <h4>Price High-Low</h4>
+      </ion-slide>
+      <ion-slide>
+        <h4>Slide 3</h4>
+      </ion-slide>
+      <ion-slide>
+        <h4>Slide 3</h4>
+      </ion-slide>
+
+    </ion-slides>
+  </div>
+
+  <div class="product-list">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <ion-card>
+            <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+            <ion-icon class="more-option" name="md-more"></ion-icon>
+
+            <img src="assets/imgs/img1.png" />
+            <ion-card-content>
+              <ion-card-title>
+                V Neck Shirt
+              </ion-card-title>
+              <hr>
+              <ion-row>
+                <ion-col col-6>
+                  <span>
+                    <i class="fa fa-rupee"></i>240.99
+                    <ion-icon name="ios-arrow-dropright-outline"></ion-icon>
+                  </span>
+                </ion-col>
+                <ion-col col-6> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span></ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col col-6>
+            <ion-card>
+              <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+              <ion-icon class="more-option" name="md-more"></ion-icon>
+  
+              <img src="assets/imgs/img1.png" />
+              <ion-card-content>
+                <ion-card-title>
+                  V Neck Shirt
+                </ion-card-title>
+                <hr>
+                <ion-row>
+                  <ion-col col-6>
+                    <span>
+                      <i class="fa fa-rupee"></i>240.99
+                      <ion-icon name="ios-arrow-dropright-outline"></ion-icon>
+                    </span>
+                  </ion-col>
+                  <ion-col col-6> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span></ion-col>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-6>
+              <ion-card>
+                <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                <ion-icon class="more-option" name="md-more"></ion-icon>
+    
+                <img src="assets/imgs/img1.png" />
+                <ion-card-content>
+                  <ion-card-title>
+                    V Neck Shirt
+                  </ion-card-title>
+                  <hr>
+                  <ion-row>
+                    <ion-col col-6>
+                      <span>
+                        <i class="fa fa-rupee"></i>240.99
+                        <ion-icon name="ios-arrow-dropright-outline"></ion-icon>
+                      </span>
+                    </ion-col>
+                    <ion-col col-6> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span></ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col col-6>
+                <ion-card>
+                  <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                  <ion-icon class="more-option" name="md-more"></ion-icon>
+      
+                  <img src="assets/imgs/img1.png" />
+                  <ion-card-content>
+                    <ion-card-title>
+                      V Neck Shirt
+                    </ion-card-title>
+                    <hr>
+                    <ion-row>
+                      <ion-col col-6>
+                        <span>
+                          <i class="fa fa-rupee"></i>240.99
+                          <ion-icon name="ios-arrow-dropright-outline"></ion-icon>
+                        </span>
+                      </ion-col>
+                      <ion-col col-6> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span></ion-col>
+                    </ion-row>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+              <ion-col col-6>
+                  <ion-card>
+                    <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                    <ion-icon class="more-option" name="md-more"></ion-icon>
+        
+                    <img src="assets/imgs/img1.png" />
+                    <ion-card-content>
+                      <ion-card-title>
+                        V Neck Shirt
+                      </ion-card-title>
+                      <hr>
+                      <ion-row>
+                        <ion-col col-6>
+                          <span>
+                            <i class="fa fa-rupee"></i>240.99
+                            <ion-icon name="ios-arrow-dropright-outline"></ion-icon>
+                          </span>
+                        </ion-col>
+                        <ion-col col-6> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span></ion-col>
+                      </ion-row>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+                <ion-col col-6>
+                    <ion-card>
+                      <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                      <ion-icon class="more-option" name="md-more"></ion-icon>
+          
+                      <img src="assets/imgs/img1.png" />
+                      <ion-card-content>
+                        <ion-card-title>
+                          V Neck Shirt
+                        </ion-card-title>
+                        <hr>
+                        <ion-row>
+                          <ion-col col-6>
+                            <span>
+                              <i class="fa fa-rupee"></i>240.99
+                              <ion-icon name="ios-arrow-dropright-outline"></ion-icon>
+                            </span>
+                          </ion-col>
+                          <ion-col col-6> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span></ion-col>
+                        </ion-row>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar text-center="">
+    <ion-buttons>
+      <button ion-button>
+        <ion-icon name="home"></ion-icon>
+      </button>
+      <button ion-button>
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      </button>
+      <button ion-button>
+        <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+      </button>
+      <button ion-button>
+        <ion-icon ios="ios-person" md="md-person"></ion-icon>
+      </button>
+      <button ion-button>
+        <ion-icon ios="ios-reorder" md="md-reorder"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

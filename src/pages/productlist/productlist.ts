@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angula
   templateUrl: 'productlist.html',
 })
 export class ProductlistPage {
-
+  rating;
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
@@ -25,6 +25,7 @@ export class ProductlistPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductlistPage');
     this.menuCtrl.close();
+    this.rating = [1, 2, 3, 4, 5];
   }
 
 }
