@@ -31,8 +31,10 @@
           <img src="assets/imgs/shoes-bg.png">
           <span>Shoes</span>
         </ion-col>
-        <ion-col col-3 class="see-all">
-          <ion-icon name="ios-arrow-dropright-circle"></ion-icon>
+        <ion-col col-3 >
+            
+            <img src="assets/imgs/see_all.png">
+         
           <span>See All</span>
 
         </ion-col>
@@ -54,14 +56,16 @@
   <div class="custom-slider latest-list">
     <ion-title>Latest Fashion</ion-title>
     <hr>
-    <ion-slides loop slidesPerView="3.4">
+    <ion-slides loop slidesPerView="2.4">
       <ion-slide>
         <ion-card>
-          <img src="assets/imgs/slder1.png" />
+          <img src="assets/imgs/slder1.png"  />
           <ion-card-content>
             <ion-title>Nike</ion-title>
             <p>This is description</p>
+            <div>
             <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;"><ion-icon name="star"></ion-icon></span>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-slide>
@@ -107,10 +111,10 @@
       </ion-slide>
     </ion-slides>
   </div>
-  <div class="custom-slider recent-list">
+  <div class="custom-slider recent-list" style="padding-top:30px;">
     <ion-title>Recently Viewed</ion-title>
     <hr>
-    <ion-slides loop slidesPerView="3">
+    <ion-slides loop slidesPerView="2.4">
         <ion-slide>
           <ion-card class="card-background-page">
             <img src="assets/imgs/slider2.png" />
@@ -163,7 +167,7 @@
         </ion-slide>
       </ion-slides>
   </div>
-  <div class="trend-list">
+  <!-- <div class="trend-list">
     <ion-title>Trending Products</ion-title>
     <hr>
     <ion-slides loop slidesPerView="1.2">
@@ -174,7 +178,7 @@
           <img src="assets/imgs/Banner1.png" />
         </ion-slide>
       </ion-slides>
-  </div>
+  </div> -->
 
 </ion-content>
 
@@ -183,6 +187,7 @@
       <ion-buttons>
         <button ion-button >
           <ion-icon name="home"></ion-icon>
+          
         </button>
         <button ion-button>
             <ion-icon ios="ios-search" md="md-search"></ion-icon>
