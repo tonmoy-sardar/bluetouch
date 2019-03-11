@@ -27,19 +27,38 @@ ion-header {
    }
 
 }
-ion-footer {
+ion-footer { 
+   
     ion-icon {
-        font-size: 30px;
+        font-size: 22px;
+        text-align: center;
     }
-    .bar-button-default-md {
-        padding: 20px;
+    button {
+        padding: 4px 16px;
+        background: transparent;
     }
+    span
+    {
+        text-align: center;
+        display: block;
+        margin: 0px auto 10px;
+    }
+    .active
+    {
+        color: #fb7775;
+    }
+   
 }
+
 .see-all ion-icon {
     font-size: 4.5em;
 }
 .see-all span {
 margin: 22px auto 10px;
+}
+.category-list
+{
+    padding-top: 10px;
 }
 .category-list span {
     text-align: center;
@@ -153,4 +172,38 @@ color:#798291;
 }
 .pro-details ion-col:nth-child(odd) {
     text-align: left;
+}
+.details-header
+{
+    padding-top: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.dot {
+    height: 30px;
+    width: 30px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+.bradcumb span{
+    margin-right: 20px;
+}
+
+
+.bradcumb .toolbar-title-md
+{
+    padding:0px 0px 10px 0px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.bradcumb .dot-size
+{
+    border: 1px solid #cccccc;
+    padding: 5px 20px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-right:10px;
 }

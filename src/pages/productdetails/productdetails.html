@@ -14,8 +14,9 @@
 
 
 <ion-content>
-  <ion-title>Faux Sued Ankle Boots</ion-title>
-  <span>240.99</span>
+
+  <ion-title class="details-header">Faux Sued Ankle Boots</ion-title>
+  <p style="text-align: center;">240.99</p>
   <ion-row>
     <ion-col>
       <ion-slides pager loop slidesPerView="1">
@@ -42,12 +43,26 @@
       </ion-segment>
   </div>
   <div *ngIf="productdetailsType=='product'">
-      <ion-card class="bradcumb">
-        Click on product tab
-      </ion-card>
+      <div class="bradcumb" style="text-align: left; padding: 10px;">
+        <div>
+          <ion-title class="section-header">SELECT COLOR</ion-title>
+          <span class="dot" style=" background-color: #f0d57c;"></span>
+          <span class="dot" style=" background-color: #75e084;"></span>
+          <span class="dot" style=" background-color: #b87cf0;"></span>
+          <span class="dot" style=" background-color: #d8284e;"></span>
+        </div>
+        <div style="padding-top: 20px;">
+            <ion-title class="section-header">SELECT SIZE</ion-title>
+            <span class="dot-size"> 4.5</span>
+            <span class="dot-size"> 5.5</span>
+            <span class="dot-size"> 6.5</span>
+            <span class="dot-size"> 7.5</span>
+
+          </div>
+      </div>
   </div>
   <div class="pro-details" *ngIf="productdetailsType=='details'">
-      <ion-card class="bradcumb">
+      <div class="bradcumb">
        <ion-row>
          <ion-col col-6>
            Brand
@@ -71,15 +86,15 @@
            <p>45 ft</p>
          </ion-col>
        </ion-row>
-      </ion-card>
+      </div>
   </div>
   <div *ngIf="productdetailsType=='reviews'">
-      <ion-card class="bradcumb">
+      <div class="bradcumb">
         Click on review tab
-      </ion-card>
+      </div>
   </div>
 
-  <ion-footer>
+  <!-- <ion-footer>
       <ion-toolbar text-center="">
           <ion-row>
               <ion-col col-6><button ion-button color="dark" round>
@@ -88,7 +103,7 @@
               <ion-col col-6><button ion-button color="danger" round>CHECKOUT</button></ion-col>
             </ion-row>
       </ion-toolbar>
-    </ion-footer>
+    </ion-footer> -->
 
 
 </ion-content>
