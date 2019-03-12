@@ -13,7 +13,10 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 // CSS for Home page  start
+ion-content {
+    background-color:#f5f6f8 !important;
 
+}
 ion-header {
     div.toolbar-background{
         // background-image: url('assets/imgs/header.png');
@@ -207,3 +210,61 @@ color:#798291;
     font-size: 12px;
     margin-right:10px;
 }
+
+// Css for profile page 
+.item-md ion-avatar img {
+    width:80px;
+    height:80px;
+}
+.item-md.item-block .item-inner {
+    border-bottom: none;
+}
+.icon-rightside {
+    float:right;
+}
+.profile-page .item-md {
+    color: #9c9c9c;
+}
+.avatar-title {
+    color: #000;
+    font-weight: bold !important;
+}
+
+.profile-page  ion-card {
+    border-radius: 6px;
+    padding-bottom:20px;
+    margin-bottom: 25px;
+}
+.close {
+    color:#fb8384;
+    font-size: 20px;
+    padding: 3px;
+}
+.sub-cat .label-md,p {
+    color: #9c9c9c;
+}
+
+.product-image img {
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    padding: 16px;
+    background-color: #ffffff;
+}
+.quantity {
+    padding-top:0px;
+}
+.quantity-btn {
+    border-radius: 50%;
+    width:20px;
+    height:20px;
+}
+// .cart-list p {
+//     margin:1px;
+// }
+.cart-list span{
+    color: #9c9c9c;
+}
+.cart-list p:first-child { 
+    margin:0;
+  }

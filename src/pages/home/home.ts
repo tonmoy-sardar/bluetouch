@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angular';
 
+
 /**
  * Generated class for the HomePage page.
  *
@@ -26,6 +27,9 @@ export class HomePage {
     console.log('ionViewDidLoad HomePage');
     this.menuCtrl.close();
     this.rating = [1, 2, 3, 4, 5];
+  }
+  gotoDetails() {
+    this.navCtrl.push('ProductdetailsPage');
   }
 
 }

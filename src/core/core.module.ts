@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { ApiProvider } from '../core/api/api';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,6 +15,11 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 
 import { MainService } from './services/main.service';
 
+import {FooterPage} from '../pages/include/footer/footer';
+
+
+
+
 
 @NgModule({
   imports: [
@@ -27,9 +32,13 @@ import { MainService } from './services/main.service';
   exports: [
     // Ionic2RatingModule 
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FooterPage
   ],
-  declarations: [],
+  declarations: [
+    //FooterPage
+    FooterPage
+  ],
   providers: [
     ApiProvider,
     SpinnerDialog,
@@ -43,7 +52,8 @@ import { MainService } from './services/main.service';
     
     //DocumentViewer,
     
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CoreModule {
 

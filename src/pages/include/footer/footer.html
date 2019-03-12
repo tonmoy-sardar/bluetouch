@@ -1,0 +1,24 @@
+<ion-toolbar>
+  <ion-buttons>
+    <button class="active" (click)="gotoPage('HomePage')">
+      <ion-icon name="home"></ion-icon>
+      <div>Home</div>
+    </button>
+    <button>
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      <div>Search</div>
+    </button>
+    <button>
+      <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+      <div>Cart</div>
+    </button>
+    <button (click)="gotoPage('ProfilePage')"> 
+      <ion-icon ios="ios-person" md="md-person"></ion-icon>
+      <div>Profile</div>
+    </button>
+    <button>
+      <ion-icon ios="ios-reorder" md="md-reorder"></ion-icon>
+      <div>More</div>
+    </button>
+  </ion-buttons>
+</ion-toolbar>

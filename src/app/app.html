@@ -11,7 +11,7 @@
       <ion-buttons right>
         <button ion-button icon-only>
                 <ion-icon ios="ios-person-outline" md="md-person"></ion-icon>
-                <ion-icon ios="ios-cart-outline" md="md-cart"></ion-icon>
+                <ion-icon (click)="gotoPage('CartPage')"  ios="ios-cart-outline" md="md-cart"></ion-icon>
         </button>
       </ion-buttons>
     </ion-navbar>
@@ -33,6 +33,14 @@
         <ion-item (click)="gotoPage('ProductdetailsPage')">
             <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
             Product Details
+        </ion-item>
+        <ion-item (click)="gotoPage('SubcategoryPage')">
+            <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
+           Sub Category
+        </ion-item>
+        <ion-item (click)="gotoPage('CartPage')">
+            <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
+          Cart
         </ion-item>
     </ion-content>
 </ion-menu>
