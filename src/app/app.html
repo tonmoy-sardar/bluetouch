@@ -1,46 +1,52 @@
-
 <ion-header>
     <ion-navbar>
-      <ion-buttons left>
-          <button ion-button menuToggle color="light">
+        <ion-buttons left>
+            <button ion-button menuToggle color="light">
             <ion-icon name="menu"></ion-icon>
             <ion-title></ion-title>
         </button>
-      </ion-buttons>
-      <ion-title></ion-title>
-      <ion-buttons right>
-        <button ion-button icon-only>
+        </ion-buttons>
+        <ion-title></ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only>
                 <ion-icon ios="ios-person-outline" md="md-person"></ion-icon>
                 <ion-icon (click)="gotoPage('CartPage')"  ios="ios-cart-outline" md="md-cart"></ion-icon>
         </button>
-      </ion-buttons>
+        </ion-buttons>
     </ion-navbar>
-  </ion-header>
+</ion-header>
 
 <ion-menu [content]="mycontent">
     <ion-content>
-        <ion-item>
+        <ion-item class="profile-img">
 
+            <img src="assets/imgs/man.jpeg" />
+
+            <h2>Shuvendu Dhenki</h2>
+            <span>shuvendu.dhenki@gmail.com</span>
         </ion-item>
         <ion-item (click)="gotoPage('HomePage')">
+
             <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
+
+
             Home
         </ion-item>
         <ion-item (click)="gotoPage('ProductlistPage')">
-            <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
+            <ion-icon name="apps"></ion-icon>
             Product List
         </ion-item>
         <ion-item (click)="gotoPage('ProductdetailsPage')">
-            <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
+            <ion-icon name="alert"></ion-icon>
             Product Details
         </ion-item>
         <ion-item (click)="gotoPage('SubcategoryPage')">
-            <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
-           Sub Category
+            <ion-icon name="archive"></ion-icon>
+            Sub Category
         </ion-item>
         <ion-item (click)="gotoPage('CartPage')">
-            <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
-          Cart
+            <ion-icon name="cart"></ion-icon>
+            Cart
         </ion-item>
     </ion-content>
 </ion-menu>
