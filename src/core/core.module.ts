@@ -10,13 +10,11 @@ import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 //import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-
+import {FooterPage} from '../pages/include/footer/footer';
 //services
 
-import { MainService } from './services/main.service';
-
-import {FooterPage} from '../pages/include/footer/footer';
-
+import { UserService } from './services/user.service';
+import { WoocommerceService } from './services/woocommerce.service';
 
 
 
@@ -42,7 +40,8 @@ import {FooterPage} from '../pages/include/footer/footer';
   providers: [
     ApiProvider,
     SpinnerDialog,
-    MainService,
+    UserService,
+    WoocommerceService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: ionicGalleryModal.GalleryModalHammerConfig,
