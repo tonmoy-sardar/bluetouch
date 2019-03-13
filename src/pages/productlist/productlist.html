@@ -6,249 +6,270 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Product List</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Product List</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 <ion-content>
-  <div class="bar bar-subheader">
-    <ion-slides slidesPerView="3.2">
-      <ion-slide>
-        <span class="active">Best Match</span>
-      </ion-slide>
-      <ion-slide>
-        <span>Top Rated</span>
-      </ion-slide>
-      <ion-slide>
-        <span>Price Low-High</span>
-      </ion-slide>
-      <ion-slide>
-        <span>Price High-Low</span>
-      </ion-slide>
-    </ion-slides>
-  </div>
+    <div class="bar bar-subheader">
+        <div class="top-search">
+            <ion-row>
+                <ion-col col-8>
+                    <ion-searchbar></ion-searchbar>
+                </ion-col>
+                <ion-col col-2> <button ion-button><ion-icon name="search"></ion-icon></button></ion-col>
+                <ion-col col-2>
 
-  <div class="product-list">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-6>
-          <ion-card>
-            <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
-            <img src="assets/imgs/img1.png" />
-            <ion-card-content>
-              <ion-card-title>
-                V Neck Shirt
-              </ion-card-title>
-              <hr>
-              <ion-row>
-                <ion-col col-6>
-                  <span class="price">
+                    <!-- <button ion-button> <ion-icon name="funnel"></ion-icon></button>-->
+                    <ion-list>
+                        <ion-item>
+                            <ion-label>
+                                sdsdsd
+                            </ion-label>
+                            <ion-select [(ngModel)]="gaming">
+                                <ion-option value="nes">NES</ion-option>
+                                <ion-option value="n64">Nintendo64</ion-option>
+                                <ion-option value="ps">PlayStation</ion-option>
+                                <ion-option value="genesis">Sega Genesis</ion-option>
+                                <ion-option value="saturn">Sega Saturn</ion-option>
+                                <ion-option value="snes">SNES</ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+
+
+            </ion-row>
+        </div>
+        <ion-slides slidesPerView="3.2">
+            <ion-slide>
+                <span class="active">Best Match</span>
+            </ion-slide>
+            <ion-slide>
+                <span>Top Rated</span>
+            </ion-slide>
+            <ion-slide>
+                <span>Price Low-High</span>
+            </ion-slide>
+            <ion-slide>
+                <span>Price High-Low</span>
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+    <div class="product-list">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-6 class="product-price">
+                    <ion-card>
+                        <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                        <img class="product-image" src="assets/imgs/img1.png" />
+                        <ion-card-content>
+                            <ion-card-title>
+                                V Neck Shirt
+                            </ion-card-title>
+                            <hr>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <span class="price">
                     <i class="fa fa-rupee"></i>240.99
                     <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
                   </span>
-                </ion-col>
-                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index"
-                    [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                </ion-col>
+                                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                     <ion-icon name="star"></ion-icon>
                   </span></ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col col-6>
-          <ion-card>
-            <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
-            <img src="assets/imgs/img1.png" />
-            <ion-card-content>
-              <ion-card-title>
-                V Neck Shirt
-              </ion-card-title>
-              <hr>
-              <ion-row>
-                <ion-col col-6>
-                  <span class="price">
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col col-6 class="product-price">
+                    <ion-card>
+                        <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                        <img class="product-image" src="assets/imgs/img1.png" />
+                        <ion-card-content>
+                            <ion-card-title>
+                                V Neck Shirt
+                            </ion-card-title>
+                            <hr>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <span class="price">
                     <i class="fa fa-rupee"></i>240.99
                     <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
                   </span>
-                </ion-col>
-                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index"
-                    [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                </ion-col>
+                                <ion-col col-6> <span class="rating  active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                     <ion-icon name="star"></ion-icon>
                   </span></ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col col-6>
-          <ion-card>
-            <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
-            <img src="assets/imgs/img1.png" />
-            <ion-card-content>
-              <ion-card-title>
-                V Neck Shirt
-              </ion-card-title>
-              <hr>
-              <ion-row>
-                <ion-col col-6>
-                  <span class="price">
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col col-6 class="product-price">
+                    <ion-card>
+                        <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                        <img class="product-image" src="assets/imgs/img1.png" />
+                        <ion-card-content>
+                            <ion-card-title>
+                                V Neck Shirt
+                            </ion-card-title>
+                            <hr>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <span class="price">
                     <i class="fa fa-rupee"></i>240.99
                     <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
                   </span>
-                </ion-col>
-                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index"
-                    [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                </ion-col>
+                                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                     <ion-icon name="star"></ion-icon>
                   </span></ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col col-6>
-          <ion-card>
-            <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
-            <img src="assets/imgs/img1.png" />
-            <ion-card-content>
-              <ion-card-title>
-                V Neck Shirt
-              </ion-card-title>
-              <hr>
-              <ion-row>
-                <ion-col col-6>
-                  <span class="price">
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col col-6 class="product-price">
+                    <ion-card>
+                        <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                        <img class="product-image" src="assets/imgs/img1.png" />
+                        <ion-card-content>
+                            <ion-card-title>
+                                V Neck Shirt
+                            </ion-card-title>
+                            <hr>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <span class="price">
                     <i class="fa fa-rupee"></i>240.99
                     <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
                   </span>
-                </ion-col>
-                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index"
-                    [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                </ion-col>
+                                <ion-col col-6> <span class="rating  active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                     <ion-icon name="star"></ion-icon>
                   </span></ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col col-6>
-          <ion-card>
-            <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
-            <img src="assets/imgs/img1.png" />
-            <ion-card-content>
-              <ion-card-title>
-                V Neck Shirt
-              </ion-card-title>
-              <hr>
-              <ion-row>
-                <ion-col col-6>
-                  <span class="price">
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col col-6 class="product-price">
+                    <ion-card>
+                        <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                        <img class="product-image" src="assets/imgs/img1.png" />
+                        <ion-card-content>
+                            <ion-card-title>
+                                V Neck Shirt
+                            </ion-card-title>
+                            <hr>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <span class="price">
                     <i class="fa fa-rupee"></i>240.99
                     <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
                   </span>
-                </ion-col>
-                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index"
-                    [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                </ion-col>
+                                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                     <ion-icon name="star"></ion-icon>
                   </span></ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col col-6>
-          <ion-card>
-            <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
-            <img src="assets/imgs/img1.png" />
-            <ion-card-content>
-              <ion-card-title>
-                V Neck Shirt
-              </ion-card-title>
-              <hr>
-              <ion-row>
-                <ion-col col-6>
-                  <span class="price">
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col col-6 class="product-price">
+                    <ion-card>
+                        <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                        <img class="product-image" src="assets/imgs/img1.png" />
+                        <ion-card-content>
+                            <ion-card-title>
+                                V Neck Shirt
+                            </ion-card-title>
+                            <hr>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <span class="price">
                     <i class="fa fa-rupee"></i>240.99
                     <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
                   </span>
-                </ion-col>
-                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index"
-                    [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                </ion-col>
+                                <ion-col col-6> <span class="rating  active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                     <ion-icon name="star"></ion-icon>
                   </span></ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col col-6>
-          <ion-card>
-            <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
-            <img src="assets/imgs/img1.png" />
-            <ion-card-content>
-              <ion-card-title>
-                V Neck Shirt
-              </ion-card-title>
-              <hr>
-              <ion-row>
-                <ion-col col-6>
-                  <span class="price">
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col col-6 class="product-price">
+                    <ion-card>
+                        <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                        <img class="product-image" src="assets/imgs/img1.png" />
+                        <ion-card-content>
+                            <ion-card-title>
+                                V Neck Shirt
+                            </ion-card-title>
+                            <hr>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <span class="price">
                     <i class="fa fa-rupee"></i>240.99
                     <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
                   </span>
-                </ion-col>
-                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index"
-                    [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                </ion-col>
+                                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                     <ion-icon name="star"></ion-icon>
                   </span></ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col col-6>
-          <ion-card>
-            <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
-            <img src="assets/imgs/img1.png" />
-            <ion-card-content>
-              <ion-card-title>
-                V Neck Shirt
-              </ion-card-title>
-              <hr>
-              <ion-row>
-                <ion-col col-6>
-                  <span class="price">
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col col-6 class="product-price">
+                    <ion-card>
+                        <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                        <img class="product-image" src="assets/imgs/img1.png" />
+                        <ion-card-content>
+                            <ion-card-title>
+                                V Neck Shirt
+                            </ion-card-title>
+                            <hr>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <span class="price">
                     <i class="fa fa-rupee"></i>240.99
                     <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
                   </span>
-                </ion-col>
-                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index"
-                    [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                </ion-col>
+                                <ion-col col-6> <span class="rating  active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                     <ion-icon name="star"></ion-icon>
                   </span></ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar text-center="">
-    <ion-buttons>
-      <button ion-button>
+    <ion-toolbar text-center="">
+        <ion-buttons>
+            <button ion-button>
         <ion-icon name="home"></ion-icon>
       </button>
-      <button ion-button>
+            <button ion-button>
         <ion-icon ios="ios-search" md="md-search"></ion-icon>
       </button>
-      <button ion-button>
+            <button ion-button>
         <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
       </button>
-      <button ion-button>
+            <button ion-button>
         <ion-icon ios="ios-person" md="md-person"></ion-icon>
       </button>
-      <button ion-button>
+            <button ion-button>
         <ion-icon ios="ios-reorder" md="md-reorder"></ion-icon>
       </button>
-    </ion-buttons>
-  </ion-toolbar>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-footer>

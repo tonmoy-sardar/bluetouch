@@ -16,7 +16,7 @@
 
 <ion-content class="has-header">
     <div class="category-list">
-        <ion-title>Categories List</ion-title>
+        <ion-title class="headline">Categories List</ion-title>
         <hr>
         <ion-grid>
             <ion-row>
@@ -34,7 +34,7 @@
                     <img src="assets/imgs/shoes-bg.png">
                     <span>Shoes</span>
                 </ion-col>
-                <ion-col col-3>
+                <ion-col col-3 (click)="gotoDetails('SubcategoryPage')">
 
                     <img src="assets/imgs/see_all.png">
 
@@ -45,7 +45,7 @@
         </ion-grid>
     </div>
     <div class="arrival-list">
-        <ion-title>New Arrival</ion-title>
+        <ion-title class="headline">New Arrival</ion-title>
         <hr>
         <ion-slides loop slidesPerView="1.2">
             <ion-slide>
@@ -57,11 +57,11 @@
         </ion-slides>
     </div>
     <div class="custom-slider latest-list">
-        <ion-title>Latest Fashion</ion-title>
+        <ion-title class="headline">Latest Fashion</ion-title>
         <hr>
         <ion-slides loop slidesPerView="2.4">
             <ion-slide>
-                <ion-card (click)="gotoDetails()">
+                <ion-card (click)="gotoDetails('ProductdetailsPage')">
                     <img src="assets/imgs/slder1.png" />
 
                     <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
@@ -132,7 +132,7 @@
         </ion-slides>
     </div>
     <div class="custom-slider recent-list" style="padding-top:30px;">
-        <ion-title>Recently Viewed</ion-title>
+        <ion-title class="headline">Recently Viewed</ion-title>
         <hr>
         <ion-slides loop slidesPerView="2.4">
             <ion-slide>

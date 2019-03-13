@@ -28,8 +28,8 @@ export class HomePage {
     this.menuCtrl.close();
     this.rating = [1, 2, 3, 4, 5];
   }
-  gotoDetails() {
-    this.navCtrl.push('ProductdetailsPage');
+  gotoDetails(page) {
+    this.navCtrl.push(page);
   }
 
 }
