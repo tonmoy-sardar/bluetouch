@@ -172,7 +172,7 @@ ion-footer {
 }
 
 .product-list {
-    background: #cccccc;
+    background: #efecec;
 }
 
 // .menu-inner ion-content {
@@ -181,18 +181,7 @@ ion-footer {
 .md .menu-inner .item-md {
     background: none;
     border-bottom: 1px solid #ea520747;
-    color: #fff;
-}
-
-.md .menu-inner .item-md ion-icon {
-    background: #b12a00;
-    padding: 4px;
-    border-radius: 100%;
-    font-size: 12px;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    line-height: 12px;
+    color: #090909;
 }
 
 .product-list ion-card {
@@ -329,10 +318,13 @@ ion-footer {
     margin-bottom: 25px;
 }
 
-.close {
+.category-list .close {
     color: #fb8384;
-    font-size: 20px;
-    padding: 3px;
+    font-size: 55px;
+    padding: 19px;
+    position: absolute;
+    right: 0;
+    top: -21px;
 }
 
 .sub-cat .label-md,
@@ -400,4 +392,83 @@ p {
 
 .menu-nav .item ion-icon {
     color: #fe5d05;
+}
+
+.slide-zoom .toolbar-title-ios {
+    color: #7b7777;
+    text-align: center;
+}
+
+.headline .toolbar-title-ios {
+    color: #7b7777;
+    text-align: left;
+    padding-left: 16px;
+    font-size: 20px;
+}
+
+.category-list .card-ios {
+    border-radius: 13px;
+}
+
+.category-list .list-ios>.item-block:first-child {
+    border-top: 0.55px solid #c8c7cc57;
+}
+
+.category-list ion-label ion-icon {
+    float: right;
+    color: #bfbfbf;
+    font-size: 23px;
+}
+
+.cart-list .price-btn {
+    display: block;
+    border-radius: 22px;
+    height: 30px;
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid #bdbdbd;
+}
+
+.cart-list .price-btn span {
+    color: red;
+}
+
+.submit-btn button ion-icon {
+    float: right;
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.product-price .product-image {
+    padding: 15px;
+}
+
+.product-price ion-card {
+    border-radius: 15px;
+}
+
+.product-price .rating {
+    font-size: 7px;
+}
+
+.top-search button {
+    background: #fff;
+    padding: 6px;
+    height: 37px;
+}
+
+.top-search button ion-icon {
+    color: #ff7874;
+    font-size: 24px;
+}
+
+.top-search .searchbar-ios {
+    border-top: 0.55px solid transparent;
+    border-bottom: none;
+    background: none;
+}
+
+.top-search .searchbar-ios .searchbar-input {
+    background-color: #cecdcd;
+    border-radius: 31px;
 }
