@@ -7,20 +7,25 @@
         </button>
         </ion-buttons>
         <ion-title></ion-title>
+
         <ion-buttons right>
             <button ion-button icon-only>
                 <ion-icon ios="ios-person-outline" md="md-person"></ion-icon>
-                <ion-icon (click)="gotoPage('CartPage')"  ios="ios-cart-outline" md="md-cart"></ion-icon>
-        </button>
+            </button>
         </ion-buttons>
+        <ion-buttons (click)="gotoPage('CartPage')" right>
+            <button ion-button icon-only>
+                <ion-icon ios="ios-cart-outline" md="md-cart"></ion-icon>
+</button></ion-buttons>
+
     </ion-navbar>
 </ion-header>
 
 <ion-menu [content]="mycontent">
-    <ion-content>
+    <ion-content class="menu-nav">
         <ion-item class="profile-img">
 
-            <img src="assets/imgs/man.jpeg" />
+            <img src="assets/imgs/man.jpg" />
 
             <h2>Shuvendu Dhenki</h2>
             <span>shuvendu.dhenki@gmail.com</span>
@@ -28,8 +33,6 @@
         <ion-item (click)="gotoPage('HomePage')">
 
             <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
-
-
             Home
         </ion-item>
         <ion-item (click)="gotoPage('ProductlistPage')">

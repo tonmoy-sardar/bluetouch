@@ -40,6 +40,7 @@ export class MyApp {
   
   gotoPage(routePage)
   {
+    alert(2);
     console.log(routePage);
     this.nav.push(routePage);
   }

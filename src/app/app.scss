@@ -102,11 +102,12 @@ ion-footer {
 
 .recent-list button {
     position: absolute;
-    bottom: 94px;
-    left: 32px;
+    bottom: 114px;
+    left: 25%;
     border-radius: 22px;
-    height: 26px;
+    height: 22px;
     color: red;
+    font-size: 11px;
 }
 
 .recent-list .card-content-md {
@@ -131,17 +132,22 @@ ion-footer {
     color: #DDA72A
 }
 
+.arrival-list .slide-zoom {
+    margin: 0 15px;
+}
+
 .latest-list .swiper-slide img {
     width: 88% !important;
 }
 
 .latest-list .swiper-slide button {
     position: absolute;
-    bottom: 86px;
-    left: 32px;
+    bottom: 103px;
+    left: 25%;
     border-radius: 22px;
-    height: 26px;
+    height: 22px;
     color: red;
+    font-size: 11px;
 }
 
 .latest-list .swiper-slide button ion-icon {
@@ -169,10 +175,9 @@ ion-footer {
     background: #cccccc;
 }
 
-.menu-inner ion-content {
-    background: #fb9360 !important;
-}
-
+// .menu-inner ion-content {
+//     background: #fb9360 !important;
+// }
 .md .menu-inner .item-md {
     background: none;
     border-bottom: 1px solid #ea520747;
@@ -375,6 +380,7 @@ p {
     height: 120px;
     width: 120px;
     border-radius: 100%;
+    border: 7px solid #febb644d;
 }
 
 .profile-img h2 {
@@ -384,6 +390,14 @@ p {
 .profile-img span {
     font-size: 11px;
     text-align: center;
-    color: #af410b;
+    color: #999;
     display: block;
+}
+
+.profile-img {
+    padding-top: 51px;
+}
+
+.menu-nav .item ion-icon {
+    color: #fe5d05;
 }
