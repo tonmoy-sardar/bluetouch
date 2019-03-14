@@ -11,6 +11,29 @@
   </ion-navbar>
 
 </ion-header> -->
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+             <button ion-button menuToggle color="light">
+                <ion-icon name="menu"></ion-icon>
+                <ion-title></ion-title>
+            </button> 
+           
+        </ion-buttons>
+        <ion-title></ion-title>
+
+        <ion-buttons right>
+            <button ion-button icon-only>
+                <ion-icon ios="ios-person-outline" md="md-person"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons (click)="gotoPage('CartPage')" right>
+            <button ion-button icon-only>
+                <ion-icon ios="ios-cart-outline" md="md-cart"></ion-icon>
+            </button></ion-buttons>
+
+    </ion-navbar>
+</ion-header>
 
 
 <ion-content>

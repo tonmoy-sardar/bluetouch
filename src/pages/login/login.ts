@@ -58,9 +58,10 @@ export class LoginPage {
       let url = Globals.apiEndpoint + 'login/';
       let loginUserUrl:string = this.woocommerceService.authenticateApi('POST',url,params);
       console.log(this.loginForm.value);
+      this.navCtrl.setRoot('HomePage');
       this.userService.userLogin(loginUserUrl,this.loginForm.value).subscribe(
         res => {
-          console.log(res)
+          console.log(res);
          
         },
         error => {

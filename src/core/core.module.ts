@@ -15,6 +15,7 @@ import {FooterPage} from '../pages/include/footer/footer';
 
 import { UserService } from './services/user.service';
 import { WoocommerceService } from './services/woocommerce.service';
+import { CategoryService } from './services/category.service';
 
 
 
@@ -42,6 +43,7 @@ import { WoocommerceService } from './services/woocommerce.service';
     SpinnerDialog,
     UserService,
     WoocommerceService,
+    CategoryService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: ionicGalleryModal.GalleryModalHammerConfig,

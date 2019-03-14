@@ -9,8 +9,8 @@ import Base64 from 'crypto-js/enc-base64';
 export class WoocommerceService {
   nonce: string = ''
   currentTimestamp: number = 0 
-  customer_key: string = 'ck_bda4dac1312e03ec52942ebf84b70ce071b7c266'; 
-  customer_secret: string = 'cs_513cb39c53404cf7aea375b4373234ca73e07711';  
+  customer_key: string = 'ck_fd87d34bcf9338dda87a47042fc474d702ef3e07'; 
+  customer_secret: string = 'cs_1186505f7196b03f934ee047d83ad92d8b46e44c';  
   constructor() { }
 
   authenticateApi(method,url,params) {

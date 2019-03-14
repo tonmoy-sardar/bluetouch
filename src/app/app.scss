@@ -48,6 +48,9 @@ ion-footer {
         color: #fb7775;
     }
 }
+ion-row {
+    text-align: center;
+}
 
 .see-all ion-icon {
     font-size: 4.5em;
@@ -60,11 +63,16 @@ ion-footer {
 .category-list {
     padding-top: 10px;
 }
+.category-list .image-avatar img {
+    border-radius: 50%;
+    width:50px;
+    height:50px;
+}
 
 .category-list span {
     text-align: center;
     display: block;
-    margin: -14px auto 10px;
+   // margin: -14px auto 10px;
 }
 
 .latest-list ion-card {
@@ -394,8 +402,6 @@ p {
     color: #fe5d05;
 }
 
-<<<<<<< HEAD
-=======
 .slide-zoom .toolbar-title-ios {
     color: #7b7777;
     text-align: center;
@@ -528,4 +534,3 @@ p {
 }
 
 // / css end by kalyan /
->>>>>>> ca0c86bd5417a2694806ff997a671c1f505a4091

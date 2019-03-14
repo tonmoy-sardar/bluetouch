@@ -1,10 +1,11 @@
-<ion-header>
+<!-- <ion-header>
     <ion-navbar>
         <ion-buttons left>
-            <button ion-button menuToggle color="light">
-            <ion-icon name="menu"></ion-icon>
-            <ion-title></ion-title>
-        </button>
+             <button ion-button menuToggle color="light">
+                <ion-icon name="menu"></ion-icon>
+                <ion-title></ion-title>
+            </button> 
+           
         </ion-buttons>
         <ion-title></ion-title>
 
@@ -16,10 +17,11 @@
         <ion-buttons (click)="gotoPage('CartPage')" right>
             <button ion-button icon-only>
                 <ion-icon ios="ios-cart-outline" md="md-cart"></ion-icon>
-</button></ion-buttons>
+            </button></ion-buttons>
 
     </ion-navbar>
-</ion-header>
+</ion-header> -->
+
 
 <ion-menu [content]="mycontent">
     <ion-content class="menu-nav">
@@ -51,6 +53,10 @@
             <ion-icon name="cart"></ion-icon>
             Cart
         </ion-item>
+        <ion-item (click)="gotoPage('OrdersPage')">
+                <ion-icon name="cart"></ion-icon>
+                Order
+            </ion-item>
     </ion-content>
 </ion-menu>
 
