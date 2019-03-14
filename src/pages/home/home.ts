@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,MenuController,Events } from 'ionic-angular';
 
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { CategoryService } from '../../core/services/category.service';
@@ -21,13 +21,15 @@ export class HomePage {
   rating;
   categoryList :any =[];
   visible_key:boolean;
+
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
      public menuCtrl: MenuController,
      private spinnerDialog: SpinnerDialog,
      public categoryService:CategoryService,
-     public woocommerceService:WoocommerceService
+     public woocommerceService:WoocommerceService,
+     public  events1:Events
      ) {
   }
 
@@ -36,6 +38,9 @@ export class HomePage {
     this.menuCtrl.close();
     this.rating = [1, 2, 3, 4, 5];
     this.getCategory();
+  }
+  ionViewDidEnter(){
+    this.events1.publish('hideBackButton', true);
   }
   gotoDetails(page) {
     this.navCtrl.push(page);

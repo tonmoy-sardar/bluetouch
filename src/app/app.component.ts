@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform,Navbar,Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -9,15 +9,24 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  @ViewChild(Navbar) navBar: Navbar;
   rootPage: any;
 
   pages: Array<{title: string, component: any}>;
+  hideBackButton:Boolean =true;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+    public platform: Platform,
+     public statusBar: StatusBar,
+      public splashScreen: SplashScreen,
+      public  events1:Events
+      ) {
     this.initializeApp();
 
-
+    this.events1.subscribe('hideBackButton', (data) =>{
+      console.log("Emitted=======>", data); 
+      this.hideBackButton = data;
+    });
   }
 
   initializeApp() {
@@ -29,6 +38,10 @@ export class MyApp {
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.navBar.backButtonClick = (e:UIEvent)=>{        
+        // todo something
+        this.nav.pop();
+       }
     });
   }
 

@@ -1,7 +1,9 @@
-<!-- <ion-header>
-    <ion-navbar>
+<ion-header>
+
+        
+    <ion-navbar hideBackButton="{{hideBackButton}}">
         <ion-buttons left>
-             <button ion-button menuToggle color="light">
+             <button ion-button menuToggle color="light" *ngIf="hideBackButton">
                 <ion-icon name="menu"></ion-icon>
                 <ion-title></ion-title>
             </button> 
@@ -20,7 +22,7 @@
             </button></ion-buttons>
 
     </ion-navbar>
-</ion-header> -->
+</ion-header>
 
 
 <ion-menu [content]="mycontent">

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController,Events } from 'ionic-angular';
 
 /**
  * Generated class for the SubcategoryPage page.
@@ -18,12 +18,15 @@ export class SubcategoryPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public menuCtrl: MenuController
+    public menuCtrl: MenuController,
+    public events1:Events
   ) {
+    
   }
 
   ionViewDidLoad() {
     this.menuCtrl.close();
+    this.events1.publish('hideBackButton', false);
     console.log('ionViewDidLoad SubcategoryPage');
   }
 
