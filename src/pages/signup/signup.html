@@ -6,49 +6,53 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>signup</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>signup</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content >
-  <div class="logo">
-    <img src="assets/imgs/logo.png" alt="Ionic logo">
-</div>
+<ion-content>
+    <div class="logo">
+        <img src="assets/imgs/logo.png" alt="Ionic logo">
+    </div>
+    <ion-card class="entry-form-body">
 
-<div class="entry-form-body">
-    <ion-title><h3 class="entry-form-title">Signup Page</h3></ion-title>
-  <form [formGroup]="signupForm" novalidate (submit)="signUp()">
+        <ion-title>
+            <h3 class="entry-form-title">Signup Page</h3>
+        </ion-title>
+        <form [formGroup]="signupForm" novalidate (submit)="signUp()">
 
-      <ion-grid class="form-body">
-          <ion-row>
-              <ion-col col-12>
-                  <ion-input type="text"  name="name" formControlName="name" [ngClass]="displayFieldCss('name')" placeholder="Name"></ion-input>
-                  <span class="error-msg" *ngIf="isFieldValid('name')">Please enter a Name.</span>
-              </ion-col>
-              <ion-col col-12>
-                  <ion-input type="email"  name="email" formControlName="email" [ngClass]="displayFieldCss('email')" placeholder="Email"></ion-input>
-                  <span class="error-msg" *ngIf="isFieldValid('email')">Please enter a valid Email.</span>
-              </ion-col>
-              <ion-col col-12>
-                  <ion-input type="tel" pattern="[0-9]*" maxLength="10"  name="contact" formControlName="contact" [ngClass]="displayFieldCss('contact')" placeholder="Contact" ></ion-input>
-                  <span class="error-msg" *ngIf="isFieldValid('contact')">Please enter a Contact.</span>
-              </ion-col>
-              <ion-col col-12>
-                  <ion-input type="password" name="password" formControlName="password" [ngClass]="displayFieldCss('password')" placeholder="Password"></ion-input>
-                  <span class="error-msg" *ngIf="isFieldValid('password')">Please enter a Password.</span>
-              </ion-col>
-          </ion-row>
-          <ion-row responsive-sm class="entry-bottom">
-                  <ion-col class="pl-0 pr-0">
-                      <button ion-button color="primary" block >Sign Up</button>
-                  </ion-col>
-              </ion-row>
-      </ion-grid>
-  </form>
- 
-  <p class="text-center not-member" (click)="gotoSignin()"> Existing User? <span class="creat">Login</span> </p>
-</div>
+            <ion-grid class="form-body">
+                <ion-row>
+                    <ion-col col-12>
+                        <ion-input type="text" name="name" formControlName="name" [ngClass]="displayFieldCss('name')" placeholder="Name"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('name')">Please enter a Name.</span>
+                    </ion-col>
+                    <ion-col col-12>
+                        <ion-input type="email" name="email" formControlName="email" [ngClass]="displayFieldCss('email')" placeholder="Email"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('email')">Please enter a valid Email.</span>
+                    </ion-col>
+                    <ion-col col-12>
+                        <ion-input type="tel" pattern="[0-9]*" maxLength="10" name="contact" formControlName="contact" [ngClass]="displayFieldCss('contact')" placeholder="Contact"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('contact')">Please enter a Contact.</span>
+                    </ion-col>
+                    <ion-col col-12>
+                        <ion-input type="password" name="password" formControlName="password" [ngClass]="displayFieldCss('password')" placeholder="Password"></ion-input>
+                        <span class="error-msg" *ngIf="isFieldValid('password')">Please enter a Password.</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row responsive-sm class="entry-bottom">
+                    <ion-col class="pl-0 pr-0">
+                        <button ion-button color="primary" block>Sign Up</button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+        <div class="forgot-password">
+            <p class="text-center not-member" (click)="gotoSignin()"> Existing User? <span class="creat">Login</span> </p>
+        </div>
+
+    </ion-card>
 </ion-content>

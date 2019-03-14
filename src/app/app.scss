@@ -48,6 +48,7 @@ ion-footer {
         color: #fb7775;
     }
 }
+
 ion-row {
     text-align: center;
 }
@@ -63,16 +64,17 @@ ion-row {
 .category-list {
     padding-top: 10px;
 }
+
 .category-list .image-avatar img {
     border-radius: 50%;
-    width:50px;
-    height:50px;
+    width: 50px;
+    height: 50px;
 }
 
 .category-list span {
     text-align: center;
     display: block;
-   // margin: -14px auto 10px;
+    // margin: -14px auto 10px;
 }
 
 .latest-list ion-card {
@@ -498,6 +500,7 @@ p {
 
 .entry-form-body {
     background: #fb8868;
+    border-radius: 13px;
 }
 
 .form-body {
@@ -505,6 +508,27 @@ p {
     margin-top: 15px;
     width: 85%;
     margin: 0 auto;
+    border-radius: 18px;
+}
+
+.entry-form-body .entry-form-title {
+    font-size: 25px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.form-body .button-md-primary {
+    color: #fff;
+    background-color: #e9520c;
+}
+
+.form-body ion-input {
+    border-bottom: 1px solid #bfbcbce6;
+}
+
+.form-body .error-msg {
+    font-size: 9px;
+    float: right;
 }
 
 .text-center {
@@ -531,6 +555,14 @@ p {
 
 .order-placed {
     text-align: center;
+}
+
+.forgot-password {
+    padding: 10px 0;
+}
+
+.forgot-password p {
+    color: #fff;
 }
 
 // / css end by kalyan /
