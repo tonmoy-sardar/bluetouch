@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform,Navbar,Events } from 'ionic-angular';
+import { Nav, Platform,Navbar,Events,ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CategoryService } from '../core/services/category.service';
-
+import { CartService } from '../core/services/cart.service';
 @Component({
   templateUrl: 'app.html'
 })
@@ -20,7 +20,9 @@ export class MyApp {
      public statusBar: StatusBar,
       public splashScreen: SplashScreen,
       public  events1:Events,
-      public categoryService:CategoryService
+      public categoryService:CategoryService,
+      public modalCtrl : ModalController,
+      public cartService:CartService
       ) {
     this.initializeApp();
 
@@ -29,9 +31,10 @@ export class MyApp {
       this.hideBackButton = data;
     });
 
-    if (sessionStorage.getItem("cart")) {
-      this.totalCart = JSON.parse(sessionStorage.getItem("cart")).length;
-    }
+    // if (sessionStorage.getItem("cart")) {
+    //   this.totalCart = JSON.parse(sessionStorage.getItem("cart")).length;
+    // }
+    cartService.getCartNumberStatus.subscribe(status => this.cartNumberStatus(status));
   }
 
   initializeApp() {
@@ -48,7 +51,7 @@ export class MyApp {
         this.nav.pop();
        }
     });
-    //categoryService.getCartNumberStatus.subscribe(status => this.cartNumberStatus(status));
+ 
   }
 
   cartNumberStatus(status: boolean) {
@@ -72,6 +75,11 @@ export class MyApp {
   {
     console.log(routePage);
     this.nav.push(routePage);
+  }
+
+  openModal(page) {
+    var modalPage = this.modalCtrl.create(page);
+    modalPage.present();
   }
 
  

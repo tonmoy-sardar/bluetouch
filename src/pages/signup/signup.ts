@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,MenuController,Events } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 //Services
 import { UserService} from '../../core/services/user.service';
-
+import { WoocommerceService } from "../../core/services/woocommerce.service";
+import * as Globals from '../../core/global';
 /**
  * Generated class for the SignupPage page.
  *
@@ -30,50 +30,114 @@ export class SignupPage {
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController,
     private spinnerDialog: SpinnerDialog,
-    public userService:UserService
+    public userService:UserService,
+    public menuCtrl: MenuController,
+    private woocommerceService: WoocommerceService,
   ) {
     events.publish('hideHeader', { isHeaderHidden: true}); 
 
     this.signupForm = this.formBuilder.group({
-      name: ["",Validators.required],
-      email: ["",[
-        Validators.required,
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', [
         Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
       ]],
-      contact: ["", [
+      username: ['', [
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(10)
       ]],
-      password: ["", Validators.required]
+      password: ['', Validators.required],
     });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignupPage');
+    this.menuCtrl.close();
   }
   gotoSignin() {
     this.navCtrl.push('LoginPage');
   }
 
+  // signUp() {
+  //   this.spinnerDialog.show();
+  //   if (this.signupForm.valid) {
+  //     console.log(this.signupForm);
+  //     // this.signupForm.value.otp_verified =  '1';
+  //     // this.signupForm.value.address =  '1';
+  //     // this.userService.userSignup(this.signupForm.value).subscribe(
+  //     //   res => {
+  //     //     this.presentToast("Succesfully User Register");
+  //     //     this.navCtrl.setRoot('LoginPage');
+  //     //     this.spinnerDialog.hide();
+  //     //   },
+  //     //   error => {
+  //     //     this.presentToast(error.error.message);
+  //     //     this.spinnerDialog.hide();
+  //     //   }
+  //     // )
+  //   } else {
+  //     this.markFormGroupTouched(this.signupForm)
+  //   }
+  // }
+
   signUp() {
-    this.spinnerDialog.show();
     if (this.signupForm.valid) {
-      console.log(this.signupForm);
-      // this.signupForm.value.otp_verified =  '1';
-      // this.signupForm.value.address =  '1';
-      // this.userService.userSignup(this.signupForm.value).subscribe(
-      //   res => {
-      //     this.presentToast("Succesfully User Register");
-      //     this.navCtrl.setRoot('LoginPage');
-      //     this.spinnerDialog.hide();
-      //   },
-      //   error => {
-      //     this.presentToast(error.error.message);
-      //     this.spinnerDialog.hide();
-      //   }
-      // )
-    } else {
+      this.spinnerDialog.show();
+      console.log(this.signupForm.value);
+
+      var signUpData = {
+        email: this.signupForm.value.email,
+        password: this.signupForm.value.password,
+        first_name: this.signupForm.value.first_name,
+        last_name: this.signupForm.value.last_name,
+        username: this.signupForm.value.username,
+        billing: {
+          first_name: this.signupForm.value.first_name,
+          last_name: this.signupForm.value.last_name,
+          company: "",
+          address_1: "",
+          address_2: "",
+          city: "",
+          state: "",
+          postcode: "",
+          country: "",
+          email: this.signupForm.value.email,
+          phone: this.signupForm.value.username,
+        },
+        shipping: {
+          first_name: this.signupForm.value.first_name,
+          last_name: this.signupForm.value.last_name,
+          company: "",
+          address_1: "",
+          address_2: "",
+          city: "",
+          state: "",
+          postcod: "",
+          country: ""
+        }
+      }
+      let params = {}
+      let url = Globals.apiEndpoint + 'customers/';
+      let createUserUrl:string = this.woocommerceService.authenticateApi('POST',url,params);
+        
+
+      this.userService.userRegister(createUserUrl,signUpData).subscribe(
+        res => {
+          this.spinnerDialog.hide();
+          console.log(res);
+          this.presentToast("Succesfully Register");
+          this.navCtrl.setRoot('HomePage');
+        },
+        error => {
+          console.log(error);
+          this.spinnerDialog.hide();
+          this.presentToast("Error in signup");
+
+        }
+      )
+    }
+    else {
       this.markFormGroupTouched(this.signupForm)
     }
   }

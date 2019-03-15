@@ -19,7 +19,9 @@
                 <ion-col col-8>
                     <ion-searchbar></ion-searchbar>
                 </ion-col>
-                <ion-col col-2> <button ion-button><ion-icon name="search"></ion-icon></button></ion-col>
+                <ion-col col-2> <button ion-button>
+                        <ion-icon name="search"></ion-icon>
+                    </button></ion-col>
                 <ion-col col-2>
 
                     <!-- <button ion-button> <ion-icon name="funnel"></ion-icon></button>-->
@@ -62,10 +64,10 @@
     <div class="product-list">
         <ion-grid>
             <ion-row>
-       
+
                 <ion-col col-6 class="product-price" *ngFor="let product of product_list let i=index">
                     <ion-card (click)="gotoProDetails(product.id)">
-                        <img class="cart-icon-image" src="assets/imgs/icon-cart.png" />
+                        <!-- <img class="cart-icon-image" src="assets/imgs/icon-cart.png" /> -->
                         <!-- <img class="product-image" src="assets/imgs/img1.png" /> -->
                         <img class="product-image" [src]="product.images[0].src" />
                         <ion-card-content>
@@ -76,42 +78,44 @@
                             <ion-row>
                                 <ion-col col-6>
                                     <span class="price">
-                    <i class="fa fa-rupee"></i>{{product.price}}
-                    <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
-                  </span>
+                                        <i class="fa fa-rupee"></i>{{product.price}}
+                                        <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
+                                    </span>
                                 </ion-col>
-                                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-                    <ion-icon name="star"></ion-icon>
-                  </span></ion-col>
+                                <ion-col col-6 style="text-align: right;"> <span class="rating active"
+                                        *ngFor="let rat of rating; let i = index"
+                                        [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                        <ion-icon name="star"></ion-icon>
+                                    </span></ion-col>
                             </ion-row>
                         </ion-card-content>
                     </ion-card>
                 </ion-col>
-               
+
             </ion-row>
         </ion-grid>
     </div>
-
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar text-center="">
+    <!-- <ion-toolbar text-center="">
         <ion-buttons>
             <button ion-button>
-        <ion-icon name="home"></ion-icon>
-      </button>
+                <ion-icon name="home"></ion-icon>
+            </button>
             <button ion-button>
-        <ion-icon ios="ios-search" md="md-search"></ion-icon>
-      </button>
+                <ion-icon ios="ios-search" md="md-search"></ion-icon>
+            </button>
             <button ion-button>
-        <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
-      </button>
+                <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+            </button>
             <button ion-button>
-        <ion-icon ios="ios-person" md="md-person"></ion-icon>
-      </button>
+                <ion-icon ios="ios-person" md="md-person"></ion-icon>
+            </button>
             <button ion-button>
-        <ion-icon ios="ios-reorder" md="md-reorder"></ion-icon>
-      </button>
+                <ion-icon ios="ios-reorder" md="md-reorder"></ion-icon>
+            </button>
         </ion-buttons>
-    </ion-toolbar>
+    </ion-toolbar> -->
+    <page-footer></page-footer>
 </ion-footer>

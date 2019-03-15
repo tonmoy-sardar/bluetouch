@@ -17,7 +17,7 @@
     <div class="cart-page">
         <ion-title class="headline">Cart</ion-title>
         <hr>
-        <ion-grid>
+        <ion-grid *ngIf="customer_cart_data.length > 0">
             <ion-row *ngFor="let item of customer_cart_data; let i = index">
                 <ion-col col-4>
                     <div class="product-image">
@@ -60,6 +60,7 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
+        <p *ngIf="customer_cart_data.length ==0" class="error-msg">No Records found</p>
     </div>
 </ion-content>
 <ion-footer>

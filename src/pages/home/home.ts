@@ -21,6 +21,8 @@ export class HomePage {
   categoryList: any = [];
   popular_product_list: any = [];
   visible_key: boolean;
+  recently_view_product:any =[];
+  all_product_list:any =[];
 
   constructor(
     public navCtrl: NavController,
@@ -39,6 +41,9 @@ export class HomePage {
     this.rating = [1, 2, 3, 4, 5];
     this.getCategory();
     this.getPopularProduct();
+    this.getAllProduct();
+    this.recently_view_product = JSON.parse(sessionStorage.getItem("recentlyViewdProduct"));
+    console.log(this.recently_view_product);
   }
   ionViewDidEnter() {
     this.events1.publish('hideBackButton', true);
@@ -87,6 +92,27 @@ export class HomePage {
       res => {
         console.log(res);
         this.popular_product_list = res.data;
+        this.visible_key = true;
+      },
+      error => {
+        this.visible_key = true;
+      }
+    )
+  }
+
+  getAllProduct() {
+    this.spinnerDialog.show();
+    let params = {}
+    let url = Globals.apiEndpoint + 'products/';
+    console.log("url", url);
+
+    let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
+
+    this.categoryService.getCategoryList(orderUrl).subscribe(
+      res => {
+        console.log("All Product==>",res);
+        this.all_product_list = res;
+        
         this.visible_key = true;
       },
       error => {

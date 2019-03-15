@@ -16,6 +16,7 @@ import {FooterPage} from '../pages/include/footer/footer';
 import { UserService } from './services/user.service';
 import { WoocommerceService } from './services/woocommerce.service';
 import { CategoryService } from './services/category.service';
+import { CartService } from './services/cart.service';
 
 
 
@@ -44,6 +45,7 @@ import { CategoryService } from './services/category.service';
     UserService,
     WoocommerceService,
     CategoryService,
+    CartService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: ionicGalleryModal.GalleryModalHammerConfig,

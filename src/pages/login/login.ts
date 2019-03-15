@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController, NavParams } from 'ionic-angular';
-import { Events } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, NavParams,Events,ModalController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
@@ -36,6 +35,7 @@ export class LoginPage {
     private spinnerDialog: SpinnerDialog,
     private userService: UserService,
     private woocommerceService: WoocommerceService,
+    public modalCtrl : ModalController
     ) {
       events.publish('hideHeader', { isHeaderHidden: true });
       this.loginForm = this.formBuilder.group({
@@ -44,12 +44,11 @@ export class LoginPage {
       });
       this.isCart = JSON.parse(sessionStorage.getItem("cart"));
       console.log(this.isCart);
-      this.lastPage=this.navCtrl.last();
-      console.log(this.lastPage.id);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    this.menuCtrl.close();
   }
 
   signIn() {
@@ -112,7 +111,7 @@ export class LoginPage {
   }
 
   gotoPage(page) {
-    this.navCtrl.push(page);
+    this.navCtrl.setRoot(page);
   }
 
 
@@ -145,5 +144,11 @@ export class LoginPage {
     });
     toast.present();
   }
+
+  // openModal(page) {
+  //   var modalPage = this.modalCtrl.create(page);
+  //   modalPage.present();
+  // }
+
 
 }

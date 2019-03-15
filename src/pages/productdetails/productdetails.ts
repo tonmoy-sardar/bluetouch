@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,MenuController,Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { CategoryService } from '../../core/services/category.service';
 import { WoocommerceService } from "../../core/services/woocommerce.service";
 import * as Globals from '../../core/global';
+import { CartService } from "../../core/services/cart.service";
 /**
  * Generated class for the HomePage page.
  *
@@ -19,24 +20,25 @@ export class ProductdetailsPage {
   productdetailsType: string = "details";
   rating;
   avg_rating;
-  product_details:any ={};
+  product_details: any = {};
   img_base_url;
   product_id;
   logged_user_id;
   customer_cart_data: any = [];
-  recently_view_product:any = [];
-  product_details_img:any =[];
+  recently_view_product: any = [];
+  product_details_img: any = [];
   package_name;
   visible_key: boolean;
   constructor(
     public navCtrl: NavController,
-     public navParams: NavParams,
-     public menuCtrl: MenuController,
-     public events1:Events,
-     private spinnerDialog: SpinnerDialog,
-     public categoryService: CategoryService,
-     public woocommerceService: WoocommerceService,
-     ) {
+    public navParams: NavParams,
+    public menuCtrl: MenuController,
+    public events1: Events,
+    private spinnerDialog: SpinnerDialog,
+    public categoryService: CategoryService,
+    public woocommerceService: WoocommerceService,
+    public cartService: CartService
+  ) {
   }
 
   ionViewDidLoad() {
@@ -58,109 +60,112 @@ export class ProductdetailsPage {
     this.spinnerDialog.show();
     let params = {
     }
-    let url = Globals.apiEndpoint + 'products/'+product_id;
-    let productDeatilsUrl:string = this.woocommerceService.authenticateApi('GET',url,params);
+    let url = Globals.apiEndpoint + 'products/' + product_id;
+    let productDeatilsUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
     this.categoryService.getProductDetails(productDeatilsUrl).subscribe(
-        res => {
-            console.log("Pro Details ==>",res);
-            this.product_details = res;
-            this.product_details_img =this.product_details.images;
-            console.log(this.product_details_img);
+      res => {
+        console.log("Pro Details ==>", res);
+        this.product_details = res;
+        this.product_details_img = this.product_details.images;
+        console.log(this.product_details_img);
 
-            var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
+        var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
 
-            if (index != -1) {
-                this.product_details['isCart'] = true;
-                this.product_details['quantity'] = this.customer_cart_data[index].quantity
-                this.product_details['price'] =  parseFloat( this.product_details['price'])
-                this.product_details['regular_price'] =  parseFloat( this.product_details['regular_price'])
-            }
-            else {
-                this.product_details['isCart'] = false;
-                this.product_details['quantity'] = 0;
-                this.product_details['price'] =  parseFloat(this.product_details['price'])
-                this.product_details['regular_price'] =  parseFloat(this.product_details['regular_price'])
-            }
-           
-            this.visible_key = true
-            this.recentlyViewdProduct(this.product_details);
-            this.spinnerDialog.hide();
-
-            console.log();
-        },
-        error => {
-          this.spinnerDialog.hide();
+        if (index != -1) {
+          this.product_details['isCart'] = true;
+          this.product_details['quantity'] = this.customer_cart_data[index].quantity
+          this.product_details['price'] = parseFloat(this.product_details['price'])
+          this.product_details['regular_price'] = parseFloat(this.product_details['regular_price'])
         }
-    )
-}
+        else {
+          this.product_details['isCart'] = false;
+          this.product_details['quantity'] = 0;
+          this.product_details['price'] = parseFloat(this.product_details['price'])
+          this.product_details['regular_price'] = parseFloat(this.product_details['regular_price'])
+        }
 
-recentlyViewdProduct(product_details) {
-  var data = {
+        this.visible_key = true
+        this.recentlyViewdProduct(this.product_details);
+        this.spinnerDialog.hide();
+
+        console.log();
+      },
+      error => {
+        this.spinnerDialog.hide();
+      }
+    )
+  }
+
+  recentlyViewdProduct(product_details) {
+    var data = {
       product_id: product_details.id,
       product_name: product_details.name,
       description: product_details.short_description,
       price: product_details.price,
       discounted_price: product_details.sale_price,
       image_small: product_details.images[0].src,
-  }
-  var index = this.recently_view_product.findIndex(y => y.product_id == product_details.id);
-  
-  if (index == -1) {
+    }
+    var index = this.recently_view_product.findIndex(y => y.product_id == product_details.id);
+
+    if (index == -1) {
       console.log(data);
       this.recently_view_product.push(data);
-      console.log("Recently View Product==>",this.recently_view_product);
+      console.log("Recently View Product==>", this.recently_view_product);
       this.setRecentlyViewdProduct();
+    }
   }
-}
 
-setRecentlyViewdProduct() {
-  sessionStorage.setItem("recentlyViewdProduct", JSON.stringify(this.recently_view_product));
-}
+  setRecentlyViewdProduct() {
+    sessionStorage.setItem("recentlyViewdProduct", JSON.stringify(this.recently_view_product));
+  }
 
-buyNow(product_details) {
-        
-  if (product_details.quantity > 1)
-  { var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
+  buyNow(product_details) {
+    console.log(product_details);
+
+    if (product_details.quantity > 1) {
+      console.log("aaaaaaaaaaa");
+      var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
       if (index != -1) {
-          this.customer_cart_data[index].quantity = product_details.quantity + 1;
-          this.setBuyNowCartData();
+        this.customer_cart_data[index].quantity = product_details.quantity + 1;
+        this.setBuyNowCartData();
       }
       this.product_details.quantity = product_details.quantity + 1
-  }
-  else{
+    }
+    else {
+      console.log("bbbbbbbbbb");
       var data = {
-          user_id: this.logged_user_id,
-          product_id: product_details.id,
-          product_name: product_details.name,
-          description: product_details.short_description,
-          price: product_details.price,
-          regular_price: product_details.regular_price,
-          image_small: product_details.images[0].src,
-          quantity: product_details.quantity + 1
+        user_id: this.logged_user_id,
+        product_id: product_details.id,
+        product_name: product_details.name,
+        description: product_details.short_description,
+        price: product_details.price,
+        regular_price: product_details.regular_price,
+        image_small: product_details.images[0].src,
+        quantity: product_details.quantity + 1
       }
       var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
       this.product_details['isCart'] = true;
-      this.product_details['quantity'] = this.product_details['quantity'] +1;
-      
+      this.product_details['quantity'] = this.product_details['quantity'] + 1;
+
 
       if (index == -1) {
-          this.customer_cart_data.push(data);
-          this.setBuyNowCartData();
+        this.customer_cart_data.push(data);
+        this.setBuyNowCartData();
       }
+    }
+
   }
 
-}
+  setBuyNowCartData() {
 
-setBuyNowCartData() {
-  
-  sessionStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
-  this.navCtrl.push('CartPage');
-}
+    sessionStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
+    this.navCtrl.push('CartPage');
+  }
 
-addToCart(product_details) {
-        console.log(product_details.quantity);
-  var data = {
+  addToCart(product_details) {
+    console.log(product_details.quantity);
+    var data = {
       user_id: this.logged_user_id,
       product_id: product_details.id,
       product_name: product_details.name,
@@ -169,55 +174,56 @@ addToCart(product_details) {
       regular_price: product_details.regular_price,
       image_small: product_details.images[0].src,
       quantity: product_details.quantity + 1
-  }
-  console.log(data);
-  var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
-  this.product_details['isCart'] = true;
-  this.product_details['quantity'] = this.product_details['quantity'] +1;
-  if (index == -1) {
+    }
+    console.log(data);
+    var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
+    this.product_details['isCart'] = true;
+    this.product_details['quantity'] = this.product_details['quantity'] + 1;
+    if (index == -1) {
       this.customer_cart_data.push(data);
       this.setCartData();
+    }
+    console.log(this.customer_cart_data);
+    this.cartService.cartNumberStatus(true);
   }
-  console.log(this.customer_cart_data);
-}
 
-setCartData() {
-  sessionStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
-}
+  setCartData() {
+    sessionStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
+  }
 
-decrement(product_details) {
-  if (product_details.quantity > 1) {
+  decrement(product_details) {
+    if (product_details.quantity > 1) {
       var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
       if (index != -1) {
-          this.customer_cart_data[index].quantity = product_details.quantity - 1;
-          this.setCartData();
+        this.customer_cart_data[index].quantity = product_details.quantity - 1;
+        this.setCartData();
       }
       this.product_details['quantity'] = product_details.quantity - 1
-     
 
-  }
-  else {
+
+    }
+    else {
       var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
       if (index != -1) {
-          this.customer_cart_data.splice(index, 1);
-          this.setCartData();
+        this.customer_cart_data.splice(index, 1);
+        this.setCartData();
       }
       this.product_details.isCart = false;
       this.product_details.quantity = product_details.quantity - 1
-  }
+    }
 
-}
-increment(product_details) {
-  var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
-  if (index != -1) {
+  }
+  increment(product_details) {
+    var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
+    if (index != -1) {
       this.customer_cart_data[index].quantity = product_details.quantity + 1;
       this.setCartData();
+    }
+    this.product_details.quantity = product_details.quantity + 1
+
   }
-  this.product_details.quantity = product_details.quantity + 1
-  
-}
-getDiscount(price, regular_price) {
-  return Math.floor(((regular_price - price) * 100) / regular_price) + '%';
-}
+  getDiscount(price, regular_price) {
+    return Math.floor(((regular_price - price) * 100) / regular_price) + '%';
+  }
 
 }

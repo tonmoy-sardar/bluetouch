@@ -1,18 +1,16 @@
 <ion-header>
-
-        
     <ion-navbar hideBackButton="{{hideBackButton}}">
         <ion-buttons left>
-             <button ion-button menuToggle color="light" *ngIf="hideBackButton">
+            <button ion-button menuToggle color="light" *ngIf="hideBackButton">
                 <ion-icon name="menu"></ion-icon>
                 <ion-title></ion-title>
-            </button> 
-           
+            </button>
+
         </ion-buttons>
         <ion-title></ion-title>
 
         <ion-buttons right>
-            <button ion-button icon-only>
+            <button ion-button icon-only (click)="gotoPage('ProfilePage')">
                 <ion-icon ios="ios-person-outline" md="md-person"></ion-icon>
             </button>
         </ion-buttons>
@@ -21,7 +19,6 @@
                 <ion-icon ios="ios-cart-outline" md="md-cart"></ion-icon>
                 {{totalCart}}
             </button></ion-buttons>
-
     </ion-navbar>
 </ion-header>
 
@@ -44,22 +41,26 @@
             <ion-icon name="apps"></ion-icon>
             Product List
         </ion-item>
-        <ion-item (click)="gotoPage('ProductdetailsPage')">
+        <!-- <ion-item (click)="gotoPage('ProductdetailsPage')">
             <ion-icon name="alert"></ion-icon>
             Product Details
-        </ion-item>
-        <ion-item (click)="gotoPage('SubcategoryPage')">
+        </ion-item> -->
+        <!-- <ion-item (click)="gotoPage('SubcategoryPage')">
             <ion-icon name="archive"></ion-icon>
             Sub Category
-        </ion-item>
+        </ion-item> -->
         <ion-item (click)="gotoPage('CartPage')">
             <ion-icon name="cart"></ion-icon>
             Cart
         </ion-item>
         <ion-item (click)="gotoPage('OrdersPage')">
-                <ion-icon name="cart"></ion-icon>
-                Order
-            </ion-item>
+            <ion-icon name="cart"></ion-icon>
+            Order
+        </ion-item>
+        <ion-item (click)="gotoPage('LoginPage')">
+            <ion-icon name="cart"></ion-icon>
+            Sign In
+        </ion-item>
     </ion-content>
 </ion-menu>
 

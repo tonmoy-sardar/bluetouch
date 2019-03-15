@@ -34,6 +34,7 @@ export class ProductlistPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductlistPage');
     this.menuCtrl.close();
+    this.events1.publish('hideBackButton', false);
     this.rating = [1, 2, 3, 4, 5];
     this.getProduct(this.navParams.get('id'));
   }
