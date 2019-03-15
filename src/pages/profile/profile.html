@@ -23,7 +23,8 @@
           </ion-avatar>
           <h2 class="avatar-title">Jane Doe</h2>
           <p>jan.doe@gmail.com</p>
-          <button ion-button color="light" round>EDIT PROFILE</button>
+          <button ion-button color="light" round (click)="gotoPage('ProfileeditPage')">EDIT PROFILE</button>
+          <button ion-button color="light" round (click)="gotoPage('ProfileviewPage')">View PROFILE</button>
         </ion-item>
       </ion-col>
     </ion-row>

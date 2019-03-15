@@ -20,7 +20,7 @@
         <ion-grid>
             <ion-row class="image-avatar">
                 <ion-col col-4>
-                    <ion-list no-lines (click)="gotoProList(category.id)" *ngFor="let category of categoryList | slice:0:3; let i=index">
+                    <ion-list no-lines (click)="gotoProList(category.id)" *ngFor="let category of categoryList  let i=index">
                             <img [src]="category.image.src" class="slide-image" />
                         <span>{{category.name}}</span>
                     </ion-list>

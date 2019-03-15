@@ -40,6 +40,9 @@ ion-footer {
         font-size: 22px;
         text-align: center;
     }
+    i {
+        font-size: 22px;
+    }
     button {
         padding: 4px 16px;
         background: transparent;
@@ -52,6 +55,7 @@ ion-footer {
     .active {
         color: #fb7775;
     }
+    background: #fff;
 }
 
 ion-row {
@@ -83,7 +87,7 @@ ion-row {
 }
 
 .latest-list ion-card {
-    height: 220px;
+    height: 230px;
     border-radius: 10px;
     position: relative;
 }
@@ -403,7 +407,7 @@ p {
 }
 
 .profile-img {
-    padding-top: 51px;
+  //  padding-top: 51px;
 }
 
 .menu-nav .item ion-icon {
@@ -571,5 +575,22 @@ p {
 .forgot-password p {
     color: #fff;
 }
+
+.profile-banner {
+    padding: 10px 0px 0px 0px;
+    background: #fcb173;
+    background-size: cover;
+    background-position: center center;
+    padding-top: 30px;
+}
+
+page-profileview .profile-view-body h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    background: #efd8c5;
+    padding: 7px;
+    border: 1px solid #ccc;
+}
+
 
 // / css end by kalyan /

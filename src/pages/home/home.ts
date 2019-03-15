@@ -73,9 +73,11 @@ export class HomePage {
         console.log(res);
         this.categoryList = res;
         this.visible_key = true;
+        this.spinnerDialog.hide();
       },
       error => {
         this.visible_key = true;
+        this.spinnerDialog.hide();
       }
     )
   }
@@ -93,9 +95,11 @@ export class HomePage {
         console.log(res);
         this.popular_product_list = res.data;
         this.visible_key = true;
+        this.spinnerDialog.hide();
       },
       error => {
         this.visible_key = true;
+        this.spinnerDialog.hide();
       }
     )
   }
@@ -112,11 +116,12 @@ export class HomePage {
       res => {
         console.log("All Product==>",res);
         this.all_product_list = res;
-        
         this.visible_key = true;
+        this.spinnerDialog.hide();
       },
       error => {
         this.visible_key = true;
+        this.spinnerDialog.hide();
       }
     )
   }

@@ -12,7 +12,8 @@
         <ion-grid>
             <ion-row class="image-avatar">
                 <ion-col col-3 nav-button (click)="gotoProList(category.id)" *ngFor="let category of categoryList | slice:0:3; let i=index">
-                    <img [src]="category.image.src" class="slide-image" />
+                    <img *ngIf="category.image !=null" [src]="category.image.src" class="slide-image" />
+                    <img *ngIf="category.image ==null" src="assets/imgs/no-image.png" />
                     <span>{{category.name}}</span>
                 </ion-col>
                 <ion-col col-3 (click)="gotoPage('CategoryPage')">
@@ -39,7 +40,8 @@
     <div class="custom-slider latest-list">
         <ion-title class="headline">Latest Fashion</ion-title>
         <hr>
-        <ion-slides loop slidesPerView="2.4">
+        <!-- <ion-slides loop slidesPerView="2.4"> -->
+                <ion-slides loop slidesPerView="2.4">
             <ion-slide *ngFor="let popularProduct of popular_product_list let i=index">
                 <ion-card (click)="gotoProDetails(popularProduct.product_id)">
                     <img [src]="popularProduct.product_img" class="slide-image" />
