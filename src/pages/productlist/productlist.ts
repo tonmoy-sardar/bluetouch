@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams,MenuController,Events } from 'ionic-angular';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { CategoryService } from '../../core/services/category.service';
+import { WoocommerceService } from "../../core/services/woocommerce.service";
+import * as Globals from '../../core/global';
 /**
  * Generated class for the HomePage page.
  *
@@ -8,17 +11,23 @@ import { IonicPage, NavController, NavParams,MenuController } from 'ionic-angula
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({ segment: 'productlist/:id' })
 @Component({
   selector: 'page-productlist',
   templateUrl: 'productlist.html',
 })
 export class ProductlistPage {
   rating;
+  product_list: any = [];
+  visible_key: boolean;
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
      public menuCtrl: MenuController,
+     private spinnerDialog: SpinnerDialog,
+     public categoryService: CategoryService,
+     public woocommerceService: WoocommerceService,
+     public events1: Events
      ) {
   }
 
@@ -26,6 +35,33 @@ export class ProductlistPage {
     console.log('ionViewDidLoad ProductlistPage');
     this.menuCtrl.close();
     this.rating = [1, 2, 3, 4, 5];
+    this.getProduct(this.navParams.get('id'));
+  }
+  getProduct(category_id) {
+    this.spinnerDialog.show();
+    let params = {
+      category:category_id,
+    }
+    let url = Globals.apiEndpoint + 'products/';
+    console.log("url", url);
+
+    let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
+
+    this.categoryService.getCategoryList(orderUrl).subscribe(
+      res => {
+        console.log(res);
+        this.product_list = res;
+        this.visible_key = true;
+      },
+      error => {
+        this.visible_key = true;
+      }
+    )
+  }
+
+  gotoProDetails(id) {
+    //this.navCtrl.push(page);
+    this.navCtrl.push('ProductdetailsPage', { id: id });
   }
 
 }

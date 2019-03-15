@@ -1,30 +1,22 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title></ion-title>
+    </ion-navbar>
+</ion-header>
 <ion-content class="has-header">
     <div class="category-list">
         <ion-title class="headline">Categories List</ion-title>
         <hr>
         <ion-grid>
             <ion-row class="image-avatar">
-                <ion-col  col-3 nav-button  (click)="gotoPage('SubcategoryPage')"  *ngFor="let category of categoryList | slice:0:3; let i=index">
-                    <!-- <img src="assets/imgs/apparel.png"> -->
+                <ion-col col-3 nav-button (click)="gotoProList(category.id)" *ngFor="let category of categoryList | slice:0:3; let i=index">
                     <img [src]="category.image.src" class="slide-image" />
                     <span>{{category.name}}</span>
                 </ion-col>
-                <!-- <ion-col col-3>
-                    <img src="assets/imgs/beauty-bg.png">
-                    <span>Beauty</span>
-                </ion-col>
-                <ion-col col-3>
-                    <img src="assets/imgs/shoes-bg.png">
-                    <span>Shoes</span>
-                </ion-col>
-                <ion-col col-3 (click)="gotoPage('SubcategoryPage')">
+                <ion-col col-3 (click)="gotoPage('CategoryPage')">
                     <img src="assets/imgs/see_all.png">
                     <span>See All</span>
-                </ion-col> -->
-                <ion-col col-3 (click)="gotoPage('SubcategoryPage')">
-                        <img src="assets/imgs/see_all.png">
-                        <span>See All</span>
-                    </ion-col>
+                </ion-col>
             </ion-row>
         </ion-grid>
     </div>
@@ -44,75 +36,25 @@
         <ion-title class="headline">Latest Fashion</ion-title>
         <hr>
         <ion-slides loop slidesPerView="2.4">
-            <ion-slide>
-                <ion-card (click)="gotoDetails('ProductdetailsPage')">
-                    <img src="assets/imgs/slder1.png" />
+            <ion-slide *ngFor="let popularProduct of popular_product_list let i=index">
+                <ion-card (click)="gotoProDetails(popularProduct.product_id)">
+                    <img [src]="popularProduct.product_img" class="slide-image" />
 
-                    <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
+                    <button ion-button color="light">₹ 320 <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
 
                     <ion-card-content>
-                        <ion-title>Nike</ion-title>
-                        <p>This is description</p>
+                        <!-- <ion-title>{{popularProduct.product_name}}</ion-title> -->
+                        <p>{{popularProduct.product_name}}</p>
                         <div>
-                            <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-                <ion-icon name="star"></ion-icon>
-              </span>
+                            <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']"
+                                style="margin-right: 2px;">
+                                <ion-icon name="star"></ion-icon>
+                            </span>
                         </div>
                     </ion-card-content>
                 </ion-card>
             </ion-slide>
-            <ion-slide>
-                <ion-card>
-                    <img src="assets/imgs/slder1.png" />
-                    <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
-                    <ion-card-content>
-                        <ion-title>Nike</ion-title>
-                        <p>The most </p>
-                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-              <ion-icon name="star"></ion-icon>
-            </span>
-                    </ion-card-content>
-                </ion-card>
-            </ion-slide>
-            <ion-slide>
-                <ion-card>
-                    <img src="assets/imgs/slder1.png" />
-                    <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
-                    <ion-card-content>
-                        <ion-title>Nike</ion-title>
-                        <p>The most </p>
-                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-              <ion-icon name="star"></ion-icon>
-            </span>
-                    </ion-card-content>
-                </ion-card>
-            </ion-slide>
-            <ion-slide>
-                <ion-card>
-                    <img src="assets/imgs/slder1.png" />
-                    <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
-                    <ion-card-content>
-                        <ion-title>Nike</ion-title>
-                        <p>The most </p>
-                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-              <ion-icon name="star"></ion-icon>
-            </span>
-                    </ion-card-content>
-                </ion-card>
-            </ion-slide>
-            <ion-slide>
-                <ion-card>
-                    <img src="assets/imgs/slder1.png" />
-                    <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
-                    <ion-card-content>
-                        <ion-title>Nike</ion-title>
-                        <p>The most </p>
-                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-              <ion-icon name="star"></ion-icon>
-            </span>
-                    </ion-card-content>
-                </ion-card>
-            </ion-slide>
+           
         </ion-slides>
     </div>
     <div class="custom-slider recent-list" style="padding-top:30px;">
@@ -122,65 +64,70 @@
             <ion-slide>
                 <ion-card class="card-background-page">
                     <img src="assets/imgs/slider2.png" />
-                    <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
+                    <button ion-button color="light">₹ 320 <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
                     <ion-card-content>
                         <ion-title>Ishin</ion-title>
                         <p>This is description</p>
-                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-              <ion-icon name="star"></ion-icon>
-            </span>
+                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']"
+                            style="margin-right: 2px;">
+                            <ion-icon name="star"></ion-icon>
+                        </span>
                     </ion-card-content>
                 </ion-card>
             </ion-slide>
             <ion-slide>
                 <ion-card>
                     <img src="assets/imgs/slider2.png" />
-                    <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
+                    <button ion-button color="light">₹ 320 <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
                     <ion-card-content>
                         <ion-title>Ishin</ion-title>
                         <p>The most </p>
                     </ion-card-content>
-                    <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-            <ion-icon name="star"></ion-icon>
-          </span>
+                    <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']"
+                        style="margin-right: 2px;">
+                        <ion-icon name="star"></ion-icon>
+                    </span>
                 </ion-card>
             </ion-slide>
             <ion-slide>
                 <ion-card>
                     <img src="assets/imgs/slider2.png" />
-                    <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
+                    <button ion-button color="light">₹ 320 <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
                     <ion-card-content>
                         <ion-title>Ishin</ion-title>
                         <p>The most </p>
-                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-              <ion-icon name="star"></ion-icon>
-            </span>
-                    </ion-card-content>
-                </ion-card>
-            </ion-slide>
-            <ion-slide>
-                <ion-card>
-                    <img src="assets/imgs/slider2.png" />
-                    <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
-                    <ion-card-content>
-                        <ion-title>Ishin</ion-title>
-                        <p>The most </p>
-                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-              <ion-icon name="star"></ion-icon>
-            </span>
+                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']"
+                            style="margin-right: 2px;">
+                            <ion-icon name="star"></ion-icon>
+                        </span>
                     </ion-card-content>
                 </ion-card>
             </ion-slide>
             <ion-slide>
                 <ion-card>
                     <img src="assets/imgs/slider2.png" />
-                    <button ion-button color="light">₹ 320     <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
+                    <button ion-button color="light">₹ 320 <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
                     <ion-card-content>
                         <ion-title>Ishin</ion-title>
                         <p>The most </p>
-                        <span class="rating " *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-              <ion-icon name="star"></ion-icon>
-            </span>
+                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']"
+                            style="margin-right: 2px;">
+                            <ion-icon name="star"></ion-icon>
+                        </span>
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+            <ion-slide>
+                <ion-card>
+                    <img src="assets/imgs/slider2.png" />
+                    <button ion-button color="light">₹ 320 <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
+                    <ion-card-content>
+                        <ion-title>Ishin</ion-title>
+                        <p>The most </p>
+                        <span class="rating " *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']"
+                            style="margin-right: 2px;">
+                            <ion-icon name="star"></ion-icon>
+                        </span>
                     </ion-card-content>
                 </ion-card>
             </ion-slide>

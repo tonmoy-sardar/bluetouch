@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform,Navbar,Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { CategoryService } from '../core/services/category.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,12 +14,13 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
   hideBackButton:Boolean =true;
-
+  totalCart: number;
   constructor(
     public platform: Platform,
      public statusBar: StatusBar,
       public splashScreen: SplashScreen,
-      public  events1:Events
+      public  events1:Events,
+      public categoryService:CategoryService
       ) {
     this.initializeApp();
 
@@ -27,6 +28,10 @@ export class MyApp {
       console.log("Emitted=======>", data); 
       this.hideBackButton = data;
     });
+
+    if (sessionStorage.getItem("cart")) {
+      this.totalCart = JSON.parse(sessionStorage.getItem("cart")).length;
+    }
   }
 
   initializeApp() {
@@ -43,6 +48,18 @@ export class MyApp {
         this.nav.pop();
        }
     });
+    //categoryService.getCartNumberStatus.subscribe(status => this.cartNumberStatus(status));
+  }
+
+  cartNumberStatus(status: boolean) {
+    if (status) {
+      if (sessionStorage.getItem("cart")) {
+        this.totalCart = JSON.parse(sessionStorage.getItem("cart")).length;
+      }
+      else {
+        this.totalCart = 0;
+      }
+    }
   }
 
   openPage(page) {
