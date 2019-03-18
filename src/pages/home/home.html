@@ -71,7 +71,7 @@
         <ion-slides loop slidesPerView="2.4">
                 
             <ion-slide *ngFor="let recentlyViewProduct of recently_view_product let i=index">
-                <ion-card class="card-background-page" (click)="gotoProDetails(popularProduct.product_id)">
+                <ion-card class="card-background-page" (click)="gotoProDetails(recentlyViewProduct.product_id)">
                     <img [src]="recentlyViewProduct.image_small"/>
                     <button ion-button color="light">₹ {{recentlyViewProduct.price}} <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
                     <ion-card-content>
