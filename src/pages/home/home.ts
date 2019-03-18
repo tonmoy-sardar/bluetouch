@@ -43,7 +43,7 @@ export class HomePage {
     this.getPopularProduct();
     this.getAllProduct();
     this.recently_view_product = JSON.parse(localStorage.getItem("recentlyViewdProduct"));
-    console.log(this.recently_view_product);
+    console.log("Recent Product==>",this.recently_view_product);
 
 
   }
