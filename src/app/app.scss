@@ -16,6 +16,9 @@
 ion-content {
     background-color: #f5f6f8 !important;
 }
+ion-content > .scroll-content{
+    margin-bottom: 56px;
+  }
 
 .back-button {
     display:block;
@@ -55,7 +58,7 @@ ion-footer {
     .active {
         color: #fb7775;
     }
-    background: #fff;
+   // background: #fff;
 }
 
 ion-row {
@@ -584,12 +587,22 @@ p {
     padding-top: 30px;
 }
 
-page-profileview .profile-view-body h3 {
+.profile-view-body h3 {
     text-align: center;
     font-size: 1.8rem;
     background: #efd8c5;
     padding: 7px;
     border: 1px solid #ccc;
+}
+
+#lblCartCount {
+    font-size: 12px;
+    background: #e9520c;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px;
+    margin-top: -35px;
 }
 
 

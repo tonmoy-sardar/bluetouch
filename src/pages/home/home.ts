@@ -19,7 +19,7 @@ import * as Globals from '../../core/global';
 export class HomePage {
   rating;
   categoryList: any = [];
-  popular_product_list: any = [];
+  popular_product_list: any;
   visible_key: boolean;
   recently_view_product:any =[];
   all_product_list:any =[];
@@ -42,8 +42,10 @@ export class HomePage {
     this.getCategory();
     this.getPopularProduct();
     this.getAllProduct();
-    this.recently_view_product = JSON.parse(sessionStorage.getItem("recentlyViewdProduct"));
+    this.recently_view_product = JSON.parse(localStorage.getItem("recentlyViewdProduct"));
     console.log(this.recently_view_product);
+
+
   }
   ionViewDidEnter() {
     this.events1.publish('hideBackButton', true);

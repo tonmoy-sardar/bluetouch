@@ -13,15 +13,16 @@
 </ion-header>
 <ion-content fullscreen>
   <div class="order-list-body">
-    <ion-card >
+    <ion-card *ngFor="let item of order_list let i=index">
       <ion-card-content>
         <ion-grid>
           <ion-row>
-            <ion-col col-6>
-              <ion-list no-lines class="recipe-name">No : 123456</ion-list>
+            <ion-col col-12>
+              <ion-list no-lines class="recipe-name">Order No : {{item.order_key}}</ion-list>
             </ion-col>
-            <ion-col col-6>
-              <ion-list no-lines class="recipe-name" style="text-align: right;">Date : 2018-02-012</ion-list>
+            <ion-col col-12>
+              <ion-list no-lines class="recipe-name">Date : {{item.date_created
+                | date:'dd-MM-yyyy h:mm:ss a'}}</ion-list>
             </ion-col>
           </ion-row>
           <ion-row style="background-color:#c3e8eb" (click)="gotoOrderDetails(order.id)">
@@ -45,21 +46,21 @@
             <ion-col col-4 style="text-align: center;">
               <ion-list no-lines class="recipe-name">
              
-                <p >COD</p>
+                <p *ngIf="item.payment_method=='cod'">COD</p>
               </ion-list>
             </ion-col>
             <ion-col col-4 style="text-align: center;">
               <ion-list no-lines class="recipe-name">
-                <p><i class="fa fa-rupee"></i>120</p>
+                <p><i class="fa fa-rupee"></i>{{item.total}}</p>
               </ion-list>
             </ion-col>
           </ion-row>
-          <ion-row (click)="repeatOrder(order)">
+          <!-- <ion-row (click)="repeatOrder(order)">
             <ion-col col-12>
               <hr>
               <p class="order-placed"><i class="fa fa-repeat" aria-hidden="true"></i>Repeat Order</p>
             </ion-col>
-          </ion-row>
+          </ion-row> -->
         </ion-grid>
       </ion-card-content>
 

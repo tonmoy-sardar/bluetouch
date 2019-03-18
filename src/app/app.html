@@ -17,7 +17,8 @@
         <ion-buttons (click)="gotoPage('CartPage')" right>
             <button ion-button icon-only>
                 <ion-icon ios="ios-cart-outline" md="md-cart"></ion-icon>
-                {{totalCart}}
+             <!-- <span class="total-cart">{{totalCart}}</span> -->
+             <span class='badge badge-warning' id='lblCartCount'> {{totalCart}} </span>
             </button></ion-buttons>
     </ion-navbar>
 </ion-header>
@@ -29,15 +30,15 @@
 
             <img src="assets/imgs/man.jpg" />
 
-            <h2>Kalyan Acharya</h2>
-            <span>kalyan.acharya@shyamfuture.com</span>
+            <h2>{{logged_first_name}} {{logged_last_name}}</h2>
+            <span>{{logged_user_email}}</span>
         </ion-item>
         <ion-item (click)="gotoPage('HomePage')">
 
             <ion-icon name="ion-md-home" class="ion-md-home"></ion-icon>
             Home
         </ion-item>
-        <ion-item (click)="gotoPage('ProductlistPage')">
+        <ion-item (click)="gotoProductList('ProductlistPage')">
             <ion-icon name="apps"></ion-icon>
             Product List
         </ion-item>
@@ -53,13 +54,17 @@
             <ion-icon name="cart"></ion-icon>
             Cart
         </ion-item>
-        <ion-item (click)="gotoPage('OrdersPage')">
-            <ion-icon name="cart"></ion-icon>
+        <ion-item (click)="gotoPage('OrdersPage')" *ngIf="isLoggedin ==true">
+            <ion-icon ios="ios-document" md="md-document"></ion-icon>
             Order
         </ion-item>
-        <ion-item (click)="gotoPage('LoginPage')">
-            <ion-icon name="cart"></ion-icon>
+        <ion-item (click)="gotoPage('LoginPage')" *ngIf="isLoggedin !=true">
+            <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
             Sign In
+        </ion-item>
+        <ion-item (click)="logOut()" *ngIf="isLoggedin ==true">
+            <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
+           Logout
         </ion-item>
     </ion-content>
 </ion-menu>

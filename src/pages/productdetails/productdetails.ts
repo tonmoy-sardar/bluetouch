@@ -48,15 +48,17 @@ export class ProductdetailsPage {
     this.getProductDetails(this.navParams.get('id'))
   }
   ionViewWillEnter() {
-    if (sessionStorage.getItem("cart")) {
-      this.customer_cart_data = JSON.parse(sessionStorage.getItem("cart"));
+    if (localStorage.getItem("cart")) {
+      this.customer_cart_data = JSON.parse(localStorage.getItem("cart"));
     }
     else {
       this.customer_cart_data = [];
     }
     console.log(this.customer_cart_data);
+    this.getProductDetails(this.navParams.get('id'))
   }
   getProductDetails(product_id) {
+    this.visible_key =false;
     this.spinnerDialog.show();
     let params = {
     }
@@ -65,6 +67,7 @@ export class ProductdetailsPage {
 
     this.categoryService.getProductDetails(productDeatilsUrl).subscribe(
       res => {
+      
         console.log("Pro Details ==>", res);
         this.product_details = res;
         this.product_details_img = this.product_details.images;
@@ -93,6 +96,7 @@ export class ProductdetailsPage {
       },
       error => {
         this.spinnerDialog.hide();
+        
       }
     )
   }
@@ -117,14 +121,13 @@ export class ProductdetailsPage {
   }
 
   setRecentlyViewdProduct() {
-    sessionStorage.setItem("recentlyViewdProduct", JSON.stringify(this.recently_view_product));
+    localStorage.setItem("recentlyViewdProduct", JSON.stringify(this.recently_view_product));
   }
 
   buyNow(product_details) {
     console.log(product_details);
 
     if (product_details.quantity > 1) {
-      console.log("aaaaaaaaaaa");
       var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
       if (index != -1) {
         this.customer_cart_data[index].quantity = product_details.quantity + 1;
@@ -133,7 +136,6 @@ export class ProductdetailsPage {
       this.product_details.quantity = product_details.quantity + 1
     }
     else {
-      console.log("bbbbbbbbbb");
       var data = {
         user_id: this.logged_user_id,
         product_id: product_details.id,
@@ -159,7 +161,7 @@ export class ProductdetailsPage {
 
   setBuyNowCartData() {
 
-    sessionStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
+    localStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
     this.navCtrl.push('CartPage');
   }
 
@@ -188,7 +190,7 @@ export class ProductdetailsPage {
   }
 
   setCartData() {
-    sessionStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
+    localStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
   }
 
   decrement(product_details) {
@@ -224,6 +226,9 @@ export class ProductdetailsPage {
   }
   getDiscount(price, regular_price) {
     return Math.floor(((regular_price - price) * 100) / regular_price) + '%';
+  }
+  goBack() {
+    this.navCtrl.pop();
   }
 
 }

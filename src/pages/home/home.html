@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>forgot</ion-title>
+        <ion-title>Home</ion-title>
     </ion-navbar>
 
 </ion-header> 
@@ -29,7 +29,7 @@
         <ion-slides loop slidesPerView="1.2">
             <ion-slide (click)="gotoProDetails(allProduct.id)" *ngFor="let allProduct of all_product_list | slice:0:10; let i=index">
                 <!-- <img src="assets/imgs/slider-banner.png" /> -->
-                <img [src]="allProduct.images[0].src" />
+                <img style="width:100%" [src]="allProduct.images[0].src" />
               
             </ion-slide>
             <!-- <ion-slide>
@@ -43,10 +43,12 @@
         <!-- <ion-slides loop slidesPerView="2.4"> -->
                 <ion-slides loop slidesPerView="2.4">
             <ion-slide *ngFor="let popularProduct of popular_product_list let i=index">
+                
                 <ion-card (click)="gotoProDetails(popularProduct.product_id)">
                     <img [src]="popularProduct.product_img" class="slide-image" />
+                   
 
-                    <button ion-button color="light">₹ 320 <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
+                    <button ion-button color="light">₹ {{popularProduct.price_sale}} <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
 
                     <ion-card-content>
                         <!-- <ion-title>{{popularProduct.product_name}}</ion-title> -->

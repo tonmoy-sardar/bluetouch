@@ -21,8 +21,8 @@
           <ion-avatar item-start>
             <img src="assets/imgs/man.jpeg">
           </ion-avatar>
-          <h2 class="avatar-title">Jane Doe</h2>
-          <p>jan.doe@gmail.com</p>
+          <h2 class="avatar-title">{{logged_first_name}} {{logged_last_name}}</h2>
+          <p>{{logged_user_email}}</p>
           <button ion-button color="light" round (click)="gotoPage('ProfileeditPage')">EDIT PROFILE</button>
           <button ion-button color="light" round (click)="gotoPage('ProfileviewPage')">View PROFILE</button>
         </ion-item>

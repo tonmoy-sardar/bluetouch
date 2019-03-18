@@ -21,12 +21,22 @@ export class CartPage {
   total_item_price: number;
   isLoggedin: boolean;
   visible_key: boolean;
+  userId
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
      public menuCtrl: MenuController,
      public events1: Events,
      ) {
+      if (localStorage.getItem('isLoggedin')) {
+        this.userId =  localStorage.getItem('logged_user_id');
+        this.isLoggedin =true;
+      }
+      else {
+        this.userId = '';
+        this.isLoggedin =false;
+      }
+      
   }
 
   ionViewDidLoad() {
@@ -38,8 +48,8 @@ export class CartPage {
 
   populateData() {
   //  this.loader.show(this.lodaing_options);
-  if (sessionStorage.getItem("cart")) {
-    this.all_cart_data = JSON.parse(sessionStorage.getItem("cart"));
+  if (localStorage.getItem("cart")) {
+    this.all_cart_data = JSON.parse(localStorage.getItem("cart"));
    // this.customer_cart_data = this.all_cart_data;
    var filteredData = this.all_cart_data.filter(x => x.user_id == this.logged_user_id)
    this.customer_cart_data = filteredData;
@@ -54,7 +64,7 @@ export class CartPage {
 }
 
 setCartData() {
-    sessionStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
+    localStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
     this.getTotalItemPrice();
     console.log(this.customer_cart_data)
 }
@@ -108,7 +118,6 @@ getTotalItemPrice() {
 
 checkout()
 {
-  alert(1);
     if(this.isLoggedin)
     {
       this.navCtrl.push('CheckoutPage');

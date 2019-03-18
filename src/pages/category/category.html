@@ -21,7 +21,8 @@
             <ion-row class="image-avatar">
                 <ion-col col-4>
                     <ion-list no-lines (click)="gotoProList(category.id)" *ngFor="let category of categoryList  let i=index">
-                            <img [src]="category.image.src" class="slide-image" />
+                            <!-- <img [src]="category.image.src" class="slide-image" /> -->
+                            <img [src]="category.image != null ? category.image.src : 'assets/imgs/no-image.png'">
                         <span>{{category.name}}</span>
                     </ion-list>
                     <!-- <ion-list no-lines>

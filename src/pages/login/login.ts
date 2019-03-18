@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController, NavParams,Events,ModalController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, NavParams, Events, ModalController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
@@ -23,8 +23,9 @@ import * as Globals from '../../core/global';
 })
 export class LoginPage {
   loginForm: FormGroup;
-  lastPage:any;
-  isCart:any;
+  lastPage: any;
+  isCart: any;
+  customer_cart_data: any = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -35,15 +36,22 @@ export class LoginPage {
     private spinnerDialog: SpinnerDialog,
     private userService: UserService,
     private woocommerceService: WoocommerceService,
-    public modalCtrl : ModalController
-    ) {
-      events.publish('hideHeader', { isHeaderHidden: true });
-      this.loginForm = this.formBuilder.group({
-        email_phone: ["", Validators.required],
-        password: ["", Validators.required]
-      });
-      this.isCart = JSON.parse(sessionStorage.getItem("cart"));
-      console.log(this.isCart);
+    public modalCtrl: ModalController
+  ) {
+    events.publish('hideHeader', { isHeaderHidden: true });
+    this.loginForm = this.formBuilder.group({
+      email_phone: ["", Validators.required],
+      password: ["", Validators.required]
+    });
+    this.isCart = JSON.parse(localStorage.getItem("cart"));
+    console.log("Cart Data==>", this.isCart);
+    if (this.isCart != null) {
+      this.customer_cart_data = this.isCart;
+    }
+    else {
+      this.customer_cart_data = [];
+    }
+
   }
 
   ionViewDidLoad() {
@@ -55,66 +63,59 @@ export class LoginPage {
     if (this.loginForm.valid) {
       let params = {}
       let url = Globals.apiEndpoint + 'login/';
-      let loginUserUrl:string = this.woocommerceService.authenticateApi('POST',url,params);
+      let loginUserUrl: string = this.woocommerceService.authenticateApi('POST', url, params);
       console.log(this.loginForm.value);
+      localStorage.setItem('logged_first_name', 'Rupam')
+      localStorage.setItem('logged_last_name', 'Hazra')
+      localStorage.setItem('logged_user_name', '9038698104')
+      localStorage.setItem('logged_user_contact_no', '9038698104')
+      localStorage.setItem('logged_user_email', 'rupam.hazra@gmail.com')
+      localStorage.setItem('logged_user_id', '16')
+      localStorage.setItem('isLoggedin', 'true')
+      this.userService.loginStatus(true)
       this.navCtrl.setRoot('HomePage');
-      this.userService.userLogin(loginUserUrl,this.loginForm.value).subscribe(
+      this.userService.loginStatus(true)
+      this.userService.userLogin(loginUserUrl, this.loginForm.value).subscribe(
         res => {
           console.log(res);
-         
+          localStorage.setItem('logged_first_name', res.user['first_name'])
+          localStorage.setItem('logged_last_name', res.user['last_name'])
+          localStorage.setItem('logged_user_email', res.user['email'])
+          localStorage.setItem('logged_user_name', res.user['first_name'] + ' ' + res.user['last_name'])
+          localStorage.setItem('logged_user_contact_no', res.user['username'])
+          localStorage.setItem('logged_user_id', res.user['user_id'].toString())
+          this.userService.loginStatus(true)
+          this.navCtrl.setRoot('HomePage');
+          if (this.customer_cart_data.length > 0) {
+            this.customer_cart_data.forEach(x => {
+              x.user_id = res.user['user_id'].toString()
+            })
+            this.setCartData();
+            //var navItemRoute = '/cart/'
+            this.navCtrl.push('CartPage');
+          }
+          else {
+            this.navCtrl.push('HomePage');
+          }
         },
         error => {
-         console.log(error);
-          
+          console.log(error);
+
         }
       )
     }
-    // if (this.loginForm.valid) {
-    //   console.log(this.loginForm);
-    //   //this.spinnerDialog.show();
-    //   // this.loginService.userLogin(this.loginForm.value).subscribe(
-    //   //   res => {
-    //   //     localStorage.setItem('isLoggedin', 'true');
-    //   //     localStorage.setItem('userId', res['result']['id']);
-    //   //     localStorage.setItem('userName', res['result']['name']);
-    //   //     localStorage.setItem('userEmail', res['result']['email']);
-    //   //     localStorage.setItem('userContact', res['result']['contact']);
-    //   //     localStorage.setItem('userImage', res['result']['profile_image']);
-    //   //     this.loginService.loginStatus(true);
-    //   //     this.presentToast("Succesfully Login");
-    //   //     if(this.lastPage.id =='ForgotPasswordPage' || this.lastPage.id =='SignupPage' || this.lastPage.id =='ProductdetailsPage' || this.lastPage.id =='RecipedetailsPage'  ) {
-    //   //       this.lastPage.id ='HomePage';
-    //   //     }
-    //   //     if(this.isCart ==null || this.isCart.length==0) {
-    //   //       //this.navCtrl.setRoot('HomePage');
-    //   //       this.navCtrl.setRoot(this.lastPage.id);
-            
-    //   //     }
-    //   //     else if(this.lastPage.id =='ForgotPasswordPage' || this.lastPage.id =='SignupPage' || this.lastPage.id =='ProductdetailsPage' || this.lastPage.id =='RecipedetailsPage'  ) {
-    //   //       this.navCtrl.setRoot('HomePage');
-    //   //     }
-    //   //     else {
-    //   //       this.navCtrl.setRoot('CartPage');
-    //   //     }
-    //   //     this.spinnerDialog.hide();
-    //   //   },
-    //   //   error => {
-    //   //     this.presentToast("Please enter valid login credentials");
-    //   //     this.spinnerDialog.hide();
-
-    //   //   }
-    //   // )
-    // }
-     else {
+    else {
       this.markFormGroupTouched(this.loginForm)
     }
+  }
+
+  setCartData() {
+    localStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
   }
 
   gotoPage(page) {
     this.navCtrl.setRoot(page);
   }
-
-
 
   markFormGroupTouched(formGroup: FormGroup) {
     (<any>Object).values(formGroup.controls).forEach(control => {

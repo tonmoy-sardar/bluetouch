@@ -33,6 +33,9 @@ export class UserService {
   userPasswordUpdate(userPasswordUpdateUrl,data): Observable<any> {
     return this.http.post(userPasswordUpdateUrl, data)
   }
+  getUserDetails(userDeatilsUrl): Observable<any> {
+    return this.http.get(userDeatilsUrl)
+  }
   
   
 }

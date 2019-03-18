@@ -21,5 +21,36 @@
           [src]="profileDetails.profile_image != ''? imageBaseUrl+ profileDetails.profile_image : 'assets/imgs/no-image.png'"> -->
       </div>
     </div>
-   
+    <div class="profile-view-body">
+      <ion-card>
+        <h3>First Name</h3>
+        <ion-item>
+            <ion-input type="text" name="first_name" placeholder="First Name"></ion-input>
+        </ion-item>
+      </ion-card>
+      <ion-card>
+          <h3>Last Name</h3>
+          <ion-item>
+              <ion-input type="text" name="first_name" placeholder="Last Name"></ion-input>
+          </ion-item>
+        </ion-card>
+  
+      <ion-card>
+        <h3>Email</h3>
+        <ion-item>
+            <ion-input type="text" name="email" placeholder="Email"></ion-input>
+        </ion-item>
+      </ion-card>
+  
+      <ion-card>
+        <h3>Contact Number</h3>
+        <ion-item>
+            <ion-input type="text" name="contact" placeholder="Contact Number"></ion-input>
+        </ion-item>
+      </ion-card>
+  
+    </div>
   </ion-content>
+  <ion-footer>
+      <page-footer></page-footer>
+  </ion-footer>

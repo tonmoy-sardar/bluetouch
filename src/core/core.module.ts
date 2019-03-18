@@ -11,12 +11,14 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 //import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import {FooterPage} from '../pages/include/footer/footer';
+import { IonicStepperModule } from 'ionic-stepper';
 //services
 
 import { UserService } from './services/user.service';
 import { WoocommerceService } from './services/woocommerce.service';
 import { CategoryService } from './services/category.service';
 import { CartService } from './services/cart.service';
+import { PaymentService } from './services/payment.service';
 
 
 
@@ -28,12 +30,14 @@ import { CartService } from './services/cart.service';
     FormsModule,
     ReactiveFormsModule,
     ionicGalleryModal.GalleryModalModule,
+    IonicStepperModule
   ],
   exports: [
     // Ionic2RatingModule 
     FormsModule,
     ReactiveFormsModule,
-    FooterPage
+    FooterPage,
+    IonicStepperModule
   ],
   declarations: [
     //FooterPage
@@ -46,6 +50,7 @@ import { CartService } from './services/cart.service';
     WoocommerceService,
     CategoryService,
     CartService,
+    PaymentService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: ionicGalleryModal.GalleryModalHammerConfig,
