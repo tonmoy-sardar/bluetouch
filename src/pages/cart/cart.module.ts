@@ -9,7 +9,7 @@ import { CoreModule } from '../../core/core.module';
   ],
   imports: [
     IonicPageModule.forChild(CartPage),
-    CoreModule
+    // CoreModule
     
   ],
 })

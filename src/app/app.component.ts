@@ -43,9 +43,9 @@ export class MyApp {
     // if (localStorage.getItem("cart")) {
     //   this.totalCart = JSON.parse(localStorage.getItem("cart")).length;
     // }
-    cartService.getCartNumberStatus.subscribe(status => this.cartNumberStatus(status));
+    cartService.getCartNumberStatus.subscribe(status => {this.cartNumberStatus(status)});
     userService.getLoginStatus.subscribe(status => this.changeStatus(status));
-this.loadUserInfo();
+    this.loadUserInfo();
    
   }
 
@@ -63,6 +63,12 @@ this.loadUserInfo();
       this.logged_last_name = '';
       this.logged_user_name = '';
       this.logged_user_contact_no = '';
+    }
+    if (localStorage.getItem("cart")) {
+      this.totalCart = JSON.parse(localStorage.getItem("cart")).length;
+    }
+    else {
+      this.totalCart = 0;
     }
   }
 
@@ -84,6 +90,7 @@ this.loadUserInfo();
   }
 
   cartNumberStatus(status: boolean) {
+    console.log(status)
     if (status) {
       if (localStorage.getItem("cart")) {
         this.totalCart = JSON.parse(localStorage.getItem("cart")).length;
@@ -91,6 +98,9 @@ this.loadUserInfo();
       else {
         this.totalCart = 0;
       }
+    }
+    else{
+
     }
   }
 

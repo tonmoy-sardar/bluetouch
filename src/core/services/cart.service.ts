@@ -9,8 +9,9 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
   cartNumberStatus(data): Observable<any> {
-    if (data = true) {
-      this.getCartNumberStatus.emit(true);
+    console.log(data)
+    if (data) {
+      this.getCartNumberStatus.emit(data);
       return
     }
   }

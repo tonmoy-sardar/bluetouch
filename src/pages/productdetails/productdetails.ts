@@ -213,6 +213,7 @@ export class ProductdetailsPage {
       this.product_details.isCart = false;
       this.product_details.quantity = product_details.quantity - 1
     }
+    this.cartService.cartNumberStatus(true);
 
   }
   increment(product_details) {
@@ -222,7 +223,7 @@ export class ProductdetailsPage {
       this.setCartData();
     }
     this.product_details.quantity = product_details.quantity + 1
-
+    this.cartService.cartNumberStatus(true);
   }
   getDiscount(price, regular_price) {
     return Math.floor(((regular_price - price) * 100) / regular_price) + '%';

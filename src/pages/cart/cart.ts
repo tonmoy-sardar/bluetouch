@@ -66,9 +66,9 @@ export class CartPage {
   }
 
   setCartData() {
-    localStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
-    this.getTotalItemPrice();
-    console.log(this.customer_cart_data)
+    localStorage.setItem("cart", JSON.stringify(this.customer_cart_data));    
+    this.getTotalItemPrice();    
+    console.log("k233",this.customer_cart_data)
   }
 
   increment(i) {
@@ -79,6 +79,7 @@ export class CartPage {
       this.all_cart_data[index].quantity = qty + 1;
       this.setCartData()
     }
+    this.cartService.cartNumberStatus(true);
   }
 
   decrement(i) {
@@ -94,6 +95,7 @@ export class CartPage {
     else {
       this.remove(this.customer_cart_data[i].product_id)
     }
+    this.cartService.cartNumberStatus(true);
   }
 
   // remove(id) {
@@ -120,12 +122,14 @@ export class CartPage {
           text: 'Remove',
           handler: () => {
             var index = this.all_cart_data.findIndex(x => x.user_id == this.logged_user_id && x.product_id == id);
+            console.log(index)
             if (index != -1) {
               this.all_cart_data.splice(index, 1);
               this.customer_cart_data.splice(index, 1);
               this.setCartData()
             }
-            this.cartService.cartNumberStatus(true);
+           console.log("kkkkkkkkkkkkkk123");
+           this.cartService.cartNumberStatus(true);
           }
         }
       ]
