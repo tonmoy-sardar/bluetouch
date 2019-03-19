@@ -16,14 +16,14 @@
 ion-content {
     background-color: #f5f6f8 !important;
 }
-ion-content > .scroll-content{
-    margin-bottom: 56px;
-  }
 
-.back-button {
-    display:block;
+ion-content>.scroll-content {
+    margin-bottom: 56px;
 }
 
+.back-button {
+    display: block;
+}
 
 ion-header {
     div.toolbar-background {
@@ -36,6 +36,23 @@ ion-header {
     ion-icon {
         color: #ffffff;
     }
+}
+
+ion-footer button i {
+    font-size: 20px !important;
+    padding-bottom: 5px;
+}
+
+ion-footer button {
+    padding: 10px 11px 0px !important;
+}
+
+ion-footer button span {
+    font-size: 19px;
+}
+
+ion-footer span {
+    margin: 0px auto 6px !important;
 }
 
 ion-footer {
@@ -58,7 +75,7 @@ ion-footer {
     .active {
         color: #fb7775;
     }
-   // background: #fff;
+    // background: #fff;
 }
 
 ion-row {
@@ -156,6 +173,15 @@ ion-row {
 
 .arrival-list .slide-zoom {
     margin: 0 15px;
+}
+
+.arrival-list .swiper-slide img {
+    height: 150px;
+}
+
+.arrival-list .swiper-slide .slide-zoom {
+    border-radius: 12px;
+    background: #d4d4d4
 }
 
 .latest-list .swiper-slide img {
@@ -410,7 +436,7 @@ p {
 }
 
 .profile-img {
-  //  padding-top: 51px;
+    //  padding-top: 51px;
 }
 
 .menu-nav .item ion-icon {
@@ -468,7 +494,7 @@ p {
 
 .product-price ion-card {
     border-radius: 15px;
-    height:285px;
+    height: 285px;
 }
 
 .product-price .rating {
@@ -604,6 +630,5 @@ p {
     margin-left: -10px;
     margin-top: -35px;
 }
-
 
 // / css end by kalyan /

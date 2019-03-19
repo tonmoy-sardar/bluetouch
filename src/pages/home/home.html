@@ -4,7 +4,7 @@
         <ion-title>Home</ion-title>
     </ion-navbar>
 
-</ion-header> 
+</ion-header>
 <ion-content class="has-header">
     <div class="category-list">
         <ion-title class="headline">Categories List</ion-title>
@@ -29,8 +29,8 @@
         <ion-slides loop slidesPerView="1.2">
             <ion-slide (click)="gotoProDetails(allProduct.id)" *ngFor="let allProduct of all_product_list | slice:0:10; let i=index">
                 <!-- <img src="assets/imgs/slider-banner.png" /> -->
-                <img style="width:100%" [src]="allProduct.images[0].src" />
-              
+                <img [src]="allProduct.images[0].src" />
+
             </ion-slide>
             <!-- <ion-slide>
                 <img src="assets/imgs/slider-banner2.png" />
@@ -41,12 +41,12 @@
         <ion-title class="headline">Latest Fashion</ion-title>
         <hr>
         <!-- <ion-slides loop slidesPerView="2.4"> -->
-                <ion-slides loop slidesPerView="2.4">
+        <ion-slides loop slidesPerView="2.4">
             <ion-slide *ngFor="let popularProduct of popular_product_list let i=index">
-                
+
                 <ion-card (click)="gotoProDetails(popularProduct.product_id)">
                     <img [src]="popularProduct.product_img" class="slide-image" />
-                   
+
 
                     <button ion-button color="light">₹ {{popularProduct.price_sale}} <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
 
@@ -54,36 +54,34 @@
                         <!-- <ion-title>{{popularProduct.product_name}}</ion-title> -->
                         <p>{{popularProduct.product_name}}</p>
                         <div>
-                            <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']"
-                                style="margin-right: 2px;">
+                            <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                                 <ion-icon name="star"></ion-icon>
                             </span>
                         </div>
                     </ion-card-content>
                 </ion-card>
             </ion-slide>
-           
+
         </ion-slides>
     </div>
     <div class="custom-slider recent-list" style="padding-top:30px;">
         <ion-title class="headline">Recently Viewed</ion-title>
         <hr>
         <ion-slides loop slidesPerView="2.4">
-                
+
             <ion-slide *ngFor="let recentlyViewProduct of recently_view_product let i=index">
                 <ion-card class="card-background-page" (click)="gotoProDetails(recentlyViewProduct.product_id)">
-                    <img [src]="recentlyViewProduct.image_small"/>
+                    <img [src]="recentlyViewProduct.image_small" />
                     <button ion-button color="light">₹ {{recentlyViewProduct.price}} <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
                     <ion-card-content>
                         <p>{{recentlyViewProduct.product_name}}</p>
-                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']"
-                            style="margin-right: 2px;">
+                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                             <ion-icon name="star"></ion-icon>
                         </span>
                     </ion-card-content>
                 </ion-card>
             </ion-slide>
-             </ion-slides>
+        </ion-slides>
     </div>
     <!-- <div class="trend-list">
     <ion-title>Trending Products</ion-title>
