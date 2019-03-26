@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
+import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import { CategoryService } from '../../core/services/category.service';
+import { WoocommerceService } from "../../core/services/woocommerce.service";
+import * as Globals from '../../core/global';
 
 /**
  * Generated class for the OrderdetailsPage page.
@@ -8,18 +12,56 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({ segment: 'orderdetails/:id' })
 @Component({
   selector: 'page-orderdetails',
   templateUrl: 'orderdetails.html',
 })
 export class OrderdetailsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  visible_key:boolean;
+  order_details:any=[];
+  shippingAddress:any ={};
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public menuCtrl: MenuController,
+    public events1: Events,
+    private spinnerDialog: SpinnerDialog,
+    public categoryService: CategoryService,
+    public woocommerceService: WoocommerceService
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrderdetailsPage');
+    this.menuCtrl.close();
+    this.events1.publish('hideBackButton', false);
+    this.getOrderDetails(this.navParams.get('id'))
   }
+  getOrderDetails(order_id) {
+    this.visible_key =false;
+    this.spinnerDialog.show();
+    let params = {
+    }
+    let url = Globals.apiEndpoint + 'orders/' + order_id;
+    let orderDeatilsUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
+
+    this.categoryService.getOrderDetails(orderDeatilsUrl).subscribe(
+      res => {
+        console.log("Order Details ==>", res);
+        this.order_details = res;
+        this.shippingAddress = this.order_details.shipping;
+        console.log(this.shippingAddress);
+        this.visible_key = true
+        this.spinnerDialog.hide();
+        console.log();
+      },
+      error => {
+        this.spinnerDialog.hide();
+        
+      }
+    )
+  }
+
 
 }

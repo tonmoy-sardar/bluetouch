@@ -1,5 +1,6 @@
 'use strict';
-export const apiEndpoint: string = 'http://192.168.28.59/bluetouch/wp-json/wc/v3/';
+//export const apiEndpoint: string = 'http://192.168.28.59/bluetouch/wp-json/wc/v3/';
+export const apiEndpoint: string = 'http://166.62.54.122/bluetouch/wp-json/wc/v3/';
 export const consumer_key:  string = "ck_fd87d34bcf9338dda87a47042fc474d702ef3e07";
 export const consumer_secret:  string = "cs_1186505f7196b03f934ee047d83ad92d8b46e44c";
 

@@ -8,10 +8,11 @@ import { SplashScreen} from '@ionic-native/splash-screen';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // core module
 import { CoreModule } from '../../src/core/core.module';
-
+import { AddressPage } from '../pages/address/address';
 @NgModule({
   declarations: [
     MyApp,
+    AddressPage
   ],
   imports: [
    // BrowserModule,
@@ -22,6 +23,7 @@ import { CoreModule } from '../../src/core/core.module';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    AddressPage
   ],
   providers: [
     StatusBar,

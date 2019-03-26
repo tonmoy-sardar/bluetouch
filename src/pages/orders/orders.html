@@ -14,7 +14,7 @@
 <ion-content fullscreen>
   <div class="order-list-body">
     <ion-card *ngFor="let item of order_list let i=index">
-      <ion-card-content>
+      <ion-card-content (click)="gotoOrderDetails(item.id)">
         <ion-grid>
           <ion-row>
             <ion-col col-12>
@@ -25,7 +25,7 @@
                 | date:'dd-MM-yyyy h:mm:ss a'}}</ion-list>
             </ion-col>
           </ion-row>
-          <ion-row style="background-color:#c3e8eb" (click)="gotoOrderDetails(order.id)">
+          <ion-row style="background-color:#fcb670">
             <ion-col col-4 style="text-align: center; border-right: 1px solid #ffffff; ">
               <ion-list no-lines class="recipe-name">Payment Status</ion-list>
             </ion-col>
@@ -36,7 +36,7 @@
               <ion-list no-lines class="recipe-name">Grand Total</ion-list>
             </ion-col>
           </ion-row>
-          <ion-row (click)="gotoOrderDetails(order.id)">
+          <ion-row >
             <ion-col col-4 style="text-align: center;">
               <ion-list no-lines class="recipe-name">
                 <p>Pending</p>

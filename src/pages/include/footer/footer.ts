@@ -25,6 +25,10 @@ export class FooterPage {
   {
     this.navCtrl.push(routePage);
   }
+  gotoSearchPage(routePage)
+  {
+    this.navCtrl.push('SearchPage', { keyword: 0 });
+  }
 
 
 }

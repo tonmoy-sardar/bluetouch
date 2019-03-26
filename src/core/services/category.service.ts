@@ -15,7 +15,8 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getCategoryList(categoryUrl): Observable<any> {
-    return this.http.get(categoryUrl)
+    console.log(categoryUrl);
+    return this.http.get(categoryUrl);
   }
 
   getSubCategoryList(cat_id,location_id): Observable<any> {
@@ -27,6 +28,10 @@ export class CategoryService {
   }
   
   getProductListByCategoryId(productUrl): Observable<any> {
+    return this.http.get(productUrl)
+  }
+
+  getSearchProduct(productUrl): Observable<any> {
     return this.http.get(productUrl)
   }
 
@@ -44,6 +49,9 @@ export class CategoryService {
 
   getProductDetails(productDeatilsUrl): Observable<any> {
     return this.http.get(productDeatilsUrl)
+  }
+  getOrderDetails(orderDeatilsUrl): Observable<any> {
+    return this.http.get(orderDeatilsUrl)
   }
 
   getPopularProductList(popularProductUrl): Observable<any> {

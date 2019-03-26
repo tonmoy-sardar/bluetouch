@@ -14,43 +14,42 @@
 
 
 <ion-content fullscreen>
-    <div class="profile-banner">
-      <div class="profile-img">
-          <img src="assets/imgs/man.jpg" />
-        <!-- <img
+  <div class="profile-banner">
+    <div class="profile-img">
+      <img src="assets/imgs/man.jpg" />
+      <!-- <img
           [src]="profileDetails.profile_image != ''? imageBaseUrl+ profileDetails.profile_image : 'assets/imgs/no-image.png'"> -->
-      </div>
     </div>
-    <div class="profile-view-body">
+  </div>
+  <div class="profile-view-body">
+    <form [formGroup]="editProfileForm" novalidate>
       <ion-card>
         <h3>First Name</h3>
-        <ion-item>
-            <ion-input type="text" name="first_name" placeholder="First Name"></ion-input>
-        </ion-item>
+        <ion-input type="text" [(ngModel)]="user_details.first_name" name="first_name" formControlName="first_name" [ngClass]="displayFieldCss('first_name')"
+          placeholder="First Name"></ion-input>
+        <span class="error-msg" *ngIf="isFieldValid('first_name')">Please enter a First Name.</span>
       </ion-card>
       <ion-card>
-          <h3>Last Name</h3>
-          <ion-item>
-              <ion-input type="text" name="first_name" placeholder="Last Name"></ion-input>
-          </ion-item>
-        </ion-card>
-  
+        <h3>Last Name</h3>
+        <ion-input type="text" [(ngModel)]="user_details.last_name" name="last_name" formControlName="last_name" [ngClass]="displayFieldCss('last_name')"
+          placeholder="Last Name"></ion-input>
+        <span class="error-msg" *ngIf="isFieldValid('last_name')">Please enter a Last Name.</span>
+      </ion-card>
       <ion-card>
         <h3>Email</h3>
-        <ion-item>
-            <ion-input type="text" name="email" placeholder="Email"></ion-input>
-        </ion-item>
+        <ion-input type="email" [(ngModel)]="user_details.email" name="email" formControlName="email" [ngClass]="displayFieldCss('email')" placeholder="Email"></ion-input>
+        <span class="error-msg" *ngIf="isFieldValid('email')">Please enter a valid Email.</span>
       </ion-card>
-  
       <ion-card>
         <h3>Contact Number</h3>
-        <ion-item>
-            <ion-input type="text" name="contact" placeholder="Contact Number"></ion-input>
-        </ion-item>
+        <ion-input type="tel" [(ngModel)]="user_details.username"  pattern="[0-9]*" maxLength="10" name="username" formControlName="username" [ngClass]="displayFieldCss('username')"
+          placeholder="username"></ion-input>
+        <span class="error-msg" *ngIf="isFieldValid('username')">Please enter a Contact.</span>
       </ion-card>
-  
-    </div>
-  </ion-content>
-  <ion-footer>
-      <page-footer></page-footer>
-  </ion-footer>
+      <button ion-button round class="update-button" (click)=updateProfile()>Update</button>
+    </form>
+  </div>
+</ion-content>
+<ion-footer>
+  <page-footer></page-footer>
+</ion-footer>

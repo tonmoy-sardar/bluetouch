@@ -185,7 +185,7 @@ export class ProductdetailsPage {
       this.customer_cart_data.push(data);
       this.setCartData();
     }
-    console.log(this.customer_cart_data);
+    console.log("kalyan222",this.customer_cart_data);
     this.cartService.cartNumberStatus(true);
   }
 

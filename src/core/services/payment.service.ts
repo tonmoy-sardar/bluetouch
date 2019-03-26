@@ -15,6 +15,8 @@ export class PaymentService {
   constructor(private http: HttpClient) { }
 
   getCustomerAddressList(getAddressUrl,data):Observable<any> {
+    console.log(getAddressUrl);
+    console.log(data);
     return this.http.post(getAddressUrl, data)
   }
 
@@ -23,6 +25,8 @@ export class PaymentService {
   }
 
   addCustomerAddress(addAddressUrl,data): Observable<any> {
+    console.log(addAddressUrl);
+    console.log(data);
     return this.http.post(addAddressUrl, data)
   }
 
@@ -63,6 +67,9 @@ export class PaymentService {
   getPeaymentOption(getPeaymentOptionUrl):Observable<any> {
     return this.http.get(getPeaymentOptionUrl)
   }
+
+
+
 
 }
 

@@ -1,4 +1,4 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA,ModuleWithProviders } from '@angular/core';
 
 import { ApiProvider } from '../core/api/api';
 import { HttpClientModule } from '@angular/common/http';
@@ -41,7 +41,7 @@ import { PaymentService } from './services/payment.service';
   ],
   declarations: [
     //FooterPage
-    FooterPage
+    FooterPage,
   ],
   providers: [
     ApiProvider,
@@ -63,6 +63,9 @@ import { PaymentService } from './services/payment.service';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class CoreModule {
+// export class CoreModule {
 
+// }
+export class CoreModule {
+ 
 }

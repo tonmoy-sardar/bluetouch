@@ -78,7 +78,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       //this.rootPage = '';
       this.nav.setRoot('HomePage');
-
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.navBar.backButtonClick = (e:UIEvent)=>{        

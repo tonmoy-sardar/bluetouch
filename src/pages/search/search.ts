@@ -11,17 +11,16 @@ import * as Globals from '../../core/global';
  * Ionic pages and navigation.
  */
 
-@IonicPage({ segment: 'productlist/:id' })
+@IonicPage({ segment: 'search/:keyword' })
 @Component({
-  selector: 'page-productlist',
-  templateUrl: 'productlist.html',
+  selector: 'page-search',
+  templateUrl: 'search.html',
 })
-export class ProductlistPage {
+export class SearchPage {
   rating;
   product_list: any = [];
-  visible_key: boolean=false;
-  catId: any;
-  filterUrl:any;
+  visible_key: boolean;
+  searchKey: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -34,13 +33,13 @@ export class ProductlistPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductlistPage');
+    console.log('ionViewDidLoad SearchPage');
     this.menuCtrl.close();
     this.events1.publish('hideBackButton', false);
     this.rating = [1, 2, 3, 4, 5];
-    this.catId = this.navParams.get('id');
-    if (this.catId != "") {
-      this.getProduct(this.navParams.get('id'));
+    this.searchKey =this.navParams.get('keyword');
+    if (this.searchKey != 0) {
+      this.searchProduct(this.navParams.get('keyword'));
     }
     else {
       this.getAllProduct();
@@ -48,20 +47,22 @@ export class ProductlistPage {
 
   }
 
-
-  getProduct(category_id) {
+  // search(keyword) {
+  //   this.searchProduct(keyword);
+  // }
+  searchProduct(keywords) {
     this.spinnerDialog.show();
     let params = {
-      category: category_id,
+      search: keywords,
     }
     let url = Globals.apiEndpoint + 'products/';
     console.log("url", url);
 
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
-    this.categoryService.getCategoryList(orderUrl).subscribe(
+    this.categoryService.getSearchProduct(orderUrl).subscribe(
       res => {
-        console.log(res);
+        console.log("Search Product",res);
         this.product_list = res;
         this.visible_key = true;
       },
@@ -93,48 +94,9 @@ export class ProductlistPage {
     )
   }
 
-
-  getSortedProductList(order_by,meta_key) {
-   // this.loader.show(this.lodaing_options);
-    var params;
-    if(this.catId !="") {
-      params = {
-        category:this.catId,
-        order:order_by,
-        orderby_meta_key:meta_key,
-    }
-    }
-    else {
-      params = {
-        order:order_by,
-        orderby_meta_key:meta_key,
-    }
-      
-    }
-    console.log("Params ====>",params);
-    let url = Globals.apiEndpoint + 'products';
-    let productUrl:string = this.woocommerceService.authenticateApi('GET',url,params);
-
-    this.categoryService.getProductListByCategoryId(productUrl).subscribe(
-        res => {
-          console.log("Sorting Product==>", res);
-          this.product_list = res;
-          this.visible_key = true;
-          this.spinnerDialog.hide();
-        },
-        error => {
-          this.spinnerDialog.hide();
-        }
-    )
-}
-
-
   gotoProDetails(id) {
     //this.navCtrl.push(page);
     this.navCtrl.push('ProductdetailsPage', { id: id });
-  }
-  searchProduct(keyword) {
-    this.navCtrl.push('SearchPage', { keyword: keyword });
   }
   goBack() {
     this.navCtrl.pop();

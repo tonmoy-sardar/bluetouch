@@ -63,7 +63,9 @@ export class OrdersPage {
         }
     )
 }
-
+gotoOrderDetails(id) {
+  this.navCtrl.push('OrderdetailsPage',{id:id});
+}
 
 
 }

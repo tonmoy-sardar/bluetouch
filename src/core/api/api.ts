@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/map';
 
-const apiUrl = "https://192.168.28.59/bluetouch/wp-json/wc/v3/";
+//const apiUrl = "https://192.168.28.59/bluetouch/wp-json/wc/v3/";
+const apiUrl = "http://166.62.54.122/bluetouch/wp-json/wc/v3/";
 
 @Injectable()
 export class ApiProvider {

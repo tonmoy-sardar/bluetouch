@@ -4,6 +4,7 @@ import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { WoocommerceService } from "../../core/services/woocommerce.service";
 import * as Globals from '../../core/global';
 import {UserService} from '../../core/services/user.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
  * Generated class for the ProfileeditPage page.
@@ -26,6 +27,7 @@ export class ProfileeditPage {
   logged_user_email:any;
   user_details:any ={};
   visible_key :boolean =false;
+  editProfileForm: FormGroup;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,11 +35,25 @@ export class ProfileeditPage {
     public events1: Events,
     private spinnerDialog: SpinnerDialog,
     public woocommerceService: WoocommerceService,
-    public userService:UserService
+    public userService:UserService,
+    private formBuilder: FormBuilder
     ) {
       if (localStorage.getItem('isLoggedin')) {
         this.userId =  localStorage.getItem('logged_user_id');
       }
+
+      this.editProfileForm = this.formBuilder.group({
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        email: ['', [
+          Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
+        ]],
+        username: ['', [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10)
+        ]],
+      });
   }
 
   ionViewDidLoad() {
@@ -68,6 +84,30 @@ export class ProfileeditPage {
         this.visible_key =true;
       }
     )
+  }
+
+  updateProfile() {
+    console.log("Update User");
+  }
+
+  markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if (control.controls) {
+        control.controls.forEach(c => this.markFormGroupTouched(c));
+      }
+    });
+  }
+
+  isFieldValid(field: string) {
+    return !this.editProfileForm.get(field).valid && (this.editProfileForm.get(field).dirty || this.editProfileForm.get(field).touched);
+  }
+
+  displayFieldCss(field: string) {
+    return {
+      'is-invalid': this.editProfileForm.get(field).invalid && (this.editProfileForm.get(field).dirty || this.editProfileForm.get(field).touched),
+      'is-valid': this.editProfileForm.get(field).valid && (this.editProfileForm.get(field).dirty || this.editProfileForm.get(field).touched)
+    };
   }
 
 }
