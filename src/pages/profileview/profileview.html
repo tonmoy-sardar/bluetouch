@@ -14,17 +14,16 @@
 
 
 <ion-content fullscreen>
-  <div class="profile-banner" >
+  <div class="profile-banner">
     <div class="profile-img" *ngIf="visible_key">
-      <img
-        [src]="user_details.avatar_url != ''?  user_details.avatar_url : 'assets/imgs/no-image.png'">
+      <img [src]="user_details.avatar_url != ''?  user_details.avatar_url : 'assets/imgs/no-image.png'">
     </div>
   </div>
   <div class="profile-view-body">
     <ion-card>
       <h3>Name</h3>
       <ion-item>
-       {{user_details.first_name}}  {{user_details.last_name}}
+        {{user_details.first_name}} {{user_details.last_name}}
       </ion-item>
     </ion-card>
 
@@ -42,8 +41,35 @@
       </ion-item>
     </ion-card>
 
+    <ion-card>
+      <h3 (click)="openAddModal()">Address  <i  class="fa fa-plus-square" aria-hidden="true"></i></h3>
+
+      <ion-list *ngFor="let address of address_list">
+          <ion-item >
+              <ion-label>
+                  <ion-row>
+                  <ion-col col-10>
+                    <div class="typetitle">{{address.label}}</div>
+                   <span>{{address.shipping_address_1}} {{address.shipping_address_2}}
+                      {{address.shipping_city}} </span> 
+                      <br>
+                      <span>{{address.shipping_state}} {{address.shipping_postcode}} {{address.shipping_country}} </span>
+                            
+                  </ion-col>
+                  <ion-col col-2>
+                   <span (click)="openEditModal(address)">Edit</span> 
+                    </ion-col>
+                   </ion-row>
+          
+              </ion-label>
+           
+            </ion-item>
+       
+      </ion-list>
+    </ion-card>
+
   </div>
 </ion-content>
 <ion-footer>
-    <page-footer></page-footer>
+  <page-footer></page-footer>
 </ion-footer>

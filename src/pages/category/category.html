@@ -20,102 +20,38 @@
         <ion-grid>
             <ion-row class="image-avatar">
                 <ion-col col-4>
-                    <ion-list no-lines (click)="gotoProList(category.id)" *ngFor="let category of categoryList  let i=index">
-                            <!-- <img [src]="category.image.src" class="slide-image" /> -->
-                            <img [src]="category.image != null ? category.image.src : 'assets/imgs/no-image.png'">
-                        <span>{{category.name}}</span>
+                    <ion-list no-lines *ngFor="let category of categoryList  let i=index">
+
+                        <img *ngIf="category.child.length == 0" (click)="gotoProList(category.category_id)"
+                            [src]="category.category_image != null ? category.category_image : 'assets/imgs/no-image.png'">
+                        <img *ngIf="category.child.length !=0" (click)="showSubCat(category.category_id)"
+                            [src]="category.category_image != null ? category.category_image : 'assets/imgs/no-image.png'">
+                        <span>{{category.category_name}}</span>
                     </ion-list>
-                    <!-- <ion-list no-lines>
-                        <img src="assets/imgs/apparel.png">
-                        <span>Clothing</span>
-                    </ion-list>
-                    <ion-list no-lines>
-                        <img src="assets/imgs/beauty-bg.png">
-                        <span>Beauty</span>
-                    </ion-list>
-                    <ion-list no-lines>
-                        <img src="assets/imgs/shoes-bg.png">
-                        <span>Shoes</span>
-                    </ion-list>
-                    <ion-list no-lines>
-                        <img src="assets/imgs/apparel.png">
-                        <span>Clothing</span>
-                    </ion-list> -->
+                  
                 </ion-col>
+              
                 <ion-col col-8>
-                    <p>Men's Apparel</p>
+                    <p *ngFor="let subcat of subCatList  let i=index">
+                       
+                      <span *ngIf="subcat.child.length == 0" (click)="gotoProList(subcat.category_id)">{{subcat.category_name}}</span>  
+                      <span *ngIf="subcat.child.length != 0" (click)="showSubCatt(subcat.category_id)">{{subcat.category_name}}</span>  
+                    </p>
                     <ion-card>
-                        <ion-list>
-                            <ion-item>T-shirts
-                                <ion-icon name="arrow-dropright-circle"></ion-icon>
-
-                            </ion-item>
-
-                        </ion-list>
-                        <ion-list>
-                            <ion-item>Shirts
-                                <ion-icon name="arrow-dropright-circle"></ion-icon>
-
-                            </ion-item>
-                        </ion-list>
-                        <ion-list>
-                            <ion-item>Socks & fa-times
-
-                                <ion-icon name="arrow-dropright-circle"></ion-icon>
-                            </ion-item>
-                        </ion-list>
-                        <ion-list>
-                            <ion-item>Jackets
-
-                                <ion-icon name="arrow-dropright-circle"></ion-icon>
-                            </ion-item>
-                        </ion-list>
-                        <ion-list>
-                            <ion-item>Sweaters
-                                <ion-icon name="arrow-dropright-circle"></ion-icon>
-
-                            </ion-item>
-                        </ion-list>
-
-                    </ion-card>
-                    <hr>
-                    <p>Women Apparel</p>
-                    <ion-card>
-                        <ion-list>
-                            <ion-item>T-shirts
-
-                                <ion-icon name="arrow-dropright-circle"></ion-icon>
-                            </ion-item>
-                        </ion-list>
-                        <ion-list>
-                            <ion-item>Shirts
-
-                                <ion-icon name="arrow-dropright-circle"></ion-icon>
-                            </ion-item>
-                        </ion-list>
-                        <ion-list>
-                            <ion-item>Socks & fa-times
-                                <ion-icon name="arrow-dropright-circle"></ion-icon>
-                            </ion-item>
-                        </ion-list>
-                        <ion-list>
-                            <ion-item>Jackets
-
-                                <ion-icon name="arrow-dropright-circle"></ion-icon>
-                            </ion-item>
-                        </ion-list>
-                        <ion-list>
-                            <ion-item>Sweaters
-
+                        <ion-list *ngFor="let subcatt of subCatListt  let i=index">
+                            <ion-item (click)="gotoProList(subcatt.category_id)">
+                                    {{subcatt.category_name}}
                                 <ion-icon name="arrow-dropright-circle"></ion-icon>
                             </ion-item>
                         </ion-list>
 
                     </ion-card>
                 </ion-col>
+
             </ion-row>
         </ion-grid>
     </div>
 
+    
 
 </ion-content>

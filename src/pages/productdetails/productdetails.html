@@ -47,19 +47,38 @@
     <div class="bradcumb" style="text-align: left; padding: 10px;" *ngIf="product_details.attributes.length >0">
       <div>
         <ion-title class="section-header">SELECT COLOR</ion-title>
-       
-        <span  *ngFor="let color of product_details.attributes[0].options; let i=index" class="dot" [ngStyle]="{'background-color': color}" ></span>
-        <!-- <span class="dot" style=" background-color: #f0d57c;"></span>
-        <span class="dot" style=" background-color: #75e084;"></span>
-        <span class="dot" style=" background-color: #b87cf0;"></span>
-        <span class="dot" style=" background-color: #d8284e;"></span> -->
+        <!-- <div *ngFor="let color of product_details.attributes[0].options; let i=index">
+          <ion-radio  [value]="color"  [ngStyle]="{'background-color': color}" (ionSelect)="selectColor(color)"></ion-radio>
+        </div> -->
+
+        
+
+        <!-- <ion-item class="dot" >
+
+          <ion-radio  value="go"></ion-radio>
+        </ion-item>
+        <ion-item class="dot">
+
+          <ion-radio  value="run"></ion-radio>
+        </ion-item>
+        <ion-item class="dot">
+
+          <ion-radio  value="ab"></ion-radio>
+        </ion-item> -->
+     
+         <div *ngFor="let color of product_details.attributes[0].options; let i=index" class="dot"
+          [ngStyle]="{'background-color': color}"   (click)="selectColor(color,i)">
+          <span class="dot-tick" [class.active]="selectedIndex === i">&#10003;</span>
+      </div> 
+     
       </div>
       <div style="padding-top: 20px;">
         <ion-title class="section-header">SELECT SIZE</ion-title>
-        <span class="dot-size" *ngFor="let size of product_details.attributes[1].options; let i=index"> {{size}}</span>
-        <!-- <span class="dot-size"> 5.5</span>
-        <span class="dot-size"> 6.5</span>
-        <span class="dot-size"> 7.5</span> -->
+        <!-- <span class="dot-size" (click)="selectSize(size)" *ngFor="let size of product_details.attributes[1].options; let i=index"> {{size}}</span> -->
+
+       <div class="dot-size" (click)="selectSize(size,i);" *ngFor="let size of product_details.attributes[1].options; let i=index"  [ngStyle]=" i === activeIndex ? {'background-color': '#ca332e'} : {'background-color': ''} ">
+         <button >{{size}}</button>
+       </div>
 
       </div>
     </div>
@@ -97,7 +116,7 @@
   </div>
   <div *ngIf="productdetailsType=='reviews'">
     <div class="bradcumb">
-      Click on review tab
+     No records found
     </div>
   </div>
 
@@ -107,7 +126,7 @@
     <ion-row>
       <ion-col col-6>
         <div class="quantity" *ngIf="!product_details.isCart">
-          <button  ion-button color="dark" round (click)="addToCart(product_details)">
+          <button style="width:100% !important;" ion-button color="dark" round (click)="addToCart(product_details)">
             ADD TO CART
           </button>
         </div>
@@ -121,17 +140,19 @@
           </button>
         </div> -->
         <div class="quantity" style="padding-left: 5px;" *ngIf="product_details.isCart">
-            <button class="quantity-btn" name="button" type="button" (click)="decrement(product_details)">
-    <ion-icon name="remove" role="img" class="icon icon-md ion-md-remove" aria-label="remove" ng-reflect-name="remove"></ion-icon>
-</button>
-            <span style="width: 20px; text-align: center; display:inline-block;">{{product_details.quantity}}</span>
-            <button class="quantity-btn" name="button" type="button" (click)="increment(product_details)">
-    <ion-icon name="add" role="img" class="icon icon-md ion-md-add" aria-label="add" ng-reflect-name="add"></ion-icon>
-</button>
-            <hr>
+          <button class="quantity-btn" name="button" type="button" (click)="decrement(product_details)">
+            <ion-icon name="remove" role="img" class="icon icon-md ion-md-remove" aria-label="remove"
+              ng-reflect-name="remove"></ion-icon>
+          </button>
+          <span style="width: 20px; text-align: center; display:inline-block;">{{product_details.quantity}}</span>
+          <button class="quantity-btn" name="button" type="button" (click)="increment(product_details)">
+            <ion-icon name="add" role="img" class="icon icon-md ion-md-add" aria-label="add" ng-reflect-name="add">
+            </ion-icon>
+          </button>
+          <hr>
         </div>
       </ion-col>
-      <ion-col col-6><button ion-button color="danger" round (click)="buyNow(product_details)">BUY</button></ion-col>
+      <ion-col col-6><button class="buy-cart" ion-button color="danger" round (click)="buyNow(product_details)">BUY</button></ion-col>
     </ion-row>
   </ion-toolbar>
 </ion-footer>

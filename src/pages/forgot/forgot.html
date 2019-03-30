@@ -31,8 +31,8 @@
                 <ion-grid class="form-body">
                     <ion-row>
                         <ion-col col-12>
-                            <ion-input type="text" formControlName="contact_or_email" name="contact_or_email" [(ngModel)]="data.contact_or_email" placeholder="Email / Mobile Number" [ngClass]="displayFieldCss(forgotForm,'contact_or_email')"></ion-input>
-                            <span class="error-msg" *ngIf="isFieldValid(forgotForm,'contact_or_email')">Please enter a Email / Mobile
+                            <ion-input type="text" formControlName="phone" name="phone" [(ngModel)]="data.phone" placeholder="Email / Mobile Number" [ngClass]="displayFieldCss(forgotForm,'phone')"></ion-input>
+                            <span class="error-msg" *ngIf="isFieldValid(forgotForm,'phone')">Please enter a Email / Mobile
               Number.</span>
                         </ion-col>
                     </ion-row>
@@ -85,13 +85,13 @@
                 <ion-grid class="form-body">
                     <ion-row>
                         <ion-col col-12>
-                            <ion-input type="password" formControlName="newpass" [ngClass]="displayFieldCss(newPasswordForm,'newpass')" name="newpass" [(ngModel)]="data.newpass" placeholder="New Password"></ion-input>
-                            <span class="error-msg" *ngIf="isFieldValid(newPasswordForm,'newpass')">Please enter New Password.</span>
+                            <ion-input type="password" formControlName="password" [ngClass]="displayFieldCss(newPasswordForm,'password')" name="password" [(ngModel)]="data.password" placeholder="New Password"></ion-input>
+                            <span class="error-msg" *ngIf="isFieldValid(newPasswordForm,'password')">Please enter New Password.</span>
                         </ion-col>
                         <ion-col col-12>
-                            <ion-input type="password" formControlName="confpass" [ngClass]="displayFieldCss(newPasswordForm,'confpass')" name="confpass" [(ngModel)]="data.confpass" placeholder="Confirm Password">
+                            <ion-input type="password" formControlName="conf_password" [ngClass]="displayFieldCss(newPasswordForm,'conf_password')" name="conf_password" [(ngModel)]="data.conf_password" placeholder="Confirm Password">
                             </ion-input>
-                            <span class="error-msg" *ngIf="isFieldValid(newPasswordForm,'confpass')">Please enter Confirm Password.</span>
+                            <span class="error-msg" *ngIf="isFieldValid(newPasswordForm,'conf_password')">Please enter Confirm Password.</span>
                         </ion-col>
                     </ion-row>
                     <ion-row responsive-sm class="entry-bottom">

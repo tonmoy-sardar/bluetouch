@@ -1,26 +1,33 @@
-<ion-header>
-    <ion-navbar hideBackButton="{{hideBackButton}}">
+<ion-header *ngIf="!isHeaderHidden">
+     <ion-navbar hideBackButton="{{hideBackButton}}">
         <ion-buttons left>
             <button ion-button menuToggle color="light" *ngIf="hideBackButton">
                 <ion-icon name="menu"></ion-icon>
                 <ion-title></ion-title>
             </button>
-
+            
         </ion-buttons>
+    
+        <ion-icon *ngIf="!hideBackButton"  ios="ios-arrow-round-back" md="md-arrow-round-back" (click)="goBack()"></ion-icon>
+
         <ion-title></ion-title>
 
         <ion-buttons right>
-            <button ion-button icon-only (click)="gotoPage('ProfilePage')">
+            <button *ngIf="isLoggedin !=true" ion-button icon-only (click)="gotoPage('LoginPage')">
+                <ion-icon ios="ios-person-outline" md="md-person"></ion-icon>
+            </button>
+            <button *ngIf="isLoggedin ==true" ion-button icon-only (click)="gotoPage('ProfilePage')">
                 <ion-icon ios="ios-person-outline" md="md-person"></ion-icon>
             </button>
         </ion-buttons>
         <ion-buttons (click)="gotoPage('CartPage')" right>
             <button ion-button icon-only>
                 <ion-icon ios="ios-cart-outline" md="md-cart"></ion-icon>
-             <!-- <span class="total-cart">{{totalCart}}</span> -->
+          
              <span class='badge badge-warning' id='lblCartCount'> {{totalCart}} </span>
             </button></ion-buttons>
     </ion-navbar>
+
 </ion-header>
 
 
@@ -28,7 +35,7 @@
     <ion-content class="menu-nav">
         <ion-item class="profile-img">
 
-            <img src="assets/imgs/man.jpg" />
+            <img src="assets/imgs/no-image.png" />
 
             <h2>{{logged_first_name}} {{logged_last_name}}</h2>
             <span>{{logged_user_email}}</span>

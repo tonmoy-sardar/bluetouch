@@ -36,6 +36,7 @@ export class SearchPage {
     console.log('ionViewDidLoad SearchPage');
     this.menuCtrl.close();
     this.events1.publish('hideBackButton', false);
+    this.events1.publish('isHeaderHidden', false);
     this.rating = [1, 2, 3, 4, 5];
     this.searchKey =this.navParams.get('keyword');
     if (this.searchKey != 0) {
@@ -56,13 +57,10 @@ export class SearchPage {
       search: keywords,
     }
     let url = Globals.apiEndpoint + 'products/';
-    console.log("url", url);
-
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
     this.categoryService.getSearchProduct(orderUrl).subscribe(
       res => {
-        console.log("Search Product",res);
         this.product_list = res;
         this.visible_key = true;
       },
@@ -76,13 +74,10 @@ export class SearchPage {
     this.spinnerDialog.show();
     let params = {}
     let url = Globals.apiEndpoint + 'products/';
-    console.log("url", url);
-
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
-        console.log("All Product==>", res);
         this.product_list = res;
         this.visible_key = true;
         this.spinnerDialog.hide();

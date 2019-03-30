@@ -1,19 +1,23 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA,ModuleWithProviders } from '@angular/core';
-
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders } from '@angular/core';
 import { ApiProvider } from '../core/api/api';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as ionicGalleryModal from 'ionic-gallery-modal';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-
-
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 //import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import {FooterPage} from '../pages/include/footer/footer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FooterPage } from '../pages/include/footer/footer';
 import { IonicStepperModule } from 'ionic-stepper';
-//services
 
+//import { File } from '@ionic-native/file';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer} from '@ionic-native/transfer';
+import { Camera } from '@ionic-native/camera';
+
+
+//services
 import { UserService } from './services/user.service';
 import { WoocommerceService } from './services/woocommerce.service';
 import { CategoryService } from './services/category.service';
@@ -46,20 +50,24 @@ import { PaymentService } from './services/payment.service';
   providers: [
     ApiProvider,
     SpinnerDialog,
-    UserService,
-    WoocommerceService,
-    CategoryService,
-    CartService,
-    PaymentService,
+    File,
+    Transfer,
+    Camera,
+    FilePath,
+    // UserService,
+    // WoocommerceService,
+    // CategoryService,
+    // CartService,
+    // PaymentService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: ionicGalleryModal.GalleryModalHammerConfig,
     },
     FileTransfer,
     FileTransferObject,
-    
+
     //DocumentViewer,
-    
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -67,5 +75,16 @@ import { PaymentService } from './services/payment.service';
 
 // }
 export class CoreModule {
- 
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: CoreModule,
+      providers: [
+        UserService,
+        WoocommerceService,
+        CategoryService,
+        CartService,
+        PaymentService,
+      ]
+    }
+  }
 }

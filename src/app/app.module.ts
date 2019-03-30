@@ -18,6 +18,7 @@ import { AddressPage } from '../pages/address/address';
    // BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
+    CoreModule.forRoot(),
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

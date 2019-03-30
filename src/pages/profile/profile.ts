@@ -24,6 +24,8 @@ export class ProfilePage {
   logged_user_name:any;
   logged_user_contact_no:any
   logged_user_email:any;
+  isLoggedin:boolean;
+  totalCart:number;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -53,11 +55,45 @@ export class ProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
     this.events1.publish('hideBackButton', false);
-
+    this.events1.publish('isHeaderHidden', false);
   }
   
   gotoPage(routePage) {
     this.navCtrl.push(routePage);
+  }
+  gotoProductList(routePage) {
+    this.navCtrl.push(routePage,{id:''});
+  }
+
+  logOut() {
+    localStorage.clear();
+    this.isLoggedin = false;
+    this.loadUserInfo();
+    this.navCtrl.setRoot('LoginPage');
+  }
+
+  loadUserInfo() {
+    if (localStorage.getItem('isLoggedin')) {
+      this.isLoggedin = true;
+      this.logged_first_name = localStorage.getItem('logged_first_name');
+      this.logged_last_name = localStorage.getItem('logged_last_name');
+      this.logged_user_name = localStorage.getItem('logged_user_name');
+      this.logged_user_contact_no = localStorage.getItem('logged_user_contact_no');
+      this.logged_user_email = localStorage.getItem('logged_user_email');
+    }
+    else {
+      this.logged_first_name = '';
+      this.logged_last_name = '';
+      this.logged_user_name = '';
+      this.logged_user_contact_no = '';
+      this.logged_user_email ='';
+    }
+    if (localStorage.getItem("cart")) {
+      this.totalCart = JSON.parse(localStorage.getItem("cart")).length;
+    }
+    else {
+      this.totalCart = 0;
+    }
   }
 
 }

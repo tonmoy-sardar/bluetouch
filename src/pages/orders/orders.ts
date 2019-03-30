@@ -37,6 +37,7 @@ export class OrdersPage {
     console.log('ionViewDidLoad OrdersPage');
     this.menuCtrl.close();
     this.events1.publish('hideBackButton', false);
+    this.events1.publish('isHeaderHidden', false);
     if (localStorage.getItem('isLoggedin')) {
       this.userId =  localStorage.getItem('logged_user_id');
     }
@@ -53,7 +54,6 @@ export class OrdersPage {
     this.paymentService.getCustomerOrderList(orderUrl).subscribe(
         res => {
             this.order_list = res;
-            console.log("order History ==>",this.order_list);
             this.visible_key = true
             this.spinnerDialog.hide();
         },

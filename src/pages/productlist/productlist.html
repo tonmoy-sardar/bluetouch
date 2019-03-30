@@ -22,10 +22,8 @@
                 <ion-col col-2> <button (click)="searchProduct(searchKeywords)" ion-button>
                         <ion-icon name="search"></ion-icon>
                     </button></ion-col>
-                <ion-col col-2>
-
-                    <!-- <button ion-button> <ion-icon name="funnel"></ion-icon></button>-->
-                    <ion-list>
+                <!-- <ion-col col-2>
+                     <ion-list>
                         <ion-item>
                             <ion-label>
                                 Filter
@@ -40,7 +38,7 @@
                             </ion-select>
                         </ion-item>
                     </ion-list>
-                </ion-col>
+                </ion-col> -->
 
 
             </ion-row>
@@ -75,17 +73,20 @@
                             </ion-card-title>
                             <hr>
                             <ion-row>
-                                <ion-col col-6>
+                                <ion-col col-12>
                                     <span class="price">
                                         <i class="fa fa-rupee"></i>{{product.price}}
                                         <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
                                     </span>
                                 </ion-col>
-                                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index"
-                                        [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                <!-- <ion-col col-6 style="text-align: right;"> 
+                                    
+                                    <span class="rating active" *ngFor="let rat of rating; let i = index"
+                                    [ngClass]="[i <= product.average_rating - 1 ? 'active' : '']" style="margin-right: 2px;">
                                         <ion-icon name="star"></ion-icon>
-                                    </span></ion-col>
+                                    </span></ion-col> -->
                             </ion-row>
+                            
                         </ion-card-content>
                     </ion-card>
                 </ion-col>

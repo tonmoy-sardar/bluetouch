@@ -31,29 +31,33 @@
               <span class="editbutton" (click)="openEditModal()">EDIT</span>
           </ion-col>
         </ion-row>           -->
-        <ion-list radio-group>
+        <!-- <ion-list radio-group>
         
-          <ion-item>
-            <ion-label>Sector V , Kolkata - 36</ion-label>
-            <ion-radio checked="true" value="go"></ion-radio>
+          <ion-item *ngFor="let address of address_list; let i = index">
+            <ion-label>{{address.shipping_first_name}} {{address.shipping_last_name}}
+              {{address.shipping_address_1}} {{address.shipping_address_2}}
+              {{address.shipping_city}} {{address.shipping_state}}
+              {{address.shipping_postcode}} {{address.shipping_country}}
+            </ion-label>
+            <ion-radio value="address"></ion-radio>
           </ion-item>
-        
-          <ion-item>
-            <ion-label>Shyam Tower, Near Webel More , Sector V , Kolkata - 33, India</ion-label>
-            <ion-radio value="rust"></ion-radio>
-          </ion-item>
-        
-  
+        </ion-list> -->
+        <ion-row *ngIf="address_list.length == 0">No Address available.</ion-row>
+        <ion-list radio-group [(ngModel)]="addressoption">
+            <ion-item *ngFor="let address of address_list">
+              <ion-label>
+                  <ion-col col-6>
+                    <div class="typetitle">{{address.label}}</div>
+                    {{address.shipping_address_1}} {{address.shipping_address_2}}
+                    {{address.shipping_city}} {{address.shipping_state}}
+                    {{address.shipping_postcode}} {{address.shipping_country}}         
+                  </ion-col>
+          
+              </ion-label>
+              <ion-radio [value]="address" (ionSelect)="getselectedAddress(address)"></ion-radio>
+            </ion-item>
         </ion-list>
-        <!-- <ion-row>
-          <ion-col col-6>
-              Jamie Wilson B- 504, Powai, Mumbai, MH
-          </ion-col>
-          <ion-col col-4 text-right>
-              <button class="editbutton">EDIT</button>
-          </ion-col>
-        </ion-row> -->
-        <button ion-button small ionicStepperNext>Continue to Confirmation</button>          
+        <button ion-button small ionicStepperNext  [disabled]="addressoption == ''">Continue to Confirmation</button>          
       <!-- <button ion-button color="light" small ionicStepperPrevious>Previous</button>
       <button ion-button small ionicStepperNext>Next</button> -->
     </ion-step>

@@ -37,6 +37,7 @@ export class ProductlistPage {
     console.log('ionViewDidLoad ProductlistPage');
     this.menuCtrl.close();
     this.events1.publish('hideBackButton', false);
+    this.events1.publish('isHeaderHidden', false);
     this.rating = [1, 2, 3, 4, 5];
     this.catId = this.navParams.get('id');
     if (this.catId != "") {
@@ -48,15 +49,12 @@ export class ProductlistPage {
 
   }
 
-
   getProduct(category_id) {
     this.spinnerDialog.show();
     let params = {
       category: category_id,
     }
     let url = Globals.apiEndpoint + 'products/';
-    console.log("url", url);
-
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
     this.categoryService.getCategoryList(orderUrl).subscribe(
@@ -64,9 +62,11 @@ export class ProductlistPage {
         console.log(res);
         this.product_list = res;
         this.visible_key = true;
+        this.spinnerDialog.hide();
       },
       error => {
         this.visible_key = true;
+        this.spinnerDialog.hide();
       }
     )
   }
@@ -75,13 +75,10 @@ export class ProductlistPage {
     this.spinnerDialog.show();
     let params = {}
     let url = Globals.apiEndpoint + 'products/';
-    console.log("url", url);
-
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
-        console.log("All Product==>", res);
         this.product_list = res;
         this.visible_key = true;
         this.spinnerDialog.hide();
@@ -95,7 +92,7 @@ export class ProductlistPage {
 
 
   getSortedProductList(order_by,meta_key) {
-   // this.loader.show(this.lodaing_options);
+    this.spinnerDialog.show();
     var params;
     if(this.catId !="") {
       params = {
@@ -111,13 +108,11 @@ export class ProductlistPage {
     }
       
     }
-    console.log("Params ====>",params);
     let url = Globals.apiEndpoint + 'products';
     let productUrl:string = this.woocommerceService.authenticateApi('GET',url,params);
 
     this.categoryService.getProductListByCategoryId(productUrl).subscribe(
         res => {
-          console.log("Sorting Product==>", res);
           this.product_list = res;
           this.visible_key = true;
           this.spinnerDialog.hide();

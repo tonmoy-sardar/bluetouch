@@ -22,7 +22,12 @@ ion-content>.scroll-content {
 }
 
 .back-button {
-    display: block;
+   // display: block;
+}
+
+.ion-md-arrow-round-back:before {
+    content: "\f288";
+    font-size: 25px;
 }
 
 ion-header {
@@ -45,6 +50,7 @@ ion-footer button i {
 
 ion-footer button {
     padding: 10px 11px 0px !important;
+    width:24%;
 }
 
 ion-footer button span {
@@ -52,7 +58,7 @@ ion-footer button span {
 }
 
 ion-footer span {
-    margin: 0px auto 6px !important;
+    margin: -5px auto 6px !important;
 }
 
 ion-footer {
@@ -76,6 +82,13 @@ ion-footer {
         color: #fb7775;
     }
     // background: #fff;
+}
+
+ion-footer .quantity button {
+    width:100%;
+}
+.buy-cart {
+    width:100%;
 }
 
 ion-row {
@@ -308,8 +321,8 @@ ion-row {
 }
 
 .dot {
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
@@ -335,6 +348,11 @@ ion-row {
     border-radius: 10px;
     font-size: 12px;
     margin-right: 10px;
+    display: inline-block;
+}
+
+.bradcumb .dot-size button {
+    background: none;
 }
 
 // Css for profile page 
@@ -494,7 +512,7 @@ p {
 
 .product-price ion-card {
     border-radius: 15px;
-    height: 285px;
+    height: 335px;
 }
 
 .product-price .rating {
@@ -634,6 +652,43 @@ p {
 
 .update-button {
     background: #e9520c;
+}
+
+  .quantity button {
+      width:25% !important;
+  }
+
+  .main-slider {
+    position: relative;
+  }
+  .skip-button {
+      position: absolute;
+      z-index:99;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width:100%;
+  }
+
+  p.forgot-desc {
+    text-align: center;
+    color: #fff;
+}
+.btn-wrapper {
+    text-align: center;
+}
+.btn-wrapper button {
+    width:50%;
+}
+
+span.dot-tick {
+    display: none;
+}
+span.dot-tick.active {
+    display: block;
+    padding: 10px;
+    font-size: 20px;
+    color: #000;
 }
 
 // / css end by kalyan /

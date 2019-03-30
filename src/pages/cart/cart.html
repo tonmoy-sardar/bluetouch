@@ -27,12 +27,12 @@
                 </ion-col>
                 <ion-col col-8>
                     <div class="cart-list">
-                        <p>{{item.product_name}}</p>
+                        <p>{{item.product_name}}, {{item.size}},{{item.color}}</p>
                         <span [innerHtml]="item.description"></span>
 
                         <button class="price-btn" ion-button>₹ {{item.price}} </button>
 
-                        <div class="quantity" style="padding-left: 5px;">
+                        <div class="cart-quantity" style="padding-left: 5px;">
                             <button class="quantity-btn" type="button" name="button" (click)="decrement(i)">
                                 <ion-icon name="remove"></ion-icon>
                             </button>

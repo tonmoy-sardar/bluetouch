@@ -9,7 +9,6 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
   cartNumberStatus(data): Observable<any> {
-    console.log(data)
     if (data) {
       this.getCartNumberStatus.emit(data);
       return

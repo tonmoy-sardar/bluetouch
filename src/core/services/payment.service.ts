@@ -15,8 +15,6 @@ export class PaymentService {
   constructor(private http: HttpClient) { }
 
   getCustomerAddressList(getAddressUrl,data):Observable<any> {
-    console.log(getAddressUrl);
-    console.log(data);
     return this.http.post(getAddressUrl, data)
   }
 
@@ -25,8 +23,6 @@ export class PaymentService {
   }
 
   addCustomerAddress(addAddressUrl,data): Observable<any> {
-    console.log(addAddressUrl);
-    console.log(data);
     return this.http.post(addAddressUrl, data)
   }
 
@@ -35,7 +31,6 @@ export class PaymentService {
   }
 
   createOrder(orderAddUrl,data) {
-    console.log(data);
     return this.http.post(orderAddUrl, data)
   }
 
@@ -109,6 +104,8 @@ export class OrderModule {
 export class line_items {
   product_id: number;
   quantity: string;
+  size:string;
+  variation_id:number;
 }
 
 export class coupon_lines{

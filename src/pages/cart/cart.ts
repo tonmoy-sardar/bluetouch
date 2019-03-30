@@ -21,7 +21,7 @@ export class CartPage {
   total_item_price: number;
   isLoggedin: boolean;
   visible_key: boolean;
-  userId
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -31,30 +31,31 @@ export class CartPage {
     public cartService:CartService
   ) {
     if (localStorage.getItem('isLoggedin')) {
-      this.userId = localStorage.getItem('logged_user_id');
+      this.logged_user_id = localStorage.getItem('logged_user_id');
       this.isLoggedin = true;
     }
     else {
-      this.userId = '';
+      this.logged_user_id = '';
       this.isLoggedin = false;
     }
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CartPage');
     this.menuCtrl.close();
     this.events1.publish('hideBackButton', false);
+    this.events1.publish('isHeaderHidden', false);
     this.populateData();
   }
 
   populateData() {
-    //  this.loader.show(this.lodaing_options);
+
     if (localStorage.getItem("cart")) {
       this.all_cart_data = JSON.parse(localStorage.getItem("cart"));
       // this.customer_cart_data = this.all_cart_data;
       var filteredData = this.all_cart_data.filter(x => x.user_id == this.logged_user_id)
       this.customer_cart_data = filteredData;
+      console.log(this.customer_cart_data);
       this.getTotalItemPrice();
       this.visible_key = true
     }
@@ -62,13 +63,11 @@ export class CartPage {
       this.customer_cart_data = [];
       this.visible_key = true
     }
-    console.log(this.customer_cart_data);
   }
 
   setCartData() {
     localStorage.setItem("cart", JSON.stringify(this.customer_cart_data));    
     this.getTotalItemPrice();    
-    console.log("k233",this.customer_cart_data)
   }
 
   increment(i) {
@@ -122,13 +121,11 @@ export class CartPage {
           text: 'Remove',
           handler: () => {
             var index = this.all_cart_data.findIndex(x => x.user_id == this.logged_user_id && x.product_id == id);
-            console.log(index)
             if (index != -1) {
               this.all_cart_data.splice(index, 1);
               this.customer_cart_data.splice(index, 1);
               this.setCartData()
             }
-           console.log("kkkkkkkkkkkkkk123");
            this.cartService.cartNumberStatus(true);
           }
         }

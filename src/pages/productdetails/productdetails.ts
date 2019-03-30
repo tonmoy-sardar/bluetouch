@@ -29,6 +29,12 @@ export class ProductdetailsPage {
   product_details_img: any = [];
   package_name;
   visible_key: boolean;
+  selectedColor: any;
+  selectedSize: any;
+  color: any;
+  activeIndex: any;
+  selectedIndex: number;
+  product_variation: any = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -39,13 +45,23 @@ export class ProductdetailsPage {
     public woocommerceService: WoocommerceService,
     public cartService: CartService
   ) {
+    this.events1.publish('isHeaderHidden', false);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductdetailsPage');
     this.menuCtrl.close();
     this.events1.publish('hideBackButton', false);
+    this.events1.publish('isHeaderHidden', false);
     this.getProductDetails(this.navParams.get('id'))
+    this.getProductVariations(this.navParams.get('id'))
+
+    if (localStorage.getItem('isLoggedin')) {
+      this.logged_user_id = localStorage.getItem('logged_user_id');
+    }
+    else {
+      this.logged_user_id = '';
+    }
   }
   ionViewWillEnter() {
     if (localStorage.getItem("cart")) {
@@ -58,7 +74,7 @@ export class ProductdetailsPage {
     this.getProductDetails(this.navParams.get('id'))
   }
   getProductDetails(product_id) {
-    this.visible_key =false;
+    this.visible_key = false;
     this.spinnerDialog.show();
     let params = {
     }
@@ -67,7 +83,7 @@ export class ProductdetailsPage {
 
     this.categoryService.getProductDetails(productDeatilsUrl).subscribe(
       res => {
-      
+
         console.log("Pro Details ==>", res);
         this.product_details = res;
         this.product_details_img = this.product_details.images;
@@ -80,6 +96,8 @@ export class ProductdetailsPage {
           this.product_details['quantity'] = this.customer_cart_data[index].quantity
           this.product_details['price'] = parseFloat(this.product_details['price'])
           this.product_details['regular_price'] = parseFloat(this.product_details['regular_price'])
+
+
         }
         else {
           this.product_details['isCart'] = false;
@@ -96,7 +114,26 @@ export class ProductdetailsPage {
       },
       error => {
         this.spinnerDialog.hide();
-        
+
+      }
+    )
+  }
+
+  getProductVariations(product_id) {
+    let params = {
+    }
+    let url = Globals.apiEndpoint + 'products/' + product_id + '/variations';
+    let productDeatilsUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
+
+    this.categoryService.getProductDetails(productDeatilsUrl).subscribe(
+      res => {
+        console.log("Pro Variation ==>", res);
+        this.product_variation = res;
+        console.log(this.product_variation);
+      },
+      error => {
+        console.log(error);
+
       }
     )
   }
@@ -156,6 +193,7 @@ export class ProductdetailsPage {
         this.setBuyNowCartData();
       }
     }
+    this.cartService.cartNumberStatus(true);
 
   }
 
@@ -166,7 +204,6 @@ export class ProductdetailsPage {
   }
 
   addToCart(product_details) {
-    console.log(product_details.quantity);
     var data = {
       user_id: this.logged_user_id,
       product_id: product_details.id,
@@ -177,15 +214,26 @@ export class ProductdetailsPage {
       image_small: product_details.images[0].src,
       quantity: product_details.quantity + 1
     }
-    console.log(data);
+    //console.log(data);
     var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
     this.product_details['isCart'] = true;
     this.product_details['quantity'] = this.product_details['quantity'] + 1;
     if (index == -1) {
+
+      if (this.product_variation.length > 0) {
+        this.product_variation.forEach(y => {
+          if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
+            data['color'] = this.selectedColor;
+            data['size'] = this.selectedSize;
+            data['variation_id'] = y.id;
+          }
+        })
+
+      }
+      console.log(data);
       this.customer_cart_data.push(data);
       this.setCartData();
     }
-    console.log("kalyan222",this.customer_cart_data);
     this.cartService.cartNumberStatus(true);
   }
 
@@ -208,6 +256,7 @@ export class ProductdetailsPage {
       var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
       if (index != -1) {
         this.customer_cart_data.splice(index, 1);
+        console.log(this.customer_cart_data);
         this.setCartData();
       }
       this.product_details.isCart = false;
@@ -220,6 +269,7 @@ export class ProductdetailsPage {
     var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
     if (index != -1) {
       this.customer_cart_data[index].quantity = product_details.quantity + 1;
+      console.log(this.customer_cart_data);
       this.setCartData();
     }
     this.product_details.quantity = product_details.quantity + 1
@@ -230,6 +280,51 @@ export class ProductdetailsPage {
   }
   goBack() {
     this.navCtrl.pop();
+  }
+
+  selectColor(color, i) {
+    console.log("Select color==>", color);
+    this.selectedColor = color;
+    this.selectedIndex = i;
+
+    var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
+    if (index != -1) {
+        if (this.product_variation.length > 0) {
+          this.product_variation.forEach(y => {
+            if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
+              this.customer_cart_data[index].color = this.selectedColor;
+              this.customer_cart_data[index].size = this.selectedSize;
+              this.customer_cart_data[index].variation_id = y.id;
+            }
+  
+          })
+  
+        }
+        console.log(this.customer_cart_data);
+        this.setCartData();
+    } 
+  }
+  selectSize(size, i) {
+    console.log("Select size==>", size);
+    this.selectedSize = size;
+    this.activeIndex = i;
+    var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
+    if (index != -1) {
+        if (this.product_variation.length > 0) {
+          this.product_variation.forEach(y => {
+            if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
+              this.customer_cart_data[index].color = this.selectedColor;
+              this.customer_cart_data[index].size = this.selectedSize;
+              this.customer_cart_data[index].variation_id = y.id;
+            }
+  
+          })
+  
+        }
+        console.log(this.customer_cart_data);
+        this.setCartData();
+    } 
+
   }
 
 }
