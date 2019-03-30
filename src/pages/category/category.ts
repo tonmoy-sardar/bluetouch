@@ -76,7 +76,7 @@ export class CategoryPage {
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
-        
+        this.spinnerDialog.hide();
         this.categoryList = res['data'];
         console.log(this.categoryList);
         var subcat = []
@@ -101,6 +101,7 @@ export class CategoryPage {
        
       },
       error => {
+        this.spinnerDialog.hide();
         this.visible_key = true;
       }
     )

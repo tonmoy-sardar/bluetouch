@@ -39,9 +39,10 @@ export class SignupPage {
     this.signupForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      email: ['', [
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
-      ]],
+      email: ['', Validators.required],
+      // email: ['', [
+      //   Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
+      // ]],
       username: ['', [
         Validators.required,
         Validators.minLength(10),
