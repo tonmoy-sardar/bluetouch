@@ -44,12 +44,14 @@
     <ion-card>
       <h3 (click)="openAddModal()">Address  <i  class="fa fa-plus-square" aria-hidden="true"></i></h3>
 
-      <ion-list *ngFor="let address of address_list">
+      <ion-list *ngFor="let address of address_list | slice:1:100;">
           <ion-item >
               <ion-label>
                   <ion-row>
                   <ion-col col-10>
                     <div class="typetitle">{{address.label}}</div>
+                    <span>{{address.shipping_first_name}}{{address.shipping_last_name}}</span>
+                    <br>
                    <span>{{address.shipping_address_1}} {{address.shipping_address_2}}
                       {{address.shipping_city}} </span> 
                       <br>

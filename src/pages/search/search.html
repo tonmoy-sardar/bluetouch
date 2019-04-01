@@ -66,7 +66,9 @@
                     <ion-card (click)="gotoProDetails(product.id)">
                         <!-- <img class="cart-icon-image" src="assets/imgs/icon-cart.png" /> -->
                         <!-- <img class="product-image" src="assets/imgs/img1.png" /> -->
-                        <img class="product-image" [src]="product.images[0].src" />
+                        <!-- <img class="product-image" [src]="product.images[0].src" /> -->
+                        <img *ngIf="product.images.length >0 " class="product-image" [src]="product.images[0].src" />
+                        <img *ngIf="product.images.length ==0 " class="product-image" src="assets/imgs/no-image.png" />
                         <ion-card-content>
                             <ion-card-title>
                                 {{product.name}}

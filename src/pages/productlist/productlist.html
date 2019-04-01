@@ -19,9 +19,16 @@
                 <ion-col col-8>
                     <ion-searchbar [(ngModel)]="searchKeywords"></ion-searchbar>
                 </ion-col>
-                <ion-col col-2> <button (click)="searchProduct(searchKeywords)" ion-button>
+                <ion-col col-2> 
+                    <button (click)="searchProduct(searchKeywords)" ion-button>
                         <ion-icon name="search"></ion-icon>
-                    </button></ion-col>
+                    </button>
+                </ion-col>
+                <ion-col col-2 >
+                        <button (click)="filterProductModal()" ion-button>
+                        <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon>
+                        </button>
+                </ion-col>
                 <!-- <ion-col col-2>
                      <ion-list>
                         <ion-item>

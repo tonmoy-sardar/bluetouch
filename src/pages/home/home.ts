@@ -108,6 +108,7 @@ export class HomePage {
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
         this.all_product_list = res;
+        console.log("New Arraival==>",res);
         this.visible_key = true;
         this.spinnerDialog.hide();
       },

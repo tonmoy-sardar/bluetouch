@@ -61,14 +61,14 @@ export class ProfileeditPage {
       this.editProfileForm = this.formBuilder.group({
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
-        email: ['', [
-          Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
-        ]],
-        username: ['', [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(10)
-        ]],
+        // email: ['', [
+        //   Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
+        // ]],
+        // username: ['', [
+        //   Validators.required,
+        //   Validators.minLength(10),
+        //   Validators.maxLength(10)
+        // ]],
       });
   }
 
@@ -104,11 +104,11 @@ export class ProfileeditPage {
     if (this.editProfileForm.valid) {
       this.spinnerDialog.show();
       var signUpData = {
-        email: this.editProfileForm.value.email,
+       // email: this.editProfileForm.value.email,
        // password: this.editProfileForm.value.password,
         first_name: this.editProfileForm.value.first_name,
         last_name: this.editProfileForm.value.last_name,
-        username: this.editProfileForm.value.username,
+       // username: this.editProfileForm.value.username,
         billing: {
           first_name: this.editProfileForm.value.first_name,
           last_name: this.editProfileForm.value.last_name,
@@ -119,8 +119,8 @@ export class ProfileeditPage {
           state: "",
           postcode: "",
           country: "",
-          email: this.editProfileForm.value.email,
-          phone: this.editProfileForm.value.username,
+         // email: this.editProfileForm.value.email,
+        //  phone: this.editProfileForm.value.username,
         },
         shipping: {
           first_name: this.editProfileForm.value.first_name,
@@ -150,11 +150,13 @@ export class ProfileeditPage {
           this.presentToast("Succesfully Updated");
           //this.navCtrl.setRoot('ProfilePage');
           this.userDetails();
+          this.userService.loginStatus(true);
         },
         error => {
           console.log(error);
           this.spinnerDialog.hide();
           this.presentToast("Error in update profile");
+
 
         }
       )

@@ -155,4 +155,8 @@ export class CartPage {
     }
   }
 
+  gotoProDetails(id) {
+    this.navCtrl.push('ProductdetailsPage', { id: id });
+  }
+
 }

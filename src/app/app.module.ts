@@ -9,10 +9,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // core module
 import { CoreModule } from '../../src/core/core.module';
 import { AddressPage } from '../pages/address/address';
+import { FooterPage } from '../pages/include/footer/footer';
+import { FilterPage } from '../pages/filter/filter';
 @NgModule({
   declarations: [
     MyApp,
-    AddressPage
+    AddressPage,
+    FilterPage
   ],
   imports: [
    // BrowserModule,
@@ -24,7 +27,8 @@ import { AddressPage } from '../pages/address/address';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AddressPage
+    AddressPage,
+    FilterPage
   ],
   providers: [
     StatusBar,

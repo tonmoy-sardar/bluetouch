@@ -40,7 +40,13 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       //this.rootPage = '';
       statusBar.styleLightContent();
-      this.nav.setRoot('HomePage');
+      if (localStorage.getItem('isLoggedin')) {
+        this.nav.setRoot('HomePage');
+      }
+      else {
+        this.nav.setRoot('LoginPage');
+      }
+     
       //this.nav.setRoot('IntroPage');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -144,6 +150,10 @@ export class MyApp {
 
   gotoPage(routePage) {
     this.nav.push(routePage);
+  }
+
+  gotoCmsPage(routePage,id) {
+    this.nav.push(routePage, { id:id });
   }
 
   gotoProductList(routePage) {

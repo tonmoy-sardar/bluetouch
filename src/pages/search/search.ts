@@ -79,6 +79,7 @@ export class SearchPage {
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
         this.product_list = res;
+        console.log("aaaaaaa",res);
         this.visible_key = true;
         this.spinnerDialog.hide();
       },

@@ -23,8 +23,10 @@
           </ion-avatar>
           <h2 class="avatar-title">{{logged_first_name}} {{logged_last_name}}</h2>
           <p>{{logged_user_email}}</p>
-          <button ion-button color="light" round (click)="gotoPage('ProfileeditPage')">EDIT PROFILE</button>
-          <button ion-button color="light" round (click)="gotoPage('ProfileviewPage')">View PROFILE</button>
+          <button ion-button color="light" *ngIf="isLoggedin ==true" round (click)="gotoPage('ProfileeditPage')">EDIT PROFILE</button>
+          <button ion-button color="light" *ngIf="isLoggedin ==true" round (click)="gotoPage('ProfileviewPage')">View PROFILE</button>
+          <button ion-button color="light" *ngIf="isLoggedin !=true" round (click)="gotoPage('LoginPage')">EDIT PROFILE</button>
+          <button ion-button color="light" *ngIf="isLoggedin !=true" round (click)="gotoPage('LoginPage')">View PROFILE</button>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -83,7 +85,7 @@
           <i class="fa fa-chevron-circle-right icon-rightside" aria-hidden="true"></i></button>
       </ion-list>
       <ion-list>
-        <button ion-item (click)="gotoPage('OrdersPage')">
+        <button *ngIf="isLoggedin ==true" ion-item (click)="gotoPage('OrdersPage')">
           <ion-icon ios="ios-document" md="md-document"></ion-icon>
           <span> Order</span>
           <i class="fa fa-chevron-circle-right icon-rightside" aria-hidden="true"></i></button>

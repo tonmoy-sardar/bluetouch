@@ -32,7 +32,7 @@
                 </ion-col>
               
                 <ion-col col-8>
-                    <p *ngFor="let subcat of subCatList  let i=index">
+                    <!-- <p *ngFor="let subcat of subCatList  let i=index">
                        
                       <span *ngIf="subcat.child.length == 0" (click)="gotoProList(subcat.category_id)">{{subcat.category_name}}</span>  
                       <span *ngIf="subcat.child.length != 0" (click)="showSubCatt(subcat.category_id)">{{subcat.category_name}}</span>  
@@ -45,7 +45,30 @@
                             </ion-item>
                         </ion-list>
 
-                    </ion-card>
+                    </ion-card> -->
+                    <ion-list>
+                            <ion-item *ngFor="let subcat of subCatList" text-wrap>
+                                 <span (click)="gotoProList(subcat.category_id)" style="font-weight:bold"> {{subcat.category_name}}</span>  
+                              <ion-list>
+                                <ion-item *ngFor="let s of subcat.child" text-wrap>
+                                   
+                                    <span *ngIf="s.child.length == 0" (click)="gotoProList(s.category_id)"> {{s.category_name}}
+                                            <ion-icon name="arrow-dropright-circle"></ion-icon>
+                                    </span>  
+                                    
+                                  <ion-list>
+                                    <ion-item *ngFor="let m of s.child" text-wrap>
+                                            <span *ngIf="s.child.length == 0" (click)="gotoProList(m.category_id)">  {{m.category_name}}
+                                                    <ion-icon name="arrow-dropright-circle"></ion-icon>
+                                            </span>  
+                                            
+                                     
+                                    </ion-item>
+                                  </ion-list>
+                                </ion-item>
+                              </ion-list>
+                            </ion-item>
+                          </ion-list>
                 </ion-col>
 
             </ion-row>

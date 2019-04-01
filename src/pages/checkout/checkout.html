@@ -44,7 +44,7 @@
         </ion-list> -->
         <ion-row *ngIf="address_list.length == 0">No Address available.</ion-row>
         <ion-list radio-group [(ngModel)]="addressoption">
-            <ion-item *ngFor="let address of address_list">
+            <ion-item *ngFor="let address of address_list | slice:1:100;">
               <ion-label>
                   <ion-col col-6>
                     <div class="typetitle">{{address.label}}</div>

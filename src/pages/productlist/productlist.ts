@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events,ModalController } from 'ionic-angular';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { CategoryService } from '../../core/services/category.service';
 import { WoocommerceService } from "../../core/services/woocommerce.service";
 import * as Globals from '../../core/global';
+import { FilterPage } from '../filter/filter';
 /**
  * Generated class for the HomePage page.
  *
@@ -29,7 +30,8 @@ export class ProductlistPage {
     private spinnerDialog: SpinnerDialog,
     public categoryService: CategoryService,
     public woocommerceService: WoocommerceService,
-    public events1: Events
+    public events1: Events,
+    public modalCtrl: ModalController,
   ) {
   }
 
@@ -134,5 +136,17 @@ export class ProductlistPage {
   goBack() {
     this.navCtrl.pop();
   }
+
+  public filterProductModal(address){
+    var data = { type : 'edit',addressData:address };
+    var modalPage = this.modalCtrl.create(FilterPage,data);
+    modalPage.onDidDismiss(() => {
+      // Call the method to do whatever in your home.ts
+      console.log('Modal closed');
+    });
+    modalPage.present();
+  } 
+
+ 
 
 }

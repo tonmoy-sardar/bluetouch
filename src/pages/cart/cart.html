@@ -20,7 +20,7 @@
         <ion-grid *ngIf="customer_cart_data.length > 0">
             <ion-row *ngFor="let item of customer_cart_data; let i = index">
                 <ion-col col-4>
-                    <div class="product-image">
+                    <div (click)="gotoProDetails(item.product_id)" class="product-image">
                         <!-- <img src="assets/imgs/img1.png"> -->
                         <img [src]="item.image_small" />
                     </div>

@@ -29,7 +29,8 @@
         <ion-slides loop slidesPerView="1.2">
             <ion-slide (click)="gotoProDetails(allProduct.id)" *ngFor="let allProduct of all_product_list | slice:0:10; let i=index">
                 <!-- <img src="assets/imgs/slider-banner.png" /> -->
-                <img [src]="allProduct.images[0].src" />
+                <img *ngIf="allProduct.images.length >0 " [src]="allProduct.images[0].src" />
+                <img *ngIf="allProduct.images.length ==0 " src="assets/imgs/no-image.png" />
 
             </ion-slide>
             <!-- <ion-slide>

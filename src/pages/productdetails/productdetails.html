@@ -22,7 +22,7 @@
       <ion-slides pager loop slidesPerView="1">
 
         <ion-slide *ngFor="let proImage of product_details_img let i=index">
-          <img [src]="proImage.src" class="slide-image" />
+          <img (click)="openModal(i)" [src]="proImage.src" class="slide-image" />
         </ion-slide>
         <!-- <ion-slide>
           <img src="assets/imgs/Banner1.png" />

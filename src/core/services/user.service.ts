@@ -47,6 +47,10 @@ export class UserService {
     return this.http.post(uploadUserImageUrl, data)
   }
 
+  getCmsDetails(cmsDeatilsUrl): Observable<any> {
+    return this.http.get(cmsDeatilsUrl)
+  }
+
   // updatemyProfile(id,profileImage,data): Observable<any> {
     
   //   // return this.http.post(environment.apiEndpoint + 'userprofileupdate/'+id, data)

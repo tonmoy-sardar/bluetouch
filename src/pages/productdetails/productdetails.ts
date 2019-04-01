@@ -5,6 +5,8 @@ import { CategoryService } from '../../core/services/category.service';
 import { WoocommerceService } from "../../core/services/woocommerce.service";
 import * as Globals from '../../core/global';
 import { CartService } from "../../core/services/cart.service";
+import { ModalController } from 'ionic-angular';
+import { GalleryModal } from 'ionic-gallery-modal';
 /**
  * Generated class for the HomePage page.
  *
@@ -35,6 +37,7 @@ export class ProductdetailsPage {
   activeIndex: any;
   selectedIndex: number;
   product_variation: any = [];
+  proImageList:any =[];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -43,7 +46,8 @@ export class ProductdetailsPage {
     private spinnerDialog: SpinnerDialog,
     public categoryService: CategoryService,
     public woocommerceService: WoocommerceService,
-    public cartService: CartService
+    public cartService: CartService,
+    private modalCtrl: ModalController,
   ) {
     this.events1.publish('isHeaderHidden', false);
   }
@@ -88,6 +92,11 @@ export class ProductdetailsPage {
         this.product_details = res;
         this.product_details_img = this.product_details.images;
         console.log(this.product_details_img);
+
+        res.images.forEach(x => {
+          this.proImageList.push({url: x.src})
+         })      
+         console.log(this.proImageList);
 
         var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
 
@@ -148,13 +157,13 @@ export class ProductdetailsPage {
       image_small: product_details.images[0].src,
     }
     var index = this.recently_view_product.findIndex(y => y.product_id == product_details.id);
-
     if (index == -1) {
       console.log(data);
       this.recently_view_product.push(data);
       console.log("Recently View Product==>", this.recently_view_product);
       this.setRecentlyViewdProduct();
     }
+  
   }
 
   setRecentlyViewdProduct() {
@@ -232,6 +241,7 @@ export class ProductdetailsPage {
       }
       console.log(data);
       this.customer_cart_data.push(data);
+      console.log("Pro details Cart==>",this.customer_cart_data);
       this.setCartData();
     }
     this.cartService.cartNumberStatus(true);
@@ -325,6 +335,15 @@ export class ProductdetailsPage {
         this.setCartData();
     } 
 
+  }
+
+  openModal(index) {
+    console.log(index);
+    let modal = this.modalCtrl.create(GalleryModal, {
+      photos: this.proImageList,
+      initialSlide: index, // The second image
+    });
+    modal.present();
   }
 
 }

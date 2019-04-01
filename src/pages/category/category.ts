@@ -78,7 +78,7 @@ export class CategoryPage {
       res => {
         this.spinnerDialog.hide();
         this.categoryList = res['data'];
-        console.log(this.categoryList);
+        console.log("Main Category List==>",this.categoryList);
         var subcat = []
         console.log(this.categoryList);
         this.visible_key = true;

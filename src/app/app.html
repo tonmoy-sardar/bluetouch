@@ -1,14 +1,15 @@
 <ion-header *ngIf="!isHeaderHidden">
-     <ion-navbar hideBackButton="{{hideBackButton}}">
+    <ion-navbar hideBackButton="{{hideBackButton}}">
         <ion-buttons left>
             <button ion-button menuToggle color="light" *ngIf="hideBackButton">
                 <ion-icon name="menu"></ion-icon>
                 <ion-title></ion-title>
             </button>
-            
+
         </ion-buttons>
-    
-        <ion-icon *ngIf="!hideBackButton"  ios="ios-arrow-round-back" md="md-arrow-round-back" (click)="goBack()"></ion-icon>
+
+        <ion-icon *ngIf="!hideBackButton" ios="ios-arrow-round-back" md="md-arrow-round-back" (click)="goBack()">
+        </ion-icon>
 
         <ion-title></ion-title>
 
@@ -23,8 +24,8 @@
         <ion-buttons (click)="gotoPage('CartPage')" right>
             <button ion-button icon-only>
                 <ion-icon ios="ios-cart-outline" md="md-cart"></ion-icon>
-          
-             <span class='badge badge-warning' id='lblCartCount'> {{totalCart}} </span>
+
+                <span class='badge badge-warning' id='lblCartCount'> {{totalCart}} </span>
             </button></ion-buttons>
     </ion-navbar>
 
@@ -61,9 +62,25 @@
             <ion-icon name="cart"></ion-icon>
             Cart
         </ion-item>
-        <ion-item (click)="gotoPage('OrdersPage')" *ngIf="isLoggedin ==true">
-            <ion-icon ios="ios-document" md="md-document"></ion-icon>
-            Order
+        <ion-item (click)="gotoPage('OrdersPage',317)" *ngIf="isLoggedin ==true">
+         <ion-icon name="paper"></ion-icon>
+            Help
+        </ion-item>
+        <ion-item (click)="gotoCmsPage('CmsPage',298)">
+                <ion-icon name="paper"></ion-icon>
+            About Us
+        </ion-item>
+        <ion-item (click)="gotoPage('ContactPage')" >
+                <ion-icon ios="ios-call" md="md-call"></ion-icon>
+            Contact us
+        </ion-item>
+        <ion-item (click)="gotoCmsPage('CmsPage',300)">
+                <ion-icon name="paper"></ion-icon>
+            Terms & Condition
+        </ion-item>
+        <ion-item (click)="gotoCmsPage('CmsPage',302)">
+                <ion-icon name="paper"></ion-icon>
+            Privacy Policy
         </ion-item>
         <ion-item (click)="gotoPage('LoginPage')" *ngIf="isLoggedin !=true">
             <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
@@ -71,7 +88,7 @@
         </ion-item>
         <ion-item (click)="logOut()" *ngIf="isLoggedin ==true">
             <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
-           Logout
+            Logout
         </ion-item>
     </ion-content>
 </ion-menu>
