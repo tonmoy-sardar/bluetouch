@@ -41,12 +41,17 @@ export class SearchPage {
     this.events1.publish('isHeaderHidden', false);
     this.rating = [1, 2, 3, 4, 5];
     this.searchKey =this.navParams.get('keyword');
-    if (this.searchKey != 0) {
-      this.searchProduct(this.navParams.get('keyword'));
-    }
-    else {
-      this.getAllProduct();
-    }
+
+
+      if (this.searchKey != 0) {
+        this.searchProduct(this.navParams.get('keyword'));
+      }
+      else {
+        this.getAllProduct();
+      }
+ 
+ 
+   
 
   }
 
@@ -110,5 +115,6 @@ export class SearchPage {
     modalPage.present();
   } 
 
+ 
 
 }

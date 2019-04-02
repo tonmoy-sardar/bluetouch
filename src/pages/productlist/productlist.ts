@@ -20,9 +20,11 @@ import { FilterPage } from '../filter/filter';
 export class ProductlistPage {
   rating;
   product_list: any = [];
+  FilterResult:number;
   visible_key: boolean=false;
   catId: any;
   filterUrl:any;
+  filterData:any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,6 +35,7 @@ export class ProductlistPage {
     public events1: Events,
     public modalCtrl: ModalController,
   ) {
+    
   }
 
   ionViewDidLoad() {
@@ -42,12 +45,20 @@ export class ProductlistPage {
     this.events1.publish('isHeaderHidden', false);
     this.rating = [1, 2, 3, 4, 5];
     this.catId = this.navParams.get('id');
-    if (this.catId != "") {
-      this.getProduct(this.navParams.get('id'));
+    this.filterData = this.navParams.get('filterData');
+
+    if(this.filterData == undefined) {
+      if (this.catId != "") {
+        this.getProduct(this.navParams.get('id'));
+      }
+      else {
+        this.getAllProduct();
+      }
     }
     else {
-      this.getAllProduct();
+      this.getFilterProductList(this.filterData);
     }
+   
 
   }
 
@@ -61,6 +72,7 @@ export class ProductlistPage {
 
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
+        this.FilterResult=0;
         console.log(res);
         this.product_list = res;
         this.visible_key = true;
@@ -81,6 +93,7 @@ export class ProductlistPage {
 
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
+        this.FilterResult=0;
         this.product_list = res;
         this.visible_key = true;
         this.spinnerDialog.hide();
@@ -146,6 +159,33 @@ export class ProductlistPage {
     });
     modalPage.present();
   } 
+
+
+  getFilterProductList(filterData) {
+    this.spinnerDialog.show();
+    let params = { }
+    var filData = {
+      "product_attribute": filterData
+    }
+
+    let url = Globals.apiEndpoint + 'product_filter_attribute_wise';
+    let filterUrl: string = this.woocommerceService.authenticateApi('POST', url, params);
+
+    this.categoryService.getFilterProduct(filterUrl,filData).subscribe(
+      res => {
+        this.FilterResult =1;
+        this.product_list = res['data'];
+        console.log("Filter Data",res['data']);
+        this.visible_key = true;
+        this.spinnerDialog.hide();
+      },
+      error => {
+        this.visible_key = true;
+        this.spinnerDialog.hide();
+      }
+    )
+  }
+
 
  
 

@@ -60,6 +60,8 @@ export class CategoryService {
   getattributesList(attributesUrl): Observable<any> {
     return this.http.get(attributesUrl)
   }
-  
-  
+
+  getFilterProduct(filterUrl,data): Observable<any> {
+    return this.http.post(filterUrl,data)
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { WoocommerceService } from "../../core/services/woocommerce.service";
 import * as Globals from '../../core/global';
@@ -21,8 +21,10 @@ export class FilterPage {
   product_variation: any = [];
   listAttributes: any = [];
   listAttributesValue: any = [];
-  allAttributeList:any=[];
-  selectedValue:any=[];
+  allAttributeList: any = [];
+  selectedValue: any = [];
+  sendList: any = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -73,7 +75,7 @@ export class FilterPage {
       res => {
         console.log(res);
         this.listAttributes = res;
-        this.allAttributeList=[];
+        this.allAttributeList = [];
         this.listAttributes.forEach(x => {
           console.log(x.id);
           // this.getAttributeValue(x.id)
@@ -90,12 +92,12 @@ export class FilterPage {
               this.listAttributesValue = res;
               this.allAttributeList.push(
                 {
-                  "name":x.name,
-                  "pa_name":x.slug,
-                  "list":this.listAttributesValue
+                  "name": x.name,
+                  "pa_name": x.slug,
+                  "list": this.listAttributesValue
                 }
               );
-              
+
 
             },
             error => {
@@ -103,7 +105,7 @@ export class FilterPage {
             }
           )
         });
-        console.log("zzzz==>",this.allAttributeList);
+        console.log("zzzz==>", this.allAttributeList);
       },
       error => {
 
@@ -111,7 +113,7 @@ export class FilterPage {
     )
   }
 
-  selectMember(data){
+  selectMember(data) {
     console.log(data);
 
   }
@@ -119,10 +121,10 @@ export class FilterPage {
   getselectedValue(list) {
     this.selectedValue.push(
       {
-        "name":list.name
+        "name": list.name
       }
     );
-    console.log("Selected Value==>",this.selectedValue);
+    console.log("Selected Value==>", this.selectedValue);
   }
 
   // getCheckboxValues(ev, data) {
@@ -146,30 +148,46 @@ export class FilterPage {
   //   console.log(this.selectedValue);
   // }
 
-  getCheckboxValues(event, data,attributes) {
-    console.log(attributes);
-    // use findIndex method to find the index of checked or unchecked item
-    var index = this.selectedValue.findIndex(x => x.order==data);
+  getCheckboxValues(event, data, attributes) {
+    console.log(attributes, data);
+    var index = this.selectedValue.findIndex(x => x.filterList == data);
+    // If checked then push
+    if (event.checked == true) {
+      if (this.sendList.length > 0) {
+        this.sendList.forEach(element => {
+          console.log(element)
+          if (element.attribute === attributes.pa_name) {
+            element.term.push(data.name)
+          } else {
+            this.sendList.push({
+              "attribute": attributes.pa_name,
+              "term": [data.name]
+            });
+          }
+        });
 
-    // If checked then push 
-    if (event.checked ==true) {
-       let obj = {
-        "filterList": data
-    }
+      } else {
+        this.sendList.push({
+          "attribute": attributes.pa_name,
+          "term": [data.name]
+        });
+      }
+
+      console.log(this.sendList)
       // Pushing the object into array
-      this.selectedValue.push(obj);
+      // this.selectedValue.push(obj);
     }
     else {
       this.selectedValue.splice(index, 1);
+      this.sendList = [];
     }
-    //Duplicates the obj if we uncheck it
-    //How to remove the value from array if we uncheck it
-    console.log(this.selectedValue);
+    // console.log(this.selectedValue);
   }
 
-
-
-
-
+  getFilterProduct(data) {
+    console.log(data);
+    //var str = { "product_attribute": data }
+    this.navCtrl.push('ProductlistPage', { filterData: data });
+  }
 
 }

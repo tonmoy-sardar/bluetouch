@@ -39,8 +39,11 @@ export class UserService {
     return this.http.get(userDeatilsUrl)
   }
 
-  uploadUserImage(uploadUserImageUrl, data): Observable<any> {
-    return this.http.post(uploadUserImageUrl, data)
+  // uploadUserImage(uploadUserImageUrl, data): Observable<any> {
+  //   return this.http.post(uploadUserImageUrl, data)
+  // }
+  uploadUserImage(user_id,data): Observable<any> {
+    return this.http.post(Globals.apiEndpoint  +'customer_image_upload?user_id=' +user_id,data)
   }
 
   getCmsDetails(page_id): Observable<any> {

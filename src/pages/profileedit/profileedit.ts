@@ -277,12 +277,12 @@ export class ProfileeditPage {
     // File name only
     var filename = this.lastImage;
     var options = {
-      fileKey: "profile_image",
+      fileKey: "image",
       fileName: filename,
       image: filename,
       chunkedMode: false,
       mimeType: "multipart/form-data",
-      params: { 'fileName': filename }
+      params: { 'image': filename }
     };
     console.log(options);
 
@@ -292,10 +292,10 @@ export class ProfileeditPage {
     });
 
    
-    let url = Globals.apiEndpoint + 'customer_image_upload?user_id=' + this.userId;
-    let userDeatilsUrl: string = this.woocommerceService.authenticateApi('GET', url, options);
+    //let url = Globals.apiEndpoint + 'customer_image_upload?user_id=' + this.userId;
+    //let userDeatilsUrl: string = this.woocommerceService.authenticateApi('POST', url, options);
 
-    this.userService.uploadUserImage(userDeatilsUrl,'').subscribe(
+    this.userService.uploadUserImage(this.userId,options).subscribe(
       res => {
         this.user_details = res;
         this.visible_key =true;
