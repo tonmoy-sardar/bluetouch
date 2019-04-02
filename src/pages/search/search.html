@@ -66,7 +66,9 @@
                     <ion-card (click)="gotoProDetails(product.id)">
                         <!-- <img class="cart-icon-image" src="assets/imgs/icon-cart.png" /> -->
                         <!-- <img class="product-image" src="assets/imgs/img1.png" /> -->
-                        <img class="product-image" [src]="product.images[0].src" />
+                        <!-- <img class="product-image" [src]="product.images[0].src" /> -->
+                        <img *ngIf="product.images.length >0 " class="product-image" [src]="product.images[0].src" />
+                        <img *ngIf="product.images.length ==0 " class="product-image" src="assets/imgs/no-image.png" />
                         <ion-card-content>
                             <ion-card-title>
                                 {{product.name}}
@@ -95,24 +97,5 @@
 </ion-content>
 
 <ion-footer>
-    <!-- <ion-toolbar text-center="">
-        <ion-buttons>
-            <button ion-button>
-                <ion-icon name="home"></ion-icon>
-            </button>
-            <button ion-button>
-                <ion-icon ios="ios-search" md="md-search"></ion-icon>
-            </button>
-            <button ion-button>
-                <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
-            </button>
-            <button ion-button>
-                <ion-icon ios="ios-person" md="md-person"></ion-icon>
-            </button>
-            <button ion-button>
-                <ion-icon ios="ios-reorder" md="md-reorder"></ion-icon>
-            </button>
-        </ion-buttons>
-    </ion-toolbar> -->
     <page-footer></page-footer>
 </ion-footer>

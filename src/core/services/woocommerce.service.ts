@@ -21,6 +21,7 @@ export class WoocommerceService {
     }    
     this.currentTimestamp = Math.floor(new Date().getTime() / 1000);
 
+
     let authParam:object ={
         oauth_consumer_key : this.customer_key,
         oauth_nonce : this.nonce,
@@ -42,6 +43,7 @@ export class WoocommerceService {
         paramStr += '&'+key+'='+parameters[key];
     });
     return url+'?oauth_consumer_key='+this.customer_key+'&oauth_nonce='+this.nonce+'&oauth_signature_method=HMAC-SHA1&oauth_timestamp='+this.currentTimestamp+'&oauth_version=1.0'+paramStr+'&oauth_signature='+Base64.stringify(hmacSHA1(method+'&'+encodeURIComponent(url)+'&'+encodeURIComponent(signatureStr),this.customer_secret+'&'));
+
 
   }
 }

@@ -20,19 +20,19 @@
         <ion-grid *ngIf="customer_cart_data.length > 0">
             <ion-row *ngFor="let item of customer_cart_data; let i = index">
                 <ion-col col-4>
-                    <div class="product-image">
+                    <div (click)="gotoProDetails(item.product_id)" class="product-image">
                         <!-- <img src="assets/imgs/img1.png"> -->
                         <img [src]="item.image_small" />
                     </div>
                 </ion-col>
                 <ion-col col-8>
                     <div class="cart-list">
-                        <p>{{item.product_name}}</p>
+                        <p>{{item.product_name}}, {{item.size}},{{item.color}}</p>
                         <span [innerHtml]="item.description"></span>
 
                         <button class="price-btn" ion-button>₹ {{item.price}} </button>
 
-                        <div class="quantity" style="padding-left: 5px;">
+                        <div class="cart-quantity" style="padding-left: 5px;">
                             <button class="quantity-btn" type="button" name="button" (click)="decrement(i)">
                                 <ion-icon name="remove"></ion-icon>
                             </button>

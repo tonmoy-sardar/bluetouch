@@ -5,6 +5,8 @@ import { CategoryService } from '../../core/services/category.service';
 import { WoocommerceService } from "../../core/services/woocommerce.service";
 import * as Globals from '../../core/global';
 import { CartService } from "../../core/services/cart.service";
+import { ModalController } from 'ionic-angular';
+import { GalleryModal } from 'ionic-gallery-modal';
 /**
  * Generated class for the HomePage page.
  *
@@ -29,6 +31,13 @@ export class ProductdetailsPage {
   product_details_img: any = [];
   package_name;
   visible_key: boolean;
+  selectedColor: any;
+  selectedSize: any;
+  color: any;
+  activeIndex: any;
+  selectedIndex: number;
+  product_variation: any = [];
+  proImageList:any =[];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -37,15 +46,26 @@ export class ProductdetailsPage {
     private spinnerDialog: SpinnerDialog,
     public categoryService: CategoryService,
     public woocommerceService: WoocommerceService,
-    public cartService: CartService
+    public cartService: CartService,
+    private modalCtrl: ModalController,
   ) {
+    this.events1.publish('isHeaderHidden', false);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductdetailsPage');
     this.menuCtrl.close();
     this.events1.publish('hideBackButton', false);
+    this.events1.publish('isHeaderHidden', false);
     this.getProductDetails(this.navParams.get('id'))
+    this.getProductVariations(this.navParams.get('id'))
+
+    if (localStorage.getItem('isLoggedin')) {
+      this.logged_user_id = localStorage.getItem('logged_user_id');
+    }
+    else {
+      this.logged_user_id = '';
+    }
   }
   ionViewWillEnter() {
     if (localStorage.getItem("cart")) {
@@ -58,7 +78,7 @@ export class ProductdetailsPage {
     this.getProductDetails(this.navParams.get('id'))
   }
   getProductDetails(product_id) {
-    this.visible_key =false;
+    this.visible_key = false;
     this.spinnerDialog.show();
     let params = {
     }
@@ -67,11 +87,16 @@ export class ProductdetailsPage {
 
     this.categoryService.getProductDetails(productDeatilsUrl).subscribe(
       res => {
-      
+
         console.log("Pro Details ==>", res);
         this.product_details = res;
         this.product_details_img = this.product_details.images;
         console.log(this.product_details_img);
+
+        res.images.forEach(x => {
+          this.proImageList.push({url: x.src})
+         })      
+         console.log(this.proImageList);
 
         var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
 
@@ -80,6 +105,8 @@ export class ProductdetailsPage {
           this.product_details['quantity'] = this.customer_cart_data[index].quantity
           this.product_details['price'] = parseFloat(this.product_details['price'])
           this.product_details['regular_price'] = parseFloat(this.product_details['regular_price'])
+
+
         }
         else {
           this.product_details['isCart'] = false;
@@ -96,7 +123,26 @@ export class ProductdetailsPage {
       },
       error => {
         this.spinnerDialog.hide();
-        
+
+      }
+    )
+  }
+
+  getProductVariations(product_id) {
+    let params = {
+    }
+    let url = Globals.apiEndpoint + 'products/' + product_id + '/variations';
+    let productDeatilsUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
+
+    this.categoryService.getProductDetails(productDeatilsUrl).subscribe(
+      res => {
+        console.log("Pro Variation ==>", res);
+        this.product_variation = res;
+        console.log(this.product_variation);
+      },
+      error => {
+        console.log(error);
+
       }
     )
   }
@@ -111,13 +157,13 @@ export class ProductdetailsPage {
       image_small: product_details.images[0].src,
     }
     var index = this.recently_view_product.findIndex(y => y.product_id == product_details.id);
-
     if (index == -1) {
       console.log(data);
       this.recently_view_product.push(data);
       console.log("Recently View Product==>", this.recently_view_product);
       this.setRecentlyViewdProduct();
     }
+  
   }
 
   setRecentlyViewdProduct() {
@@ -156,6 +202,7 @@ export class ProductdetailsPage {
         this.setBuyNowCartData();
       }
     }
+    this.cartService.cartNumberStatus(true);
 
   }
 
@@ -166,7 +213,6 @@ export class ProductdetailsPage {
   }
 
   addToCart(product_details) {
-    console.log(product_details.quantity);
     var data = {
       user_id: this.logged_user_id,
       product_id: product_details.id,
@@ -177,15 +223,27 @@ export class ProductdetailsPage {
       image_small: product_details.images[0].src,
       quantity: product_details.quantity + 1
     }
-    console.log(data);
+    //console.log(data);
     var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
     this.product_details['isCart'] = true;
     this.product_details['quantity'] = this.product_details['quantity'] + 1;
     if (index == -1) {
+
+      if (this.product_variation.length > 0) {
+        this.product_variation.forEach(y => {
+          if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
+            data['color'] = this.selectedColor;
+            data['size'] = this.selectedSize;
+            data['variation_id'] = y.id;
+          }
+        })
+
+      }
+      console.log(data);
       this.customer_cart_data.push(data);
+      console.log("Pro details Cart==>",this.customer_cart_data);
       this.setCartData();
     }
-    console.log("kalyan222",this.customer_cart_data);
     this.cartService.cartNumberStatus(true);
   }
 
@@ -208,6 +266,7 @@ export class ProductdetailsPage {
       var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
       if (index != -1) {
         this.customer_cart_data.splice(index, 1);
+        console.log(this.customer_cart_data);
         this.setCartData();
       }
       this.product_details.isCart = false;
@@ -220,6 +279,7 @@ export class ProductdetailsPage {
     var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
     if (index != -1) {
       this.customer_cart_data[index].quantity = product_details.quantity + 1;
+      console.log(this.customer_cart_data);
       this.setCartData();
     }
     this.product_details.quantity = product_details.quantity + 1
@@ -230,6 +290,60 @@ export class ProductdetailsPage {
   }
   goBack() {
     this.navCtrl.pop();
+  }
+
+  selectColor(color, i) {
+    console.log("Select color==>", color);
+    this.selectedColor = color;
+    this.selectedIndex = i;
+
+    var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
+    if (index != -1) {
+        if (this.product_variation.length > 0) {
+          this.product_variation.forEach(y => {
+            if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
+              this.customer_cart_data[index].color = this.selectedColor;
+              this.customer_cart_data[index].size = this.selectedSize;
+              this.customer_cart_data[index].variation_id = y.id;
+            }
+  
+          })
+  
+        }
+        console.log(this.customer_cart_data);
+        this.setCartData();
+    } 
+  }
+  selectSize(size, i) {
+    console.log("Select size==>", size);
+    this.selectedSize = size;
+    this.activeIndex = i;
+    var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
+    if (index != -1) {
+        if (this.product_variation.length > 0) {
+          this.product_variation.forEach(y => {
+            if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
+              this.customer_cart_data[index].color = this.selectedColor;
+              this.customer_cart_data[index].size = this.selectedSize;
+              this.customer_cart_data[index].variation_id = y.id;
+            }
+  
+          })
+  
+        }
+        console.log(this.customer_cart_data);
+        this.setCartData();
+    } 
+
+  }
+
+  openModal(index) {
+    console.log(index);
+    let modal = this.modalCtrl.create(GalleryModal, {
+      photos: this.proImageList,
+      initialSlide: index, // The second image
+    });
+    modal.present();
   }
 
 }

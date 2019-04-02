@@ -29,7 +29,8 @@
         <ion-slides loop slidesPerView="1.2">
             <ion-slide (click)="gotoProDetails(allProduct.id)" *ngFor="let allProduct of all_product_list | slice:0:10; let i=index">
                 <!-- <img src="assets/imgs/slider-banner.png" /> -->
-                <img [src]="allProduct.images[0].src" />
+                <img *ngIf="allProduct.images.length >0 " [src]="allProduct.images[0].src" />
+                <img *ngIf="allProduct.images.length ==0 " src="assets/imgs/no-image.png" />
 
             </ion-slide>
             <!-- <ion-slide>
@@ -53,11 +54,11 @@
                     <ion-card-content>
                         <!-- <ion-title>{{popularProduct.product_name}}</ion-title> -->
                         <p>{{popularProduct.product_name}}</p>
-                        <div>
+                        <!-- <div>
                             <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                                 <ion-icon name="star"></ion-icon>
                             </span>
-                        </div>
+                        </div> -->
                     </ion-card-content>
                 </ion-card>
             </ion-slide>
@@ -75,9 +76,9 @@
                     <button ion-button color="light">₹ {{recentlyViewProduct.price}} <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
                     <ion-card-content>
                         <p>{{recentlyViewProduct.product_name}}</p>
-                        <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                        <!-- <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                             <ion-icon name="star"></ion-icon>
-                        </span>
+                        </span> -->
                     </ion-card-content>
                 </ion-card>
             </ion-slide>

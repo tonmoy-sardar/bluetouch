@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController,ViewController, Events } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
@@ -25,18 +25,21 @@ export class AddressPage {
   userId:any;
   addressData:any;
   isUpdate:any;
+  editAddress:any;
+  type:any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public events: Events,
+    public events1: Events,
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController,
     private spinnerDialog: SpinnerDialog,
     public paymentService: PaymentService,
     public menuCtrl: MenuController,
     private woocommerceService: WoocommerceService,
+    public viewCtrl : ViewController,
   ) {
-
+    this.events1.publish('isHeaderHidden', false);
     this.addressForm = this.formBuilder.group({
       label: ['', Validators.required],
       shipping_first_name: ['', Validators.required],
@@ -50,22 +53,15 @@ export class AddressPage {
         Validators.maxLength(6)]
       ]
     });
-  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddressPage');
-    if (localStorage.getItem('isLoggedin')) {
-      this.userId = localStorage.getItem('logged_user_id');
-    }
-    else {
-      this.userId = '';
-    }
-
-    // this.addressData = this.params.context['data'];        
-    // this.isUpdate = this.params.context['isUpdate'];
-    this.addressData = '';        
-    this.isUpdate = '';
+    this.isUpdate = navParams.get('type');
+    this.addressData = navParams.get('addressData');
+    console.log(this.isUpdate);
+    console.log(this.addressData);
+   // this.addressData = '';        
+    //
     if(this.isUpdate){
+      console.log("kk",this.isUpdate);
         this.addressForm.patchValue({
             label: this.addressData.label,
             shipping_first_name: this.addressData.shipping_first_name,
@@ -78,9 +74,23 @@ export class AddressPage {
     }
   }
 
+  ionViewDidLoad() {
+    if (localStorage.getItem('isLoggedin')) {
+      this.userId = localStorage.getItem('logged_user_id');
+    }
+    else {
+      this.userId = '';
+    }
+
+  
+
+    // this.addressData = this.params.context['data'];        
+    // this.isUpdate = this.params.context['isUpdate'];
+ 
+  }
+
   addAdress() {
     if (this.addressForm.valid) {
-        console.log(this.addressForm.value);
         var data = {
             user_id: this.userId,
             user_multiple_address: [
@@ -106,8 +116,8 @@ export class AddressPage {
 
         this.paymentService.addCustomerAddress(addAddressUrl, data).subscribe(
             res => {
-                console.log(res);
-              //  this.params.closeCallback({status: true});
+                //this.navCtrl.push('CheckoutPage');
+                this.navCtrl.pop();
             },
             error => {
                 console.log(error)
@@ -121,9 +131,6 @@ export class AddressPage {
 
 updateAdress() {
   if (this.addressForm.valid) {
-      console.log(this.addressForm.value);
-      console.log(this.addressData);
-     // this.loader.show(this.lodaing_options);
       var data = {
           user_id: this.userId,
           user_address: {
@@ -149,12 +156,10 @@ updateAdress() {
       this.paymentService.updateCustomerAddress(updateAddressUrl, data).subscribe(
           res => {
               console.log(res);
-              //this.loader.hide()
-             // this.params.closeCallback({status: true});
+              this.navCtrl.pop();
           },
           error => {
               console.log(error)
-              //this.loader.hide()
           }
       )
   }
@@ -181,6 +186,10 @@ updateAdress() {
       'is-invalid': this.addressForm.get(field).invalid && (this.addressForm.get(field).dirty || this.addressForm.get(field).touched),
       'is-valid': this.addressForm.get(field).valid && (this.addressForm.get(field).dirty || this.addressForm.get(field).touched)
     };
+  }
+
+  public closeModal(){
+    this.viewCtrl.dismiss();
   }
 
 }

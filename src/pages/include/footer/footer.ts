@@ -14,12 +14,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'footer.html',
 })
 export class FooterPage {
-
+  isLoggedin:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+   
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FooterPage');
+    if (localStorage.getItem('isLoggedin')) {
+      this.isLoggedin = true;
+    }
+    else {
+      this.isLoggedin = false;
+    }
   }
   gotoPage(routePage)
   {

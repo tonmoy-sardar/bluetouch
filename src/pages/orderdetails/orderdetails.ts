@@ -36,6 +36,7 @@ export class OrderdetailsPage {
     console.log('ionViewDidLoad OrderdetailsPage');
     this.menuCtrl.close();
     this.events1.publish('hideBackButton', false);
+    this.events1.publish('isHeaderHidden', false);
     this.getOrderDetails(this.navParams.get('id'))
   }
   getOrderDetails(order_id) {
@@ -48,13 +49,10 @@ export class OrderdetailsPage {
 
     this.categoryService.getOrderDetails(orderDeatilsUrl).subscribe(
       res => {
-        console.log("Order Details ==>", res);
         this.order_details = res;
         this.shippingAddress = this.order_details.shipping;
-        console.log(this.shippingAddress);
         this.visible_key = true
         this.spinnerDialog.hide();
-        console.log();
       },
       error => {
         this.spinnerDialog.hide();

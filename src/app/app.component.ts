@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform,Navbar,Events,ModalController } from 'ionic-angular';
+import { Nav, Platform, Navbar, Events, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CategoryService } from '../core/services/category.service';
@@ -13,40 +13,68 @@ export class MyApp {
   @ViewChild(Navbar) navBar: Navbar;
   rootPage: any;
 
-  pages: Array<{title: string, component: any}>;
-  hideBackButton:Boolean =true;
+  pages: Array<{ title: string, component: any }>;
+  hideBackButton: Boolean = true;
   totalCart: number;
-  logged_first_name:any;
-  logged_last_name:any;
-  logged_user_name:any;
-  logged_user_contact_no:any
-  logged_user_email:any;
-  isLoggedin:boolean;
+  logged_first_name: any;
+  logged_last_name: any;
+  logged_user_name: any;
+  logged_user_contact_no: any
+  logged_user_email: any;
+  isLoggedin: boolean;
+  isHeaderHidden: any;
 
   constructor(
     public platform: Platform,
-     public statusBar: StatusBar,
-      public splashScreen: SplashScreen,
-      public  events1:Events,
-      public categoryService:CategoryService,
-      public modalCtrl : ModalController,
-      public cartService:CartService,
-      public userService:UserService
-      ) {
-    this.initializeApp();
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public events1: Events,
+    public categoryService: CategoryService,
+    public modalCtrl: ModalController,
+    public cartService: CartService,
+    public userService: UserService
+  ) {
+    //this.initializeApp();
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      //this.rootPage = '';
+      statusBar.styleLightContent();
+      if (localStorage.getItem('isLoggedin')) {
+        this.nav.setRoot('HomePage');
+      }
+      else {
+        this.nav.setRoot('LoginPage');
+      }
+     
+      //this.nav.setRoot('IntroPage');
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+      this.navBar.backButtonClick = (e: UIEvent) => {
+        // todo something
+        this.nav.pop();
+      }
 
-    this.events1.subscribe('hideBackButton', (data) =>{
-      console.log("Emitted=======>", data); 
+
+    });
+
+    this.events1.subscribe('hideBackButton', (data) => {
       this.hideBackButton = data;
+    });
+
+    this.events1.subscribe('isHeaderHidden', (data) => {
+      this.isHeaderHidden = data;
     });
 
     // if (localStorage.getItem("cart")) {
     //   this.totalCart = JSON.parse(localStorage.getItem("cart")).length;
     // }
-    cartService.getCartNumberStatus.subscribe(status => {this.cartNumberStatus(status)});
+    cartService.getCartNumberStatus.subscribe(status => {
+      this.cartNumberStatus(status)
+    });
     userService.getLoginStatus.subscribe(status => this.changeStatus(status));
     this.loadUserInfo();
-   
+
   }
 
   loadUserInfo() {
@@ -63,6 +91,7 @@ export class MyApp {
       this.logged_last_name = '';
       this.logged_user_name = '';
       this.logged_user_contact_no = '';
+      this.logged_user_email = '';
     }
     if (localStorage.getItem("cart")) {
       this.totalCart = JSON.parse(localStorage.getItem("cart")).length;
@@ -72,24 +101,34 @@ export class MyApp {
     }
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      //this.rootPage = '';
-      this.nav.setRoot('HomePage');
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-      this.navBar.backButtonClick = (e:UIEvent)=>{        
-        // todo something
-        this.nav.pop();
-       }
-    });
- 
+  // initializeApp() {
+  //   this.platform.ready().then(() => {
+  //     // Okay, so the platform is ready and our plugins are available.
+  //     // Here you can do any higher level native things you might need.
+  //     //this.rootPage = '';
+  //     statusBar.styleLightContent();
+  //     this.nav.setRoot('HomePage');
+  //     //this.nav.setRoot('IntroPage');
+  //     this.statusBar.styleDefault();
+  //     this.splashScreen.hide();
+  //     this.navBar.backButtonClick = (e:UIEvent)=>{        
+  //       // todo something
+  //       this.nav.pop();
+  //      }
+
+
+  //   });
+
+  // }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad NoticiaCompletaPage');
+    this.navBar.backButtonClick = (e: UIEvent) => {   /// add this event
+      this.nav.pop();
+    };
   }
 
   cartNumberStatus(status: boolean) {
-    console.log(status)
     if (status) {
       if (localStorage.getItem("cart")) {
         this.totalCart = JSON.parse(localStorage.getItem("cart")).length;
@@ -98,7 +137,7 @@ export class MyApp {
         this.totalCart = 0;
       }
     }
-    else{
+    else {
 
     }
   }
@@ -108,15 +147,17 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
-  
-  gotoPage(routePage)
-  {
-    console.log(routePage);
+
+  gotoPage(routePage) {
     this.nav.push(routePage);
   }
 
+  gotoCmsPage(routePage,id) {
+    this.nav.push(routePage, { id:id });
+  }
+
   gotoProductList(routePage) {
-    this.nav.push(routePage,{id:''});
+    this.nav.push(routePage, { id: '' });
   }
 
   openModal(page) {
@@ -130,11 +171,16 @@ export class MyApp {
     }
   }
 
+  goBack() {
+    this.nav.pop();
+  }
+
   logOut() {
     localStorage.clear();
+    this.isLoggedin = false;
     this.loadUserInfo();
     this.nav.setRoot('LoginPage');
   }
 
- 
+
 }

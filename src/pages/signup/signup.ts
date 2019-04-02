@@ -26,7 +26,7 @@ export class SignupPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public events: Events,
+    public events1: Events,
     private formBuilder: FormBuilder,
     private toastCtrl: ToastController,
     private spinnerDialog: SpinnerDialog,
@@ -34,14 +34,15 @@ export class SignupPage {
     public menuCtrl: MenuController,
     private woocommerceService: WoocommerceService,
   ) {
-    events.publish('hideHeader', { isHeaderHidden: true}); 
+    this.events1.publish('isHeaderHidden', true);
 
     this.signupForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      email: ['', [
-        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
-      ]],
+      email: ['', Validators.required],
+      // email: ['', [
+      //   Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
+      // ]],
       username: ['', [
         Validators.required,
         Validators.minLength(10),
@@ -84,8 +85,6 @@ export class SignupPage {
   signUp() {
     if (this.signupForm.valid) {
       this.spinnerDialog.show();
-      console.log(this.signupForm.value);
-
       var signUpData = {
         email: this.signupForm.value.email,
         password: this.signupForm.value.password,
@@ -125,14 +124,13 @@ export class SignupPage {
       this.userService.userRegister(createUserUrl,signUpData).subscribe(
         res => {
           this.spinnerDialog.hide();
-          console.log(res);
           this.presentToast("Succesfully Register");
-          this.navCtrl.setRoot('HomePage');
+          this.navCtrl.setRoot('LoginPage');
         },
         error => {
           console.log(error);
           this.spinnerDialog.hide();
-          this.presentToast("Error in signup");
+          this.presentToast("Account already exist");
 
         }
       )

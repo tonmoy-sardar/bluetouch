@@ -29,7 +29,7 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public events: Events,
+    public events1: Events,
     private toastCtrl: ToastController,
     public menuCtrl: MenuController,
     private formBuilder: FormBuilder,
@@ -38,13 +38,13 @@ export class LoginPage {
     private woocommerceService: WoocommerceService,
     public modalCtrl: ModalController
   ) {
-    events.publish('hideHeader', { isHeaderHidden: true });
+    //events1.publish({'isHeaderHidden': true });
+    this.events1.publish('isHeaderHidden', true);
     this.loginForm = this.formBuilder.group({
       email_phone: ["", Validators.required],
       password: ["", Validators.required]
     });
     this.isCart = JSON.parse(localStorage.getItem("cart"));
-    console.log("Cart Data==>", this.isCart);
     if (this.isCart != null) {
       this.customer_cart_data = this.isCart;
     }
@@ -64,26 +64,15 @@ export class LoginPage {
       let params = {}
       let url = Globals.apiEndpoint + 'login/';
       let loginUserUrl: string = this.woocommerceService.authenticateApi('POST', url, params);
-      console.log(this.loginForm.value);
-      localStorage.setItem('logged_first_name', 'Rupam')
-      localStorage.setItem('logged_last_name', 'Hazra')
-      localStorage.setItem('logged_user_name', '9038698104')
-      localStorage.setItem('logged_user_contact_no', '9038698104')
-      localStorage.setItem('logged_user_email', 'rupam.hazra@gmail.com')
-      localStorage.setItem('logged_user_id', '16')
-      localStorage.setItem('isLoggedin', 'true')
-      this.userService.loginStatus(true)
-      this.navCtrl.setRoot('HomePage');
-      this.userService.loginStatus(true)
       this.userService.userLogin(loginUserUrl, this.loginForm.value).subscribe(
         res => {
-          console.log(res);
           localStorage.setItem('logged_first_name', res.user['first_name'])
           localStorage.setItem('logged_last_name', res.user['last_name'])
           localStorage.setItem('logged_user_email', res.user['email'])
           localStorage.setItem('logged_user_name', res.user['first_name'] + ' ' + res.user['last_name'])
           localStorage.setItem('logged_user_contact_no', res.user['username'])
           localStorage.setItem('logged_user_id', res.user['user_id'].toString())
+          localStorage.setItem('isLoggedin', 'true')
           this.userService.loginStatus(true)
           this.navCtrl.setRoot('HomePage');
           if (this.customer_cart_data.length > 0) {
@@ -91,16 +80,15 @@ export class LoginPage {
               x.user_id = res.user['user_id'].toString()
             })
             this.setCartData();
-            //var navItemRoute = '/cart/'
-            this.navCtrl.push('CartPage');
+           this.navCtrl.setRoot('HomePage');
           }
           else {
-            this.navCtrl.push('HomePage');
+            this.navCtrl.setRoot('HomePage');
           }
         },
         error => {
           console.log(error);
-
+          this.presentToast("Please check your login credential");
         }
       )
     }
@@ -145,11 +133,4 @@ export class LoginPage {
     });
     toast.present();
   }
-
-  // openModal(page) {
-  //   var modalPage = this.modalCtrl.create(page);
-  //   modalPage.present();
-  // }
-
-
 }

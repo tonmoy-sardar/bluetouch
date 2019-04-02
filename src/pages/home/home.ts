@@ -33,9 +33,12 @@ export class HomePage {
     public woocommerceService: WoocommerceService,
     public events1: Events
   ) {
+    this.events1.publish('isHeaderHidden', false);
+    
   }
 
   ionViewDidLoad() {
+   
     this.visible_key = false;
     this.menuCtrl.close();
     this.rating = [1, 2, 3, 4, 5];
@@ -43,8 +46,6 @@ export class HomePage {
     this.getPopularProduct();
     this.getAllProduct();
     this.recently_view_product = JSON.parse(localStorage.getItem("recentlyViewdProduct"));
-    console.log("Recent Product==>",this.recently_view_product);
-
 
   }
   ionViewDidEnter() {
@@ -54,7 +55,6 @@ export class HomePage {
     this.navCtrl.push('ProductlistPage', { id: id });
   }
   gotoProDetails(id) {
-    //this.navCtrl.push(page);
     this.navCtrl.push('ProductdetailsPage', { id: id });
   }
   gotoPage(page) {
@@ -66,13 +66,9 @@ export class HomePage {
       customer: ''
     }
     let url = Globals.apiEndpoint + 'products/categories/';
-    console.log("url", url);
-
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
-
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
-        console.log(res);
         this.categoryList = res;
         this.visible_key = true;
         this.spinnerDialog.hide();
@@ -88,13 +84,10 @@ export class HomePage {
     this.spinnerDialog.show();
     let params = {}
     let url = Globals.apiEndpoint + 'popular_product/';
-    console.log("url", url);
-
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
-        console.log(res);
         this.popular_product_list = res.data;
         this.visible_key = true;
         this.spinnerDialog.hide();
@@ -110,14 +103,12 @@ export class HomePage {
     this.spinnerDialog.show();
     let params = {}
     let url = Globals.apiEndpoint + 'products/';
-    console.log("url", url);
-
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
-        console.log("All Product==>",res);
         this.all_product_list = res;
+        console.log("New Arraival==>",res);
         this.visible_key = true;
         this.spinnerDialog.hide();
       },

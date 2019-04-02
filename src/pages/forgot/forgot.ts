@@ -4,6 +4,9 @@ import { Events } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
+import * as Globals from '../../core/global';
+import { UserService } from "../../core/services/user.service";
+import { WoocommerceService } from "../../core/services/woocommerce.service";
 /**
  * Generated class for the ForgotPage page.
  *
@@ -29,26 +32,35 @@ export class ForgotPage {
   forgotForm: FormGroup;
   otpForm: FormGroup;
   newPasswordForm:FormGroup;
+  otp:any;
+  user_id:any;
+  otp_status:any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public events: Events,
+    public events1: Events,
     private toastCtrl: ToastController,
     private spinnerDialog: SpinnerDialog,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private woocommerceService: WoocommerceService,
   ) {
     this.isShow = 0;
     //Header Show Hide Code 
-    events.publish('hideHeader', { isHeaderHidden: true, isSubHeaderHidden: true });
+    //events.publish('hideHeader', { isHeaderHidden: true, isSubHeaderHidden: true });
+    this.events1.publish('isHeaderHidden', true);
+    // this.events1.publish('isHeaderHidden', false);
     this.forgotForm = this.formBuilder.group({
-      contact_or_email: ["", Validators.required]
+      phone: ["", Validators.required]
     });
+
     this.otpForm = this.formBuilder.group({
       otp: ["", Validators.required]
     });
+
     this.newPasswordForm = this.formBuilder.group({
-      newpass: ["", Validators.required],
-      confpass: ["", Validators.required]
+      password: ["", Validators.required],
+      conf_password: ["", Validators.required]
     });
   }
 
@@ -60,70 +72,87 @@ export class ForgotPage {
     this.navCtrl.push('LoginPage');
   }
   resetPassword(data) {
-    console.log(data);
-    this.useContactEmail = data.contact_or_email;
-
+    this.useContactEmail = data.phone;
+    this.spinnerDialog.show();
     if (this.useContactEmail != undefined) {
-      // this.spinnerDialog.show();
-      // this.forgotpasswordService.userForgotPassword(data).subscribe(
-      //   res => {
-      //     this.isShow = 1;
-      //     this.newOtp = res['result']['otp'];
-      //     this.getResult = res['result'];
-      //     this.spinnerDialog.hide();
-      //   },
-      //   error => {
-      //     this.presentToast("Please check your contact number");
-      //     this.spinnerDialog.hide();
-      //   }
-      // )
+      let params = {}
+      let otpUrl = Globals.apiEndpoint + 'send_otp/';
+      let sendOtpUrl: string = this.woocommerceService.authenticateApi('POST', otpUrl, params);
+
+      this.userService.userForgetPasswordOtp(sendOtpUrl, this.forgotForm.value).subscribe(
+        res => {
+          console.log(res);
+          this.spinnerDialog.hide();
+
+         // this.otp = base64.decode(res['phone_otp']);
+         this.otp =res['phone_otp'];
+          this.user_id = res['user_id'];
+          this.isShow = 1;
+        },
+        error => {
+          this.presentToast("Please check your contact number");
+          this.spinnerDialog.hide();
+
+        }
+      )
     } else {
       this.presentToast("Please check your contact number");
     }
 
   }
 
-  matchOtp(data) {
-    if (data != "") {
-      this.spinnerDialog.show();
-      if (this.newOtp == btoa(data.otp)) {
-        this.otpVerified = 1;
-        this.isShow = 2;
-        this.spinnerDialog.hide();
-      }
-      else {
-        this.presentToast("OTP mismatch");
-        this.spinnerDialog.hide();
-      }
-    } else {
-      this.presentToast("Please Enter OTP");
-      this.spinnerDialog.hide();
+  matchOtp() {
+    console.log(this.otp);
+    console.log(btoa(this.otpForm.value.otp));
+    if (this.otp == btoa(this.otpForm.value.otp)) {
+      this.isShow = 2;
+     this.otp_status = 1;
+     console.log(this.otp)
+     console.log(this.otpForm.value.otp)
+     console.log("Match otp");
+    }
+    else {
+      this.presentToast("Please Enter Valid OTP");
     }
   }
 
-  updatePassword(data) {
-    console.log(data);
-    if (data.newpass == data.confpass) {
-      // this.spinnerDialog.show();
-      // data.otp_verified = 1;
-      // data.password = data.newpass;
-      // data.contact_or_email = this.useContactEmail;
-      // this.forgotpasswordService.updatePassword(data).subscribe(
-      //   res => {
-      //     this.isShow = 0;
-      //     this.navCtrl.setRoot('LoginPage');
-      //     this.spinnerDialog.hide();
-      //   },
-      //   error => {
-      //     this.presentToast("Error in update password");
-      //     this.spinnerDialog.hide();
+  updatePassword() {
+    if (this.newPasswordForm.valid) {
+      if (this.newPasswordForm.value.conf_password != this.newPasswordForm.value.password) {
+        this.presentToast("New & Confirm Password should be same");
 
-      //   }
-      // )
-    } else {
-      this.presentToast("New & Confirm Password should be same");
-      this.spinnerDialog.hide();
+      }
+      else {
+        this.spinnerDialog.show();
+        var data = {
+          user_id: this.user_id,
+          otp_status: this.otp_status,
+          new_password: this.newPasswordForm.value.password,
+        }
+        let params = {}
+        let url = Globals.apiEndpoint + 'forget_password/';
+        let userPasswordUpdateUrl: string = this.woocommerceService.authenticateApi('POST', url, params);
+        
+        this.userService.userPasswordUpdate(userPasswordUpdateUrl,data).subscribe(
+          res => {
+            this.spinnerDialog.hide();
+            this.presentToast("Password has been successfully changed.");
+            this.navCtrl.setRoot('LoginPage');
+           
+          },
+          error => {
+           this.presentToast("New & Confirm Password should be same");
+           this.spinnerDialog.hide();
+          }
+        )
+
+      }
+
     }
+    else {
+      this.markFormGroupTouched(this.newPasswordForm)
+    }
+
   }
 
   presentToast(msg) {

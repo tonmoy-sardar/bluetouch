@@ -15,10 +15,8 @@
 
 <ion-content fullscreen>
   <div class="profile-banner">
-    <div class="profile-img">
-      <img src="assets/imgs/man.jpg" />
-      <!-- <img
-          [src]="profileDetails.profile_image != ''? imageBaseUrl+ profileDetails.profile_image : 'assets/imgs/no-image.png'"> -->
+    <div class="profile-img" (click)="presentActionSheet()">
+      <img src="assets/imgs/no-image.png" />
     </div>
   </div>
   <div class="profile-view-body">
@@ -35,18 +33,21 @@
           placeholder="Last Name"></ion-input>
         <span class="error-msg" *ngIf="isFieldValid('last_name')">Please enter a Last Name.</span>
       </ion-card>
-      <ion-card>
+      <!-- <ion-card>
         <h3>Email</h3>
         <ion-input type="email" [(ngModel)]="user_details.email" name="email" formControlName="email" [ngClass]="displayFieldCss('email')" placeholder="Email"></ion-input>
         <span class="error-msg" *ngIf="isFieldValid('email')">Please enter a valid Email.</span>
-      </ion-card>
-      <ion-card>
+      </ion-card> -->
+      <!-- <ion-card>
         <h3>Contact Number</h3>
         <ion-input type="tel" [(ngModel)]="user_details.username"  pattern="[0-9]*" maxLength="10" name="username" formControlName="username" [ngClass]="displayFieldCss('username')"
           placeholder="username"></ion-input>
         <span class="error-msg" *ngIf="isFieldValid('username')">Please enter a Contact.</span>
-      </ion-card>
-      <button ion-button round class="update-button" (click)=updateProfile()>Update</button>
+      </ion-card> -->
+      <div class="btn-wrapper">
+          <button ion-button round class="update-button" (click)=updateProfile()>Update</button>
+      </div>
+      
     </form>
   </div>
 </ion-content>

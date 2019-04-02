@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events,ModalController } from 'ionic-angular';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { CategoryService } from '../../core/services/category.service';
 import { WoocommerceService } from "../../core/services/woocommerce.service";
 import * as Globals from '../../core/global';
+import { FilterPage } from '../filter/filter';
 /**
  * Generated class for the HomePage page.
  *
@@ -29,7 +30,8 @@ export class ProductlistPage {
     private spinnerDialog: SpinnerDialog,
     public categoryService: CategoryService,
     public woocommerceService: WoocommerceService,
-    public events1: Events
+    public events1: Events,
+    public modalCtrl: ModalController,
   ) {
   }
 
@@ -37,6 +39,7 @@ export class ProductlistPage {
     console.log('ionViewDidLoad ProductlistPage');
     this.menuCtrl.close();
     this.events1.publish('hideBackButton', false);
+    this.events1.publish('isHeaderHidden', false);
     this.rating = [1, 2, 3, 4, 5];
     this.catId = this.navParams.get('id');
     if (this.catId != "") {
@@ -48,15 +51,12 @@ export class ProductlistPage {
 
   }
 
-
   getProduct(category_id) {
     this.spinnerDialog.show();
     let params = {
       category: category_id,
     }
     let url = Globals.apiEndpoint + 'products/';
-    console.log("url", url);
-
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
     this.categoryService.getCategoryList(orderUrl).subscribe(
@@ -64,9 +64,11 @@ export class ProductlistPage {
         console.log(res);
         this.product_list = res;
         this.visible_key = true;
+        this.spinnerDialog.hide();
       },
       error => {
         this.visible_key = true;
+        this.spinnerDialog.hide();
       }
     )
   }
@@ -75,13 +77,10 @@ export class ProductlistPage {
     this.spinnerDialog.show();
     let params = {}
     let url = Globals.apiEndpoint + 'products/';
-    console.log("url", url);
-
     let orderUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
-        console.log("All Product==>", res);
         this.product_list = res;
         this.visible_key = true;
         this.spinnerDialog.hide();
@@ -95,7 +94,7 @@ export class ProductlistPage {
 
 
   getSortedProductList(order_by,meta_key) {
-   // this.loader.show(this.lodaing_options);
+    this.spinnerDialog.show();
     var params;
     if(this.catId !="") {
       params = {
@@ -111,13 +110,11 @@ export class ProductlistPage {
     }
       
     }
-    console.log("Params ====>",params);
     let url = Globals.apiEndpoint + 'products';
     let productUrl:string = this.woocommerceService.authenticateApi('GET',url,params);
 
     this.categoryService.getProductListByCategoryId(productUrl).subscribe(
         res => {
-          console.log("Sorting Product==>", res);
           this.product_list = res;
           this.visible_key = true;
           this.spinnerDialog.hide();
@@ -139,5 +136,17 @@ export class ProductlistPage {
   goBack() {
     this.navCtrl.pop();
   }
+
+  public filterProductModal(address){
+    var data = { type : 'edit',addressData:address };
+    var modalPage = this.modalCtrl.create(FilterPage,data);
+    modalPage.onDidDismiss(() => {
+      // Call the method to do whatever in your home.ts
+      console.log('Modal closed');
+    });
+    modalPage.present();
+  } 
+
+ 
 
 }
