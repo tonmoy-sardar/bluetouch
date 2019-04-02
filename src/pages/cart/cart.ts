@@ -108,6 +108,7 @@ export class CartPage {
   // }
 
   remove(id) {
+    console.log(id);
     let alert = this.alertCtrl.create({
       message: 'Do you want to remove?',
       buttons: [

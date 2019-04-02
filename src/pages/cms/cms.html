@@ -14,5 +14,15 @@
 
 
 <ion-content padding>
+    <ion-card>
+        <ion-card-header>
+         {{cmsDetails.page_title}}
+        </ion-card-header>
+        <ion-card-content>
+            <div [innerHtml]="cmsDetails.page_content">
+              
+            </div>
+        </ion-card-content>
+      </ion-card>
 
 </ion-content>

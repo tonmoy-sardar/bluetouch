@@ -72,18 +72,24 @@
           <span> Change Password</span>
           <i class="fa fa-chevron-circle-right icon-rightside" aria-hidden="true"></i></button>
       </ion-list> -->
-      <ion-list>
+      <!-- <ion-list>
         <button ion-item (click)="gotoProductList('ProductlistPage')">
           <ion-icon name="apps"></ion-icon>
           <span> Product List</span>
           <i class="fa fa-chevron-circle-right icon-rightside" aria-hidden="true"></i></button>
-      </ion-list>
+      </ion-list> -->
       <ion-list>
         <button ion-item (click)="gotoPage('CartPage')">
           <ion-icon name="cart"></ion-icon>
           <span> Cart</span>
           <i class="fa fa-chevron-circle-right icon-rightside" aria-hidden="true"></i></button>
       </ion-list>
+      <!-- <ion-list>
+          <button *ngIf="isLoggedin ==true" ion-item (click)="gotoProductList('ProductlistPage')">
+            <ion-icon ios="ios-document" md="md-document"></ion-icon>
+            <span>Product List</span>
+            <i class="fa fa-chevron-circle-right icon-rightside" aria-hidden="true"></i></button>
+        </ion-list> -->
       <ion-list>
         <button *ngIf="isLoggedin ==true" ion-item (click)="gotoPage('OrdersPage')">
           <ion-icon ios="ios-document" md="md-document"></ion-icon>

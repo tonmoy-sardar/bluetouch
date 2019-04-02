@@ -40,16 +40,16 @@ export class UserService {
   }
 
   uploadUserImage(uploadUserImageUrl, data): Observable<any> {
-    console.log(uploadUserImageUrl);
-    console.log(data);
-    console.log(data.params);
-    
     return this.http.post(uploadUserImageUrl, data)
   }
 
-  getCmsDetails(cmsDeatilsUrl): Observable<any> {
-    return this.http.get(cmsDeatilsUrl)
+  getCmsDetails(page_id): Observable<any> {
+    return this.http.get(Globals.apiEndpoint  +'page?page_id=' +page_id )
   }
+
+  // paytmFormValue(order_amount, table_order_id, user_id, customer_email): Observable<any> {
+  //   return this.http.get(Globals.apiEndpoint + 'payment_details/?order_amount=' + order_amount + '&order_id=' + table_order_id + '&type=app&cust_id=' + customer_email)
+  // }
 
   // updatemyProfile(id,profileImage,data): Observable<any> {
     

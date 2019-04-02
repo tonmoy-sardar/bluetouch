@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events,ToastController } from 'ionic-angular';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { CategoryService } from '../../core/services/category.service';
 import { WoocommerceService } from "../../core/services/woocommerce.service";
@@ -37,7 +37,7 @@ export class ProductdetailsPage {
   activeIndex: any;
   selectedIndex: number;
   product_variation: any = [];
-  proImageList:any =[];
+  proImageList: any = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -48,6 +48,7 @@ export class ProductdetailsPage {
     public woocommerceService: WoocommerceService,
     public cartService: CartService,
     private modalCtrl: ModalController,
+    private toastCtrl: ToastController,
   ) {
     this.events1.publish('isHeaderHidden', false);
   }
@@ -94,9 +95,14 @@ export class ProductdetailsPage {
         console.log(this.product_details_img);
 
         res.images.forEach(x => {
-          this.proImageList.push({url: x.src})
-         })      
-         console.log(this.proImageList);
+          this.proImageList.push({ url: x.src })
+        })
+        console.log(this.proImageList);
+
+        // this.selectedColor = 'red';
+        // this.selectedIndex = 1;
+        // this.selectedSize = 'M';
+        // this.activeIndex = 1;
 
         var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
 
@@ -163,7 +169,7 @@ export class ProductdetailsPage {
       console.log("Recently View Product==>", this.recently_view_product);
       this.setRecentlyViewdProduct();
     }
-  
+
   }
 
   setRecentlyViewdProduct() {
@@ -172,8 +178,7 @@ export class ProductdetailsPage {
 
   buyNow(product_details) {
     console.log(product_details);
-
-    if (product_details.quantity > 1) {
+    if (product_details.quantity >= 1) {
       var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
       if (index != -1) {
         this.customer_cart_data[index].quantity = product_details.quantity + 1;
@@ -193,16 +198,34 @@ export class ProductdetailsPage {
         quantity: product_details.quantity + 1
       }
       var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
-      this.product_details['isCart'] = true;
-      this.product_details['quantity'] = this.product_details['quantity'] + 1;
-
-
+     // this.product_details['isCart'] = true;
+     // this.product_details['quantity'] = this.product_details['quantity'] + 1;
       if (index == -1) {
-        this.customer_cart_data.push(data);
-        this.setBuyNowCartData();
+        if (this.product_variation.length > 0) {
+          this.product_variation.forEach(y => {
+            if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
+              data['color'] = this.selectedColor;
+              data['size'] = this.selectedSize;
+              data['variation_id'] = y.id;
+            }
+          })
+
+        }
+        if(this.selectedColor ==undefined || this.selectedSize==undefined ) {
+          this.presentToast("Please Select color and Size");
+        }
+        else {
+          this.product_details['isCart'] = true;
+          this.product_details['quantity'] = this.product_details['quantity'] + 1;
+         this.customer_cart_data.push(data);
+         this.setBuyNowCartData();
+          this.cartService.cartNumberStatus(true);
+        }
+        // this.customer_cart_data.push(data);
+        // this.setBuyNowCartData();
       }
     }
-    this.cartService.cartNumberStatus(true);
+   // this.cartService.cartNumberStatus(true);
 
   }
 
@@ -225,10 +248,8 @@ export class ProductdetailsPage {
     }
     //console.log(data);
     var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
-    this.product_details['isCart'] = true;
-    this.product_details['quantity'] = this.product_details['quantity'] + 1;
-    if (index == -1) {
 
+    if (index == -1) {
       if (this.product_variation.length > 0) {
         this.product_variation.forEach(y => {
           if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
@@ -237,14 +258,30 @@ export class ProductdetailsPage {
             data['variation_id'] = y.id;
           }
         })
+        if(this.selectedColor ==undefined || this.selectedSize==undefined ) {
+          this.presentToast("Please Select color and Size");
+        }
+        else {
+          this.product_details['isCart'] = true;
+          this.product_details['quantity'] = this.product_details['quantity'] + 1;
+          this.customer_cart_data.push(data);
+          console.log("Pro details Cart==>", this.customer_cart_data);
+          this.setCartData();
+          this.cartService.cartNumberStatus(true);
+        }
 
       }
-      console.log(data);
-      this.customer_cart_data.push(data);
-      console.log("Pro details Cart==>",this.customer_cart_data);
-      this.setCartData();
+      else {
+        this.product_details['isCart'] = true;
+        this.product_details['quantity'] = this.product_details['quantity'] + 1;
+        this.customer_cart_data.push(data);
+        console.log("Pro details Cart==>", this.customer_cart_data);
+        this.setCartData();
+        this.cartService.cartNumberStatus(true);
+      }
+ 
     }
-    this.cartService.cartNumberStatus(true);
+   
   }
 
   setCartData() {
@@ -299,20 +336,20 @@ export class ProductdetailsPage {
 
     var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
     if (index != -1) {
-        if (this.product_variation.length > 0) {
-          this.product_variation.forEach(y => {
-            if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
-              this.customer_cart_data[index].color = this.selectedColor;
-              this.customer_cart_data[index].size = this.selectedSize;
-              this.customer_cart_data[index].variation_id = y.id;
-            }
-  
-          })
-  
-        }
-        console.log(this.customer_cart_data);
-        this.setCartData();
-    } 
+      if (this.product_variation.length > 0) {
+        this.product_variation.forEach(y => {
+          if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
+            this.customer_cart_data[index].color = this.selectedColor;
+            this.customer_cart_data[index].size = this.selectedSize;
+            this.customer_cart_data[index].variation_id = y.id;
+          }
+
+        })
+
+      }
+      console.log(this.customer_cart_data);
+      this.setCartData();
+    }
   }
   selectSize(size, i) {
     console.log("Select size==>", size);
@@ -320,20 +357,20 @@ export class ProductdetailsPage {
     this.activeIndex = i;
     var index = this.customer_cart_data.findIndex(y => y.product_id == this.product_details.id && y.user_id == this.logged_user_id);
     if (index != -1) {
-        if (this.product_variation.length > 0) {
-          this.product_variation.forEach(y => {
-            if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
-              this.customer_cart_data[index].color = this.selectedColor;
-              this.customer_cart_data[index].size = this.selectedSize;
-              this.customer_cart_data[index].variation_id = y.id;
-            }
-  
-          })
-  
-        }
-        console.log(this.customer_cart_data);
-        this.setCartData();
-    } 
+      if (this.product_variation.length > 0) {
+        this.product_variation.forEach(y => {
+          if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
+            this.customer_cart_data[index].color = this.selectedColor;
+            this.customer_cart_data[index].size = this.selectedSize;
+            this.customer_cart_data[index].variation_id = y.id;
+          }
+
+        })
+
+      }
+      console.log(this.customer_cart_data);
+      this.setCartData();
+    }
 
   }
 
@@ -344,6 +381,15 @@ export class ProductdetailsPage {
       initialSlide: index, // The second image
     });
     modal.present();
+  }
+
+  presentToast(msg) {
+    const toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 
 }

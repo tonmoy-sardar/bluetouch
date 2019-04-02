@@ -57,7 +57,9 @@ export class CategoryService {
     return this.http.get(popularProductUrl)
   }
   
-
+  getattributesList(attributesUrl): Observable<any> {
+    return this.http.get(attributesUrl)
+  }
   
   
 }

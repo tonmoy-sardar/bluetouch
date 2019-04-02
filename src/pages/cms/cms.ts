@@ -41,12 +41,13 @@ export class CmsPage {
   cmsDetails(page_id) {
     let params = {
     }
-    let url = Globals.apiEndpoint + 'page?page_id=' + page_id;
-    let orderDeatilsUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
+  //  let url = Globals.apiEndpoint + 'page';
+   // let orderDeatilsUrl: string = this.woocommerceService.authenticateApi('GET', url, params);
 
-    this.userService.getCmsDetails(orderDeatilsUrl).subscribe(
+    this.userService.getCmsDetails(page_id).subscribe(
       res => {
-       console.log(res);
+       this.cmsDetails = res['data'][0];
+       console.log(this.cmsDetails);
       },
       error => {
         console.log(error);

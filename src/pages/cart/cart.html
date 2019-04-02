@@ -40,6 +40,8 @@
                             <button class="quantity-btn" type="button" name="button" (click)="increment(i)">
                                 <ion-icon name="add"></ion-icon>
                             </button>
+
+                            <button (click)="remove(item.product_id)" class="quantity-btn" style="float:right; color:red;"><ion-icon name="trash"></ion-icon></button>
                             <hr>
                         </div>
                     </div>
