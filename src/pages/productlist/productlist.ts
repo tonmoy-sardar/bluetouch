@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Events,ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events,ModalController,ViewController } from 'ionic-angular';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { CategoryService } from '../../core/services/category.service';
 import { WoocommerceService } from "../../core/services/woocommerce.service";
@@ -34,6 +34,7 @@ export class ProductlistPage {
     public woocommerceService: WoocommerceService,
     public events1: Events,
     public modalCtrl: ModalController,
+    public viewCtrl:ViewController
   ) {
     
   }
@@ -63,6 +64,7 @@ export class ProductlistPage {
   }
 
   getProduct(category_id) {
+    this.visible_key = false;
     this.spinnerDialog.show();
     let params = {
       category: category_id,
@@ -86,6 +88,7 @@ export class ProductlistPage {
   }
 
   getAllProduct() {
+    this.visible_key = false;
     this.spinnerDialog.show();
     let params = {}
     let url = Globals.apiEndpoint + 'products/';
@@ -153,15 +156,18 @@ export class ProductlistPage {
   public filterProductModal(address){
     var data = { type : 'edit',addressData:address };
     var modalPage = this.modalCtrl.create(FilterPage,data);
-    modalPage.onDidDismiss(() => {
+    modalPage.onDidDismiss((data) => {
       // Call the method to do whatever in your home.ts
-      console.log('Modal closed');
+      console.log('Modal closed',data);
+      this.getFilterProductList(data);
+      this.FilterResult =1;
     });
     modalPage.present();
   } 
 
 
   getFilterProductList(filterData) {
+    this.visible_key = false;
     this.spinnerDialog.show();
     let params = { }
     var filData = {

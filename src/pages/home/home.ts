@@ -88,6 +88,7 @@ export class HomePage {
 
     this.categoryService.getCategoryList(orderUrl).subscribe(
       res => {
+        console.log("Latest Fashion==>",res);
         this.popular_product_list = res.data;
         this.visible_key = true;
         this.spinnerDialog.hide();

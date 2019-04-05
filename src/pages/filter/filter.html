@@ -65,6 +65,6 @@
                 </ion-list>
         </h3>
     </ion-list>
-    <button ion-button round (click)="getFilterProduct(sendList)">Apply</button>
-    <button ion-button round color="danger">Clear</button>
+    <button *ngIf="listAttributesValue.length >0" ion-button round (click)="getFilterProduct(sendList)">Apply</button>
+     <button *ngIf="listAttributesValue.length >0" ion-button round color="danger" (click)="closeModal()">Close</button>
 </ion-content>

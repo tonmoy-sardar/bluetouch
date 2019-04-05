@@ -22,10 +22,15 @@
                 <ion-col col-2> <button ion-button (click)="searchProduct(searchKeywords)">
                         <ion-icon name="search"></ion-icon>
                     </button></ion-col>
-                    <ion-col col-2 >
+                <!-- <ion-col col-2 >
                         <button (click)="filterProductModal()" ion-button>
                         <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon>
                         </button>
+                </ion-col> -->
+                <ion-col col-2>
+                    <button (click)="filterProductModal()" ion-button>
+                        <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon>
+                    </button>
                 </ion-col>
                 <!-- <ion-col col-2>
                     <ion-list>
@@ -64,9 +69,9 @@
         </ion-slides> -->
     </div>
 
-    <div class="product-list" *ngIf="visible_key">
-        <ion-grid>
-            <ion-row *ngIf="product_list.length > 0">
+    <div class="product-list">
+        <ion-grid *ngIf="visible_key">
+            <ion-row *ngIf="product_list.length > 0  && FilterResult==0">
                 <ion-col col-6 class="product-price" *ngFor="let product of product_list let i=index">
                     <ion-card (click)="gotoProDetails(product.id)">
                         <!-- <img class="cart-icon-image" src="assets/imgs/icon-cart.png" /> -->
@@ -86,7 +91,8 @@
                                         <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
                                     </span>
                                 </ion-col>
-                                <ion-col col-6 style="text-align: right;"> <span class="rating active" *ngFor="let rat of rating; let i = index"
+                                <ion-col col-6 style="text-align: right;"> <span class="rating active"
+                                        *ngFor="let rat of rating; let i = index"
                                         [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
                                         <ion-icon name="star"></ion-icon>
                                     </span></ion-col>
@@ -96,7 +102,38 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
-        <p *ngIf="product_list.length==0" class="error-msg"> No records Found!!!</p>
+        <ion-grid *ngIf="visible_key">
+            <ion-row *ngIf="product_list.length > 0 && FilterResult==1">
+                <ion-col col-6 class="product-price" *ngFor="let product of product_list let i=index">
+                    <ion-card (click)="gotoProDetails(product.product_id)">
+                        <img class="product-image" [src]="product.product_img" />
+                        <ion-card-content>
+                            <ion-card-title>
+                                {{product.product_name}}
+                            </ion-card-title>
+                            <hr>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <span class="price">
+                                        <i class="fa fa-rupee"></i>{{product.sale_price}}
+                                        <!-- <ion-icon name="ios-arrow-dropright-outline"></ion-icon> -->
+                                    </span>
+                                </ion-col>
+                                <!-- <ion-col col-6 style="text-align: right;"> 
+                                    
+                                    <span class="rating active" *ngFor="let rat of rating; let i = index"
+                                    [ngClass]="[i <= product.average_rating - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                        <ion-icon name="star"></ion-icon>
+                                    </span></ion-col> -->
+                            </ion-row>
+
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+      
+        <!-- <p *ngIf="product_list.length==0" class="error-msg"> No records Found!!!</p> -->
     </div>
 
 </ion-content>

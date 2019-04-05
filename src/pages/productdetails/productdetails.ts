@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Events,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events, ToastController } from 'ionic-angular';
 import { SpinnerDialog } from '@ionic-native/spinner-dialog';
 import { CategoryService } from '../../core/services/category.service';
 import { WoocommerceService } from "../../core/services/woocommerce.service";
@@ -67,6 +67,7 @@ export class ProductdetailsPage {
     else {
       this.logged_user_id = '';
     }
+
   }
   ionViewWillEnter() {
     if (localStorage.getItem("cart")) {
@@ -93,7 +94,6 @@ export class ProductdetailsPage {
         this.product_details = res;
         this.product_details_img = this.product_details.images;
         console.log(this.product_details_img);
-
         res.images.forEach(x => {
           this.proImageList.push({ url: x.src })
         })
@@ -176,59 +176,7 @@ export class ProductdetailsPage {
     localStorage.setItem("recentlyViewdProduct", JSON.stringify(this.recently_view_product));
   }
 
-  buyNow(product_details) {
-    console.log(product_details);
-    if (product_details.quantity >= 1) {
-      var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
-      if (index != -1) {
-        this.customer_cart_data[index].quantity = product_details.quantity + 1;
-        this.setBuyNowCartData();
-      }
-      this.product_details.quantity = product_details.quantity + 1
-    }
-    else {
-      var data = {
-        user_id: this.logged_user_id,
-        product_id: product_details.id,
-        product_name: product_details.name,
-        description: product_details.short_description,
-        price: product_details.price,
-        regular_price: product_details.regular_price,
-        image_small: product_details.images[0].src,
-        quantity: product_details.quantity + 1
-      }
-      var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
-     // this.product_details['isCart'] = true;
-     // this.product_details['quantity'] = this.product_details['quantity'] + 1;
-      if (index == -1) {
-        if (this.product_variation.length > 0) {
-          this.product_variation.forEach(y => {
-            if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
-              data['color'] = this.selectedColor;
-              data['size'] = this.selectedSize;
-              data['variation_id'] = y.id;
-            }
-          })
-
-        }
-        if(this.selectedColor ==undefined || this.selectedSize==undefined ) {
-          this.presentToast("Please Select color and Size");
-        }
-        else {
-          this.product_details['isCart'] = true;
-          this.product_details['quantity'] = this.product_details['quantity'] + 1;
-         this.customer_cart_data.push(data);
-         this.setBuyNowCartData();
-          this.cartService.cartNumberStatus(true);
-        }
-        // this.customer_cart_data.push(data);
-        // this.setBuyNowCartData();
-      }
-    }
-   // this.cartService.cartNumberStatus(true);
-
-  }
-
+  
   setBuyNowCartData() {
 
     localStorage.setItem("cart", JSON.stringify(this.customer_cart_data));
@@ -258,7 +206,7 @@ export class ProductdetailsPage {
             data['variation_id'] = y.id;
           }
         })
-        if(this.selectedColor ==undefined || this.selectedSize==undefined ) {
+        if (this.selectedColor == undefined || this.selectedSize == undefined) {
           this.presentToast("Please Select color and Size");
         }
         else {
@@ -279,10 +227,77 @@ export class ProductdetailsPage {
         this.setCartData();
         this.cartService.cartNumberStatus(true);
       }
- 
+
     }
-   
+
   }
+
+  buyNow(product_details) {
+    console.log(product_details);
+    if (product_details.quantity >= 1) {
+      var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
+      if (index != -1) {
+        this.customer_cart_data[index].quantity = product_details.quantity + 1;
+        this.setBuyNowCartData();
+      }
+      this.product_details.quantity = product_details.quantity + 1
+    }
+    else {
+      var data = {
+        user_id: this.logged_user_id,
+        product_id: product_details.id,
+        product_name: product_details.name,
+        description: product_details.short_description,
+        price: product_details.price,
+        regular_price: product_details.regular_price,
+        image_small: product_details.images[0].src,
+        quantity: product_details.quantity + 1
+      }
+      var index = this.customer_cart_data.findIndex(y => y.product_id == product_details.id && y.user_id == this.logged_user_id);
+      // this.product_details['isCart'] = true;
+      // this.product_details['quantity'] = this.product_details['quantity'] + 1;
+      if (index == -1) {
+        console.log(this.product_variation.length);
+        if (this.product_variation.length > 0) {
+          this.product_variation.forEach(y => {
+            if (y.attributes[0].option == this.selectedColor && y.attributes[1].option == this.selectedSize) {
+              data['color'] = this.selectedColor;
+              data['size'] = this.selectedSize;
+              data['variation_id'] = y.id;
+            }
+          })
+
+          console.log(this.selectedColor);
+          console.log(this.selectedSize);
+          if (this.selectedColor == undefined || this.selectedSize == undefined) {
+            this.presentToast("Please Select color and Size");
+          }
+          else {
+            this.product_details['isCart'] = true;
+            this.product_details['quantity'] = this.product_details['quantity'] + 1;
+            this.customer_cart_data.push(data);
+            this.setBuyNowCartData();
+            this.cartService.cartNumberStatus(true);
+          }
+
+        }
+        else {
+          this.product_details['isCart'] = true;
+          this.product_details['quantity'] = this.product_details['quantity'] + 1;
+          this.customer_cart_data.push(data);
+          console.log("Pro details Cart==>", this.customer_cart_data);
+          this.setCartData();
+          this.cartService.cartNumberStatus(true);
+        }
+
+        // this.customer_cart_data.push(data);
+        // this.setBuyNowCartData();
+      }
+    }
+    // this.cartService.cartNumberStatus(true);
+
+  }
+
 
   setCartData() {
     localStorage.setItem("cart", JSON.stringify(this.customer_cart_data));

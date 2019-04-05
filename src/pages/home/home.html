@@ -68,7 +68,7 @@
     <div class="custom-slider recent-list" style="padding-top:30px;">
         <ion-title class="headline">Recently Viewed</ion-title>
         <hr>
-        <ion-slides loop slidesPerView="2.4">
+        <!-- <ion-slides loop slidesPerView="2.4">
 
             <ion-slide *ngFor="let recentlyViewProduct of recently_view_product let i=index">
                 <ion-card class="card-background-page" (click)="gotoProDetails(recentlyViewProduct.product_id)">
@@ -76,13 +76,29 @@
                     <button ion-button color="light">₹ {{recentlyViewProduct.price}} <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
                     <ion-card-content>
                         <p>{{recentlyViewProduct.product_name}}</p>
-                        <!-- <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
-                            <ion-icon name="star"></ion-icon>
-                        </span> -->
+                        
                     </ion-card-content>
                 </ion-card>
             </ion-slide>
-        </ion-slides>
+        </ion-slides> -->
+        <ion-grid>
+            <ion-row>
+              <ion-col col-6  *ngFor="let recentlyViewProduct of recently_view_product let i=index">
+                    <ion-card class="card-background-page" (click)="gotoProDetails(recentlyViewProduct.product_id)">
+                            <img [src]="recentlyViewProduct.image_small" />
+                            <button ion-button color="light">₹ {{recentlyViewProduct.price}} <ion-icon name="arrow-dropright-circle"></ion-icon> </button>
+                            <ion-card-content>
+                                <p>{{recentlyViewProduct.product_name}}</p>
+                                <!-- <span class="rating active" *ngFor="let rat of rating; let i = index" [ngClass]="[i <= 0 - 1 ? 'active' : '']" style="margin-right: 2px;">
+                                    <ion-icon name="star"></ion-icon>
+                                </span> -->
+                            </ion-card-content>
+                        </ion-card>
+                </ion-col>
+            </ion-row>
+            
+          </ion-grid>
+
     </div>
     <!-- <div class="trend-list">
     <ion-title>Trending Products</ion-title>

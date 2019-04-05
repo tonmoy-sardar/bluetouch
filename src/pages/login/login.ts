@@ -102,7 +102,7 @@ export class LoginPage {
   }
 
   gotoPage(page) {
-    this.navCtrl.setRoot(page);
+    this.navCtrl.push(page);
   }
 
   markFormGroupTouched(formGroup: FormGroup) {

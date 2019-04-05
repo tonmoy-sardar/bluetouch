@@ -40,6 +40,7 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+    this.menuCtrl.close();
     this.events1.publish('hideBackButton', false);
     this.events1.publish('isHeaderHidden', false);
   }

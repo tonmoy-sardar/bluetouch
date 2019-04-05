@@ -155,7 +155,8 @@ export class FilterPage {
     if (event.checked == true) {
       if (this.sendList.length > 0) {
         this.sendList.forEach(element => {
-          console.log(element)
+          console.log("aaa",element.attribute);
+          console.log("bbb",attributes.pa_name);
           if (element.attribute === attributes.pa_name) {
             element.term.push(data.name)
           } else {
@@ -187,7 +188,14 @@ export class FilterPage {
   getFilterProduct(data) {
     console.log(data);
     //var str = { "product_attribute": data }
-    this.navCtrl.push('ProductlistPage', { filterData: data });
+    //this.navCtrl.push('ProductlistPage', { filterData: data });
+    this.viewCtrl.dismiss(data);
   }
+
+  // public closeModal(data){
+  //   this.viewCtrl.dismiss(data);
+  // }
+
+ 
 
 }
