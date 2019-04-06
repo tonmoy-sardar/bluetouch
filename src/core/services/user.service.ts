@@ -50,6 +50,10 @@ export class UserService {
     return this.http.get(Globals.apiEndpoint  +'page?page_id=' +page_id )
   }
 
+  getNotificationList(user_id): Observable<any> {
+    return this.http.get(Globals.apiEndpoint  +'order_status?user_id=' +user_id)
+  }
+
   // paytmFormValue(order_amount, table_order_id, user_id, customer_email): Observable<any> {
   //   return this.http.get(Globals.apiEndpoint + 'payment_details/?order_amount=' + order_amount + '&order_id=' + table_order_id + '&type=app&cust_id=' + customer_email)
   // }

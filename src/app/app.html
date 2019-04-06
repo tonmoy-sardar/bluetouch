@@ -17,9 +17,13 @@
             <button *ngIf="isLoggedin !=true" ion-button icon-only (click)="gotoPage('LoginPage')">
                 <ion-icon ios="ios-person-outline" md="md-person"></ion-icon>
             </button>
-            <button *ngIf="isLoggedin ==true" ion-button icon-only (click)="gotoPage('ProfilePage')">
+            <!-- <button *ngIf="isLoggedin ==true" ion-button icon-only (click)="gotoPage('ProfilePage')">
                 <ion-icon ios="ios-person-outline" md="md-person"></ion-icon>
+            </button> -->
+            <button *ngIf="isLoggedin ==true" ion-button icon-only (click)="gotoPage('NotificationPage')">
+                <ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
             </button>
+            
         </ion-buttons>
         <ion-buttons (click)="gotoPage('CartPage')" right>
             <button ion-button icon-only>

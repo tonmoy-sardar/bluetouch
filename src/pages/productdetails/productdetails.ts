@@ -267,8 +267,6 @@ export class ProductdetailsPage {
             }
           })
 
-          console.log(this.selectedColor);
-          console.log(this.selectedSize);
           if (this.selectedColor == undefined || this.selectedSize == undefined) {
             this.presentToast("Please Select color and Size");
           }
