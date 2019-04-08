@@ -67,6 +67,7 @@ export class CheckoutPage {
   }
 
   ionViewDidLoad() {
+    this.visible_key = false;
     console.log('ionViewDidLoad CheckoutPage');
     this.events1.publish('hideBackButton', false);
     this.events1.publish('isHeaderHidden', false);

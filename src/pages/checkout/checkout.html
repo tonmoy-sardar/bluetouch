@@ -12,8 +12,7 @@
 
 </ion-header>
 
-
-<ion-content class="basic-content checkout-page">
+<ion-content class="basic-content checkout-page" *ngIf="visible_key">
   <ion-stepper #stepper (selectIndexChange)="selectChange($event)" mode="horizontal">      
     <ion-step label="Shipping" description="Shipping">
       <h6>SHIPPING TO:</h6>
@@ -66,7 +65,7 @@
       <h2>Payment Mode</h2>
       <ion-list radio-group>
          
-          <ion-item  *ngFor="let option of paymentOptions">
+          <ion-item  *ngFor="let option of paymentOptions | slice:0:1">
               <ion-label>{{option.title}} </ion-label>
               <ion-radio [checked]="option.selected" (ionSelect)="changeCheckedRadioPaymentMode(option)"></ion-radio>
             </ion-item>
