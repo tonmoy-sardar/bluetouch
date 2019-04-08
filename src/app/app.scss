@@ -107,7 +107,8 @@ ion-footer {
         margin: 0px auto 10px;
     }
     .active {
-        color: #fb7775;
+        //color: #fb7775;
+        color: #1047a6;
     }
     // background: #fff;
 }
@@ -509,7 +510,8 @@ p {
 }
 
 .menu-nav .item ion-icon {
-    color: #fe5d05;
+   // color: #fe5d05;
+   color: #1047a6;
 }
 
 .slide-zoom .toolbar-title-ios {
@@ -692,7 +694,8 @@ p {
 
 .profile-banner {
     padding: 10px 0px 0px 0px;
-    background: #fcb173;
+    //background: #fcb173;
+    background: #2f5feb;
     background-size: cover;
     background-position: center center;
     padding-top: 30px;
@@ -701,23 +704,41 @@ p {
 .profile-view-body h3 {
     text-align: center;
     font-size: 1.8rem;
-    background: #efd8c5;
+    //background: #efd8c5;
+    background: #3d6a96;
+    color:#fff;
     padding: 7px;
     border: 1px solid #ccc;
 }
 
+// #lblCartCount {
+//     font-size: 12px;
+//     //background: #e9520c;
+//     background: #2f5feb;
+//     color: #fff;
+//     padding: 0 5px;
+//     vertical-align: top;
+//     margin-left: -10px;
+//     margin-top: -35px;
+// }
 #lblCartCount {
-    font-size: 12px;
-    background: #e9520c;
+    background: #031c4a;
     color: #fff;
     padding: 0 5px;
     vertical-align: top;
     margin-left: -10px;
-    margin-top: -35px;
+    margin-top: -19px;
+    border-radius: 100px;
+    height: 20px;
+    width: 20px;
+    line-height: 21px;
+    display: inline;
+    font-size: 10px;
 }
 
 .update-button {
-    background: #e9520c;
+    //background: #e9520c;
+    background: #1047a6;
 }
 
 .quantity button {
@@ -773,12 +794,17 @@ span.dot-tick.active {
     color: red;
 }
 
+// .notification-header {
+//     background: #ccc;
+// }
 .notification-header {
-    background: #ccc;
+    background: #3d6a96;
+    color: #fff;
 }
 
 .notification-list ion-col {
-    border: 1px solid #ecb190;
+    //border: 1px solid #ecb190;
+    border: 1px solid #1047a6;
 }
 
 // / css end by kalyan /
