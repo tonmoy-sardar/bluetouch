@@ -21,8 +21,36 @@ ion-content>.scroll-content {
     margin-bottom: 56px;
 }
 
+.scroll-content .item.item-md .checkbox-md {
+    margin: 7px;
+}
+
+.scroll-content .list-md .list-md {
+    border-radius: 15px;
+    background: #fff;
+}
+
+.scroll-content .list-md .list-md .item-md {
+    background: none !important;
+    height: 8px;
+}
+
+.scroll-content .list-md .list-md .item-md .typetitle {
+    font-size: 14px;
+    color: #717171;
+}
+
+.scroll-content .item-md .label-md {
+    margin: 0;
+}
+
+.scroll-content .list-md h3 {
+    font-size: 16px;
+    color: #0943cd;
+}
+
 .back-button {
-   // display: block;
+    // display: block;
 }
 
 .ion-md-arrow-round-back:before {
@@ -50,7 +78,7 @@ ion-footer button i {
 
 ion-footer button {
     padding: 10px 11px 0px !important;
-    width:24%;
+    width: 24%;
 }
 
 ion-footer button span {
@@ -85,10 +113,11 @@ ion-footer {
 }
 
 ion-footer .quantity button {
-    width:100%;
+    width: 100%;
 }
+
 .buy-cart {
-    width:100%;
+    width: 100%;
 }
 
 ion-row {
@@ -386,13 +415,34 @@ ion-row {
 }
 
 .category-list .close {
-    color: #fb8384;
+    color: #3f51b5;
     font-size: 29px;
     padding: 25px;
     position: absolute;
     right: 0;
     top: -21px;
     z-index: 999;
+}
+
+.category-list .item-md span {
+    text-align: left;
+}
+
+.category-list .main-menu {
+    border-radius: 15px;
+    margin-bottom: 19px;
+}
+
+.category-list .main-menu .input-wrapper .label-md {
+    margin: 0;
+}
+
+.category-list .main-menu .main-menu-title {
+    margin-bottom: 7px;
+    margin-top: 9px;
+    border-bottom: 1px solid #d0d0d0;
+    color: #616161;
+    padding-bottom: 4px;
 }
 
 .sub-cat .label-md,
@@ -523,11 +573,12 @@ p {
 .top-search button {
     background: #fff;
     padding: 6px;
-    height: 37px;
+    height: 40px;
+    width: 100%;
 }
 
 .top-search button ion-icon {
-    color: #ff7874;
+    color: #0841d1;
     font-size: 24px;
 }
 
@@ -540,6 +591,20 @@ p {
 .top-search .searchbar-ios .searchbar-input {
     background-color: #cecdcd;
     border-radius: 31px;
+}
+
+.bar-subheader .searchbar-md {
+    height: 47px;
+    width: 100%;
+    padding: 0;
+}
+
+.bar-subheader .searchbar-md .searchbar-input {
+    padding: 6px;
+}
+
+.bar-subheader .searchbar-md .searchbar-search-icon {
+    display: none;
 }
 
 // / css start by kalyan / 
@@ -558,7 +623,7 @@ p {
 }
 
 .entry-form-body {
-    background: #fb8868;
+    background: #5971f9;
     border-radius: 13px;
 }
 
@@ -578,7 +643,7 @@ p {
 
 .form-body .button-md-primary {
     color: #fff;
-    background-color: #e9520c;
+    background-color: #5971f9;
 }
 
 .form-body ion-input {
@@ -655,36 +720,40 @@ p {
     background: #e9520c;
 }
 
-  .quantity button {
-      width:25% !important;
-  }
+.quantity button {
+    width: 25% !important;
+}
 
-  .main-slider {
+.main-slider {
     position: relative;
-  }
-  .skip-button {
-      position: absolute;
-      z-index:99;
-      top: 60%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width:100%;
-  }
+}
 
-  p.forgot-desc {
+.skip-button {
+    position: absolute;
+    z-index: 99;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+p.forgot-desc {
     text-align: center;
     color: #fff;
 }
+
 .btn-wrapper {
     text-align: center;
 }
+
 .btn-wrapper button {
-    width:50%;
+    width: 50%;
 }
 
 span.dot-tick {
     display: none;
 }
+
 span.dot-tick.active {
     display: block;
     padding: 10px;
@@ -696,19 +765,20 @@ span.dot-tick.active {
     content: "\f27d";
     color: #000;
 }
+
 .close-right {
     float: right;
     font-size: 22px;
     padding: 5px;
-    color:red;
+    color: red;
 }
 
 .notification-header {
-    background:#ccc;
-}
-.notification-list ion-col {
-    border:1px solid #ecb190;
+    background: #ccc;
 }
 
+.notification-list ion-col {
+    border: 1px solid #ecb190;
+}
 
 // / css end by kalyan /
