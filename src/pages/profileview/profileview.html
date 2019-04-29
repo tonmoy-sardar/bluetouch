@@ -41,7 +41,7 @@
       </ion-item>
     </ion-card>
 
-    <ion-card>
+    <ion-card class="address-list">
       <h3 (click)="openAddModal()">Address  <i  class="fa fa-plus-square" aria-hidden="true"></i></h3>
 
       <ion-list *ngFor="let address of address_list | slice:1:100;">
@@ -50,16 +50,15 @@
                   <ion-row>
                   <ion-col col-10>
                     <div class="typetitle">{{address.label}}</div>
-                    <span>{{address.shipping_first_name}}{{address.shipping_last_name}}</span>
-                    <br>
-                   <span>{{address.shipping_address_1}} {{address.shipping_address_2}}
+                    <span>{{address.shipping_first_name}}{{address.shipping_last_name}} {{address.shipping_address_1}} {{address.shipping_address_2}}
                       {{address.shipping_city}} </span> 
                       <br>
                       <span>{{address.shipping_state}} {{address.shipping_postcode}} {{address.shipping_country}} </span>
                             
                   </ion-col>
                   <ion-col col-2>
-                   <span (click)="openEditModal(address)">Edit</span> 
+                   <!-- <span (click)="openEditModal(address)">Edit</span>  -->
+                   <button ion-button round (click)="openEditModal(address)">Edit</button> 
                     </ion-col>
                    </ion-row>
           

@@ -357,6 +357,7 @@ ion-row {
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
+    position:relative;
 }
 
 .bradcumb span {
@@ -780,6 +781,7 @@ span.dot-tick.active {
     padding: 10px;
     font-size: 20px;
     color: #000;
+    position: absolute;
 }
 
 .ion-md-arrow-back:before {
@@ -805,6 +807,23 @@ span.dot-tick.active {
 .notification-list ion-col {
     //border: 1px solid #ecb190;
     border: 1px solid #1047a6;
+}
+
+.address-list ion-list {
+    border-bottom:2px solid #1047a6;
+    padding-bottom:5px;
+}
+.address-list ion-list span {
+    float:left;
+}
+.address-list .typetitle {
+    text-align: left;
+    font-weight: bold;
+}
+.address-list button {
+    width:100%;
+    height:24px;
+    font-size:11px;
 }
 
 // / css end by kalyan /

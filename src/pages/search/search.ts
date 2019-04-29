@@ -50,10 +50,6 @@ export class SearchPage {
       else {
         this.getAllProduct();
       }
- 
- 
-   
-
   }
 
   // search(keyword) {
@@ -73,8 +69,10 @@ export class SearchPage {
         this.FilterResult=0;
         this.product_list = res;
         this.visible_key = true;
+        this.spinnerDialog.hide();
       },
       error => {
+        this.spinnerDialog.hide();
         this.visible_key = true;
       }
     )

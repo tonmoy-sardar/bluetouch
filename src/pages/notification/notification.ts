@@ -42,9 +42,11 @@ export class NotificationPage {
       res => {
         this.allNotificationList = res['data'];
         console.log(this.allNotificationList);
-        this.visible_key = true
+        this.visible_key = true;
+        this.spinnerDialog.hide();
       },
       error => {
+        this.spinnerDialog.hide();
         console.log(error);
       }
     )
